@@ -9,11 +9,11 @@ hero:
     alt: 暖金色的沙粒穿过沙漏，在余晖中缓缓堆积
   actions:
     - theme: brand
-      text: 看看最近的更新 ↗
-      link: /daily-build/
+      text: 如何开始 ↗
+      link: /guide/getting-started
     - theme: alt
-      text: 了解四个系统
-      link: /systems/
+      text: 看看最近的更新
+      link: /daily-build/
 features:
   - icon: 🪙
     title: 货币 · 时间有价
@@ -35,6 +35,11 @@ features:
     details: 从帮忙收拾一张餐桌开始。沿着顺序目标前行，也让几条故事同时展开。
     link: /systems/#quests
     linkText: 了解任务系统
+  - icon: 🎞️
+    title: 存档 · 重返那一刻
+    details: 回放走过的故事，定位任意已记录的时刻。从那里重新接手，让时间有另一种走向。
+    link: /systems/#saves
+    linkText: 了解可回放存档
 ---
 
 <section class="home-journal" aria-labelledby="journal-title">
