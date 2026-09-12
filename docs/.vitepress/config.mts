@@ -4,7 +4,9 @@ export default defineConfig({
   title: '余时遗物',
   description: '余时遗物的每日更新与玩法指南。在酒馆中遇见人物、寻找遗物，决定时间的去向。',
   base: '/',
+  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }]],
   themeConfig: {
+    logo: { src: '/favicon.svg', alt: '余时遗物沙漏标志' },
     nav: [
       { text: '如何开始', link: '/guide/getting-started' },
       { text: '每日更新', link: '/daily-build/' },
