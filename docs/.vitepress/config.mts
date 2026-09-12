@@ -1,12 +1,28 @@
 import { defineConfig } from 'vitepress';
 export default defineConfig({
   lang: 'zh-CN',
-  title: 'remaining-time',
-  description: 'remaining-time 游戏指南与公开文档',
+  title: '余时遗物',
+  description: '余时遗物的每日更新与玩法指南。在酒馆中遇见人物、寻找遗物，决定时间的去向。',
   base: '/',
   themeConfig: {
-    nav: [{ text: '开始阅读', link: '/guide/getting-started' }],
-    sidebar: [{ text: '指南', items: [{ text: '关于文档', link: '/guide/getting-started' }] }],
+    nav: [
+      { text: '每日更新', link: '/daily-build/' },
+      { text: '主要系统', link: '/systems/' },
+      { text: '关于文档', link: '/guide/getting-started' },
+    ],
+    sidebar: [
+      { text: '酒馆手记', items: [
+        { text: 'Daily Build 更新', link: '/daily-build/' },
+        { text: '关于文档', link: '/guide/getting-started' },
+      ] },
+      { text: '四个主要系统', items: [
+        { text: '货币 · 时间有价', link: '/systems/#currency' },
+        { text: '时间 · 世界继续', link: '/systems/#time' },
+        { text: '收藏 · 拾起线索', link: '/systems/#collection' },
+        { text: '任务 · 回应相遇', link: '/systems/#quests' },
+      ] },
+    ],
+    footer: { message: '余时遗物 · 在余晖里，留下一点故事。' },
     socialLinks: [{ icon: 'github', link: 'https://github.com/XnneHangLab/remaining-time-docs' }],
     editLink: { pattern: 'https://github.com/XnneHangLab/remaining-time-docs/edit/dev/docs/:path', text: '编辑本页' },
     search: { provider: 'local' },
