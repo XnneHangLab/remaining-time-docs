@@ -19,6 +19,10 @@ npm run dev
 
 ## 发布
 
-仓库 Settings → Pages 的 Source 使用 GitHub Actions。合入 `dev` 的站点变更触发部署，首次部署成功后地址为：
+仓库 Settings → Pages 的 Source 使用 GitHub Actions，自定义域名设置为 `afterglow.xnnehang.top`。合入 `dev` 的站点变更触发部署，网站地址为：
 
-https://xnnehanglab.github.io/remaining-time-docs/
+https://afterglow.xnnehang.top/
+
+DNS 使用 CNAME：`afterglow` → `xnnehanglab.github.io`。VitePress 的 base 为 `/`。
+
+工作流通过 `upload-pages-artifact` 和 `deploy-pages` 直接发布构建产物；源码保存在 `dev`。域名由 Pages 设置维护，HTTPS 需等待 DNS 生效和 GitHub 证书签发。

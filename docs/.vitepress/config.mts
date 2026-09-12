@@ -3,7 +3,7 @@ export default defineConfig({
   lang: 'zh-CN',
   title: 'remaining-time',
   description: 'remaining-time 游戏指南与公开文档',
-  base: '/remaining-time-docs/',
+  base: '/',
   themeConfig: {
     nav: [{ text: '开始阅读', link: '/guide/getting-started' }],
     sidebar: [{ text: '指南', items: [{ text: '关于文档', link: '/guide/getting-started' }] }],

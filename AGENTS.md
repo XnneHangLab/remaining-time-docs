@@ -12,6 +12,7 @@
 - 默认分支为 `dev`。同步默认 fast-forward 更新 `origin/dev`，新工作分支从最新 `dev` 创建，PR 显式指定 `--repo XnneHangLab/remaining-time-docs --base dev`。
 - 在 submodule 的 detached HEAD 上编辑前，先创建命名工作分支。同步遇到未提交改动时先保留工作，不执行 reset --hard 或强制覆盖。
 - `dev` 的站点相关变更由公共仓库的 GitHub Actions 构建并部署到 GitHub Pages；工作流仅使用本仓库的 GITHUB_TOKEN，不需要私有游戏仓库的访问令牌。
+- 正式域名为 `https://afterglow.xnnehang.top/`，VitePress base 使用 `/`。Pages Source 为 GitHub Actions，通过官方 artifact 部署；自定义域名在仓库 Pages 设置中维护，DNS CNAME 指向 `xnnehanglab.github.io`。
 - 文档 PR 合入后，游戏仓库按需更新 submodule 指针。游戏仓库只记录已推送且已合入文档 `dev` 的确切提交；squash 合并后必须重新获取合并后的 SHA。
 - 纯文档修改不强制另开游戏 PR；需要更新游戏工作区文档版本时，可将指针更新并入相关游戏 PR。
 
