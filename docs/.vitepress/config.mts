@@ -4,22 +4,25 @@ export default defineConfig({
   title: '余时遗物',
   description: '余时遗物的每日更新与玩法指南。在酒馆中遇见人物、寻找遗物，决定时间的去向。',
   base: '/',
+  head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' }]],
   themeConfig: {
+    logo: { src: '/favicon.svg', alt: '余时遗物沙漏标志' },
     nav: [
+      { text: '如何开始', link: '/guide/getting-started' },
       { text: '每日更新', link: '/daily-build/' },
       { text: '主要系统', link: '/systems/' },
-      { text: '关于文档', link: '/guide/getting-started' },
     ],
     sidebar: [
       { text: '酒馆手记', items: [
         { text: 'Daily Build 更新', link: '/daily-build/' },
-        { text: '关于文档', link: '/guide/getting-started' },
+        { text: '如何开始', link: '/guide/getting-started' },
       ] },
-      { text: '四个主要系统', items: [
+      { text: '主要系统', items: [
         { text: '货币 · 时间有价', link: '/systems/#currency' },
         { text: '时间 · 世界继续', link: '/systems/#time' },
         { text: '收藏 · 拾起线索', link: '/systems/#collection' },
         { text: '任务 · 回应相遇', link: '/systems/#quests' },
+        { text: '存档 · 重返那一刻', link: '/systems/#saves' },
       ] },
     ],
     footer: { message: '余时遗物 · 在余晖里，留下一点故事。' },
