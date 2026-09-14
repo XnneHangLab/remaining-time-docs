@@ -10,11 +10,13 @@ export default defineConfig({
     nav: [
       { text: '如何开始', link: '/guide/getting-started' },
       { text: '每日更新', link: '/daily-build/' },
+      { text: '剧本时间线', link: '/story/timeline' },
       { text: '主要系统', link: '/systems/' },
     ],
     sidebar: [
       { text: '酒馆手记', items: [
         { text: 'Daily Build 更新', link: '/daily-build/' },
+        { text: '剧本时间线', link: '/story/timeline' },
         { text: '如何开始', link: '/guide/getting-started' },
       ] },
       { text: '主要系统', items: [
