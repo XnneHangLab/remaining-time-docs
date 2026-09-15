@@ -12,6 +12,10 @@ description: 余时遗物本地酒馆运行时的架构快照，说明世界定�
 适用范围是以 `npm run play:local` 启动的
 **memory 模式酒馆**。本文的源码路径供有游戏仓库访问权限的读者定位，不要求公共站点读者能够打开私有源码。
 
+::: info 同日版本导航
+[NPC 实体统一版（实现预览）](/architecture/world-model-2026-09-15-npc-entities)说明统一实体身份、外观与新旧录制布局的变化。本文继续保留
+`dba56a4` 版本的字段与流程，供查阅原实现和旧格式。:::
+
 ## 三种职责，而非三个数据库 {#overview}
 
 用 **World Config → World State → Storage**

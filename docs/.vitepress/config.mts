@@ -22,6 +22,7 @@ export default defineConfig({
       ] },
       { text: '架构快照', items: [
         { text: '世界数据模型 · 2026-09-15', link: '/architecture/world-model-2026-09-15' },
+        { text: 'NPC 实体统一版 · 2026-09-15（预览）', link: '/architecture/world-model-2026-09-15-npc-entities' },
       ] },
       { text: '主要系统', items: [
         { text: '货币 · 时间有价', link: '/systems/#currency' },
