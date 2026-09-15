@@ -10,6 +10,7 @@ export default defineConfig({
     nav: [
       { text: '如何开始', link: '/guide/getting-started' },
       { text: '每日更新', link: '/daily-build/' },
+      { text: '世界背景', link: '/story/background' },
       { text: '剧本时间线', link: '/story/timeline' },
       { text: '主要系统', link: '/systems/' },
       { text: '架构快照', link: '/architecture/world-model-2026-09-15' },
@@ -17,6 +18,7 @@ export default defineConfig({
     sidebar: [
       { text: '酒馆手记', items: [
         { text: 'Daily Build 更新', link: '/daily-build/' },
+        { text: '世界背景', link: '/story/background' },
         { text: '剧本时间线', link: '/story/timeline' },
         { text: '如何开始', link: '/guide/getting-started' },
       ] },
@@ -28,6 +30,8 @@ export default defineConfig({
         { text: '时间 · 世界继续', link: '/systems/#time' },
         { text: '收藏 · 拾起线索', link: '/systems/#collection' },
         { text: '任务 · 回应相遇', link: '/systems/#quests' },
+        { text: '吉他指导练习', link: '/systems/#practice' },
+        { text: '场景交互', link: '/systems/#interaction' },
         { text: '存档 · 重返那一刻', link: '/systems/#saves' },
       ] },
     ],
