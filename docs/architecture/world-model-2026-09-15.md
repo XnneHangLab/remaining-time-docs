@@ -103,73 +103,10 @@ type Content = {
 内容清单的 `scenes`／`stories` 是路径；加载结果 `Content.scenes`／`Content.story`
 才是对象。录制保存加载结果，不保存一份待联网解析的文件清单。
 
-### Scene：地图、实体和服务布局
+### StoryBody：变量、对白、选项与任务 {#story-body}
 
-```ts
-type Visual = {
-  image: string;
-  size?: XY;
-  anchor?: XY;
-  offset?: XY;
-};
-
-type Scene = {
-  schema_version: '1.0';
-  content_version: string;
-  id: string;
-  name: string;
-  map: {
-    width: number;
-    height: number;
-    floorTile: number;
-    wallTile: number;
-    tileset?: 'tavern';
-    playerScale?: number;
-    collision?: string[];
-    blockedEdges?: [number, number, number, number][]; // ax, ay, bx, by
-    art?: (Visual & { position: XY; depth: number })[];
-  };
-  anchors: Record<string, XY>;
-  entities: Entity[];
-  dining?: {
-    entrance: XY;
-    counter: XY;
-    counterTiles?: XY[];
-    home: XY;
-    tables: {
-      id: string;
-      service: XY;
-      interactionTiles: XY[];
-      position: XY;
-      depth: number;
-    }[];
-  };
-};
-
-type Entity = {
-  id: string;
-  name: string;
-  position: XY;
-  character: string;
-  sprite?: Visual;
-  seatedOn?: string; // 初始绑定的座位 ID
-  seat?: {
-    table?: string;
-    orientation: number;
-    depth: number;
-    playerSprite: Visual;
-  };
-  interactionOffsets?: XY[]; // 相对实体格的交互站位
-  movable?: boolean;
-  portal?: { scene: string; anchor: string };
-};
-```
-
-`map.collision` 控制格子可通行性，`blockedEdges` 控制相邻格之间的边；`map.art`
-只负责显示，不会自动生成可交互实体。`Scene.dining` 的入口、服务站位和 `home` 是格坐标；餐桌
-`position` 与 `depth` 用于像素显示。实体 ID 跨场景引用，移动后的坐标写入 State。
-
-### Story：变量、对白、选项与任务
+`StoryBody` 是本文为剧本文件与合并后的 `Story` 提取的共同字段形状。源码直接定义
+`Story`，JSON 中不需要增加 `StoryBody` 包装层。
 
 ```ts
 type StoryBody = {
@@ -384,6 +321,72 @@ type PracticeSettings = {
 相对一个短句触发点。`completedVar`、`unlockedVar`
 引用剧情布尔变量。多个剧本可贡献不同任务和交互，但同一内容包只有一份
 `clock`、`dining`、`performance`、`practice` 配置。
+
+### Scene：地图、实体和服务布局
+
+```ts
+type Visual = {
+  image: string;
+  size?: XY;
+  anchor?: XY;
+  offset?: XY;
+};
+
+type Scene = {
+  schema_version: '1.0';
+  content_version: string;
+  id: string;
+  name: string;
+  map: {
+    width: number;
+    height: number;
+    floorTile: number;
+    wallTile: number;
+    tileset?: 'tavern';
+    playerScale?: number;
+    collision?: string[];
+    blockedEdges?: [number, number, number, number][]; // ax, ay, bx, by
+    art?: (Visual & { position: XY; depth: number })[];
+  };
+  anchors: Record<string, XY>;
+  entities: Entity[];
+  dining?: {
+    entrance: XY;
+    counter: XY;
+    counterTiles?: XY[];
+    home: XY;
+    tables: {
+      id: string;
+      service: XY;
+      interactionTiles: XY[];
+      position: XY;
+      depth: number;
+    }[];
+  };
+};
+
+type Entity = {
+  id: string;
+  name: string;
+  position: XY;
+  character: string;
+  sprite?: Visual;
+  seatedOn?: string; // 初始绑定的座位 ID
+  seat?: {
+    table?: string;
+    orientation: number;
+    depth: number;
+    playerSprite: Visual;
+  };
+  interactionOffsets?: XY[]; // 相对实体格的交互站位
+  movable?: boolean;
+  portal?: { scene: string; anchor: string };
+};
+```
+
+`map.collision` 控制格子可通行性，`blockedEdges` 控制相邻格之间的边；`map.art`
+只负责显示，不会自动生成可交互实体。`Scene.dining` 的入口、服务站位和 `home` 是格坐标；餐桌
+`position` 与 `depth` 用于像素显示。实体 ID 跨场景引用，移动后的坐标写入 State。
 
 ### 作者交付什么
 
