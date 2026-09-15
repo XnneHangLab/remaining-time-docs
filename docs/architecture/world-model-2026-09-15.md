@@ -1,894 +1,253 @@
 ---
-title: 世界数据模型 · 2026-09-15
-description: 余时遗物本地酒馆运行时的架构快照，说明世界定义、运行状态，以及记录、持久化与恢复的职责和数据流。
+title: 世界架构 · 2026-09-15
+description: 当前本地运行时的配置、状态与存储边界，以及 NPC、Story 与 ability、Scene 与 Map 的职责和编辑方式。
 ---
 
-# 世界数据模型 · 2026-09-15
+# 世界架构 · 2026-09-15
 
-这是 **2026 年 9 月 15 日的架构快照**，依据游戏仓库 `NevaMind-AI/remaining-time` 的提交
-`dba56a4c6cb074e40a7984664b542bfac0465c1b`
-整理。本文描述该提交的实现，后续代码可能变化；日期不代表存档格式版本，也不代表一份持续跟随最新代码的接口承诺。
+依据游戏仓库 `NevaMind-AI/remaining-time` 的已合入提交
+`125dfc482645bc3c44234a39f11d75a399254e72`（PR #61），内容版本 `scene-maps-2`。
+适用于 `npm run play:local` 的本地 memory 模式，包括酒馆、客房与室外场景。下文区分当前实现与已确定的扩展方向；日期不等于存档格式版本。
 
-适用范围是以 `npm run play:local` 启动的
-**memory 模式酒馆**。本文的源码路径供有游戏仓库访问权限的读者定位，不要求公共站点读者能够打开私有源码。
+## Config → State → Storage {#overview}
 
-::: info 同日版本导航
-[NPC 实体统一版（实现预览）](/architecture/world-model-2026-09-15-npc-entities)说明统一实体身份、外观与新旧录制布局的变化。本文继续保留
-`dba56a4` 版本的字段与流程，供查阅原实现和旧格式。:::
-
-## 三种职责，而非三个数据库 {#overview}
-
-用 **World Config → World State → Storage**
-理解当前系统是合理的。更准确的名称是：**世界定义、运行状态、记录与持久化恢复**。它们区分数据的用途和修改责任，不意味着三套数据库，也不是只能从上往下调用的三层服务。
-
-| 职责                         | 回答的问题                           | 当前实现                                                 |
-| ---------------------------- | ------------------------------------ | -------------------------------------------------------- |
-| World Config · 世界定义      | 这个世界有哪些场景、规则和初始安排？ | JSON 内容包，经加载和校验后形成 `Content`                |
-| World State · 运行状态       | 这局世界现在进行到哪里？             | `MemoryWorld` 持有的 `State`                             |
-| Storage · 记录、持久化与恢复 | 如何保留历史、恢复进度或重新播放？   | 引擎事件记录、快照与回放，以及浏览器 OPFS 文件和存档索引 |
-
-其中 `MemoryWorld`
-同时负责运行状态和内存中的记录；浏览器文件模块负责把记录保存下来。因此“第三层”横跨引擎与存储适配，不是一个独立的 Storage 类。
+| 职责 | 保存什么 | 谁负责修改 |
+| --- | --- | --- |
+| **Config：世界定义** | 场景、地图、人物初始安排、剧本与能力参数，加载为 `Content` | 作者编辑 JSON；加载器组装和校验 |
+| **State：本局事实** | 当前位置、活动阶段、变量、任务、物品数量与时间 | `MemoryWorld` 校验命令、推进系统并提交状态 |
+| **Storage：记录与恢复** | 本局内容、输入事件、状态快照、请求去重信息与存档索引 | 引擎生成记录；浏览器存储适配负责落盘、加载和截断 |
 
 ```text
-作者的内容包 ──加载、校验──→ 本局固定的 Content
-                                  │
-                                  ▼
-                         MemoryWorld 初始化 State
-                                  │
-玩家命令 / 模拟推进 ──→ 校验并计算下一状态
-                                  │
-                       先记录，再提交 State 与请求缓存
-                                  │
-                                  ▼
-                  当前段录制：内容 + 事件 + 恢复信息
-                                  │
-                       写 JSON → 发布存档索引
-                                  │
-                       成功后释放已保存的内存前缀
-                                  │
-                  ┌───────────────┴────────────────┐
-                  ▼                                ▼
-           直接恢复档末快照                 从起点逐事件执行并校验
-                  │                                │
-                  ▼                                ▼
-                续玩                         观看 / 定位 / 续玩
+JSON 内容包 → 加载与校验 → 本局 Content → 初始化 State
+                                            ↑       │
+玩家命令 / 模拟推进 → 校验、计算、记录成功后提交 ──────┘
+                                            │
+                              内容 + 事件 + 档末状态 + 恢复信息
+                                            │
+                                     OPFS 文件与索引
+                                            │
+                              恢复续玩 / 逐事件回放与定位
 ```
 
-界面是这些职责的使用者：发送命令、展示状态、调用存档功能。菜单是否展开、按键是否按住、画面插值到哪一帧，并不都属于游戏世界的持久状态。
+这些是数据职责，不是三套数据库。`MemoryWorld` 同时维护运行状态和内存记录；界面发送命令、读取状态，不直接修改业务数据。
+菜单开关和画面插值留在界面，人物当前位置、任务进度和活动期限进入 State。运行过程不回写作者的 JSON。
 
-## 第一层：World Config，定义世界 {#config}
+## Config：内容如何组织 {#config}
 
-### 字段阅读约定
+正式入口为 `public/content/demo/manifest.json`：
 
-下面用 TypeScript 形状描述该版本实际接收或保存的数据，便于查看必填、可选和嵌套关系；它不是新增的 JSON 格式。`?`
-表示字段可省略，`| null` 表示字段存在但当前没有动作，`Record<string, T>`
-表示以 ID 为键的字典。JSON 文件不包含类型别名或注释。
-
-`XY` 表示 `[x, y]` 数组，`Position` 表示 `{ x, y }`
-对象；两种形式在当前实现中同时存在，不可任意替换。场景／人物坐标以格为单位，图层
-`position`、`size`、`offset` 与显示深度以像素为单位，`anchor`
-是 0–1 的归一化锚点。朝向使用角度：右 0、下 90、左 180、上 270。
-
-### 内容清单、文件和加载结果
-
-```ts
-type XY = [number, number];
-type NumberRange = [number, number];
-type Position = { x: number; y: number };
-type Start = { scene: string; anchor: string };
-
-type ContentManifest = {
-  schema_version: '1.0';
-  content_version: string;
-  start: Start;
-  scenes: string[]; // 场景文件的相对路径
-  stories: string[]; // 剧本文件的相对路径
-};
-
-type StoryFile = StoryBody & {
-  schema_version: '1.0';
-  content_version: string;
-  id: string; // 内容包内唯一；单个剧本文件不填写 start
-};
-
-type Story = StoryBody & {
-  schema_version: '1.0';
-  content_version: string;
-  start: Start; // 合并时取自 manifest
-};
-
-type Content = {
-  scenes: Scene[];
-  story: Story; // 多份 StoryFile 合并后的定义
-};
+```text
+public/content/demo/
+  manifest.json          场景和剧本清单、起始 scene/anchor、版本
+  scenes/*.json          场景身份、初始摆放、交互站位、场景连接
+  stories/*.json         对白、条件、任务及现有能力参数
+src/content/demo/
+  maps/*.json            地图尺寸、碰撞、瓦片与美术图层
+  animations/*.json      环境动画的帧与动画名
+public/assets/           图片、音频等资源
 ```
 
-内容清单的 `scenes`／`stories` 是路径；加载结果 `Content.scenes`／`Content.story`
-才是对象。录制保存加载结果，不保存一份待联网解析的文件清单。
+`loadPackage()` 合并剧本，展开地图与动画帧引用，再由 `loadContent()` 校验，形成
+`Content = { scenes, story }`。重复 ID、未知字段和无效引用会被拒绝。
 
-### StoryBody：变量、对白、选项与任务 {#story-body}
+| 结构 | 关键字段与引用 |
+| --- | --- |
+| Manifest | `schema_version`、`content_version`、`scenes`、`stories`、`start:{scene,anchor}` |
+| Scene | `id`、`name`、版本、`map`、`anchors`、`entities`；可选 `dining` 空间布局 |
+| Story 文件 | `id`、版本、`vars`、`interactions`；可选任务、商品与能力配置 |
+| 合并后的 Story | 多份文件的共同内容，`start` 与内容版本取自 manifest |
 
-`StoryBody` 是本文为剧本文件与合并后的 `Story` 提取的共同字段形状。源码直接定义
-`Story`，JSON 中不需要增加 `StoryBody` 包装层。
+录制保存的是**展开后的 Content**。旧时间线不会因为作者修改了某个地图或剧本文件就改变；体验新内容需从存档 0 开启新时间线。
+图片和音频仍按路径加载，资源字节没有嵌入存档。
 
-```ts
-type StoryBody = {
-  vars: Record<string, boolean>;
-  interactions: Record<
-    string,
-    DialogueText & {
-      firstText?: string;
-      topics?: Record<string, DialogueText>;
-      choices: Choice[];
-    }
-  >;
-  tasks?: Task[];
-  items?: Item[];
-  shops?: Record<string, Shop>; // 商人实体 ID → 商店
-  clues?: { id: string; slot: number; text: string; source: string }[];
-  clock?: ClockSettings;
-  dining?: DiningSettings;
-  schedules?: Record<string, NpcSchedule>;
-  performance?: PerformanceSettings;
-  practice?: PracticeSettings;
-};
+## NPC：最小身份实体 {#entities}
 
-type Condition =
-  | { var: string; equals: boolean }
-  | { task: string; step: string }
-  | { diningOpen: boolean }
-  | { diningPendingAtLeast: number };
+**当前确定的实体建模范围以 NPC 为最小身份单位。** 一个 NPC 保持同一个 ID、姓名、外观、位置与生命周期，按需要附加移动、交谈、交易、作息、服务、演出或教学能力。玩家状态目前仍独立保存。
 
-type DialogueText = {
-  text: string;
-  variants?: string[];
-  replies?: { when: Condition; text: string; variants?: string[] }[];
-};
+这里需要区分设计范围和现有字段命名：代码中的 `Scene.entities` 同时容纳 NPC 与床、门、座椅等交互物件，初始化也会把这些条目放进 `State.entities`；当前没有独立的 NPC／object 类型标签。这个共用容器不意味着每件装饰、商品或活动都拥有 NPC 式身份与生命周期。
 
-type Choice = {
-  id: string;
-  text: string;
-  topic?: string;
-  opens?: string;
-  when?: Condition;
-  effects: Effect[];
-};
+基础运行结构示意如下，`?` 表示可选；ID 是字典键，不在对象内重复保存：
 
-type Effect =
-  | { op: 'set'; var: string; value: boolean }
-  | { op: 'pay_time'; seconds: number }
-  | { op: 'grant_clue'; clue: string }
-  | { op: 'give_item'; item: string; quantity: number }
-  | { op: 'travel' }
-  | { op: 'move_entity'; entity: string; path: XY[]; via?: string; arrival?: string }
-  | { op: 'sleep'; selectHours: true }
-  | { op: 'sleep'; seconds: number }
-  | { op: 'sleep'; nextDayAt: number };
-
-type Task = {
-  id: string;
-  title: string;
-  background?: string;
-  description: string;
-  trigger?:
-    | { var: string; equals: boolean }
-    | { diningPendingAtLeast: number }
-    | { diningDirtyAtLeast: number };
-  completion?: { background: string; description: string };
-  steps: {
-    id: string;
-    text: string;
-    background?: string;
-    description?: string;
-    condition: {
-      event:
-        | 'movement.completed'
-        | 'interaction.started'
-        | 'choice.confirmed'
-        | 'dining.cleaned'
-        | 'scene.entered'
-        | 'practice.completed';
-      where?: Record<string, string>;
-      collect?: string;
-      count: number;
-      items?: { value: string; label: string }[];
-    };
-  }[];
-};
+```text
+State.entities[id] = {
+  name,
+  appearance,          // character，以及可选 image、sprite、坐姿/演出图片
+  sceneId,             // 空字符串表示场外
+  position,            // [x,y]，格坐标
+  orientation,         // 右0、下90、左180、上270
+  path,                // 尚未走完的 [x,y] 路线
+  moving,              // null 或 {target:{x,y}, arrivesAt, durationMs?}
+  transit,             // null 或 {via:门ID, arrival:目标anchor}
+  seatedOn?,           // 座位ID
+  movementSystem?      // 'dining' 表示沿用餐饮移动循环
+}
 ```
 
-`interactions` 以实体 ID 为键，`topics` 以话题名为键。`opens` 切换话题，`effects`
-才执行业务效果。任务的 `steps` 顺序推进，不同任务可以同时推进；`collect`
-按不同值计数，否则按匹配事实次数计数。
+具名人物初始化时建立身份，诗人首次到场前也可查询。顾客生成时分配稳定 ID，外观只抽取一次并保存。
+离场不等于删除身份：顾客的消费分组结束后清理活动字段，保留人物基础记录；`DiningState.waiter` 和 `groups[].guests` 通过 ID 引用这些人物。
 
-任务事实可用字段分别是：移动的 `direction`，交互的 `entityId`，选项的
-`entityId`／`choiceId`，清理与入场的 `sceneId`，练习的 `entityId`／`lessonId`。`where`、`collect`
-引用这些字段，而不是任意 State 路径。
+`getEntity(id)` 返回副本：未知 ID 为 `undefined`，场外人物的 `location` 为 `null`；当前所在位置读取 `location`。
+`scene(id).entities` 筛选该场景内的条目，并提供当前坐标。查询副本不能用来写回世界。
 
-### 商品、时钟、客流与作息配置
+## Story + ability：编排与执行 {#story-body}
 
-```ts
-type Item = {
-  id: string;
-  name: string;
-  image: string;
-  category: string;
-  quality: string;
-  description: string;
-  kind?: 'relic';
-  initiallyOwned?: boolean;
-  slot?: number;
-  effectDescription?: string;
-};
+**Story 决定剧情何时开放、说什么、推进到哪一步；ability 承担具体玩法的执行规则与活动过程。**
+复杂能力按实际需求附加，保持人物身份不变。
 
-type Shop = {
-  name: string;
-  offers: { item: string; buySeconds: number; sellSeconds: number; stock: number }[];
-  restock?: { intervalSeconds: number };
-};
+当前已经由 JSON 配置的内容包括：
 
-type ClockSettings = {
-  initialBalanceSeconds?: number;
-  startTimeSeconds?: number;
-} & (
-  | { realSecondsPerTick: number; gameSecondsPerTick: number; idlePauseSeconds: number }
-  | { rate: number } // 旧的连续倍率格式，与分段格式二选一
-);
+| Story 内容 | 当前表达 |
+| --- | --- |
+| 初始变量 | `vars`，值为布尔值；运行值进入 `State.vars` |
+| 对白与话题 | `interactions[目标ID]`，包含正文、首次对白、条件对白、话题与选项 |
+| 条件 | 布尔变量、任务当前步骤、营业状态或待服务桌数 |
+| 选项效果 | `set`、`pay_time`、`give_item`、`grant_clue`、`travel`、`move_entity`、`sleep` |
+| 任务 | `tasks[].steps` 顺序推进；不同任务并行统计；可选触发条件和完成总结 |
+| 现有能力参数 | `shops`、`schedules`、`dining`、`performance`、`practice` 等 |
 
-type DiningSettings = {
-  scene: string;
-  seed: number;
-  maxTables: number;
-  arrivalIntervalMs: NumberRange; // [最小值, 最大值]
-  arrivalChance: number;
-  partySize: NumberRange; // 人数范围
-  eatMs: NumberRange; // 用餐时长范围
-  orderMs: number;
-  prepareMs: number;
-  cleanMs: number;
-  rewardSeconds: number;
-  hours?: { open: number; close: number }; // 一天内的剧情秒
-  help?: { acceptedVar: string; completedVar: string; paidVar: string };
-  waiter: { id: string; name: string; character: string; image: string };
-  guests: { character: string; left: string; right: string }[];
-  menu: string[]; // 商品 ID
-  residue: string;
-};
+任务按事实推进：移动完成、交互开始、选项确认、清桌完成、进入场景、练习完成。
+`where` 过滤事实字段，`count` 统计次数，`collect` 统计不同值。每个任务只统计当前步骤，不追溯激活前的行为；选择启动 NPC 移动不代表 NPC 已抵达。
 
-type NpcSchedule = {
-  scene: string;
-  sleepAt: number; // 一天内的剧情秒
-  wakeAt: number;
-  entrance: XY;
-  home: XY;
-};
+**当前 ability 的落地形式是具体系统模块与配置关联。** 商人按 `shops[ID]` 关联，作息按 `schedules[ID]` 关联，服务员、演出者和老师由各自配置引用。
+`getEntity().capabilities` 是由这些关联计算的只读标记；尚没有统一的 `abilities` JSON 字段或动态插件注册协议。
+餐饮、演出、练习仍各有一份系统状态，当前一个内容包各支持一份对应配置。
+
+扩展流程保持简单：先用已有条件、效果和能力编排；确实缺少行为时，再补对应能力的配置、执行与结果，让 Story 能据真实结果推进。
+物品交付／扣除，以及任务完成后自动发奖／写变量已登记为待实现需求；当前 `tasks[].completion` 只有总结文案。已有对话选项可以赠送物品和写变量。
+
+## Scene + Map：编辑空间与画面 {#scene-map}
+
+**Scene 放身份、站位和连接；Map 放地形、通行与显示。** 当前 Scene 使用：
+
+```json
+"map": { "source": "maps/woodland.json" }
 ```
 
-`slot`
-是固定收藏格位，范围为 1–31；价格和奖励以生命秒计。时钟配置描述初始流速，运行中调速后的值保存在 State。客流参数描述规则，已入店客人和正在处理的订单属于
-`State.dining`。
-
-### 演出与练习配置
-
-```ts
-type PerformanceSettings = {
-  scene: string;
-  entrance: XY;
-  position: XY;
-  at: number; // 首次演出的剧情秒门槛
-  performer: { id: string; name: string; character: string; image?: string };
-  listeningTiles?: XY[];
-  reactions?: { during: string; after: string; tipSeconds: number; lingerMs: number }[];
-  audio: string;
-  durationMs: number;
-  completedVar: string;
-  fallbackEntity: string;
-  cues: {
-    atMs: number;
-    speaker: 'performer' | 'guest';
-    text: string;
-    fallbackText?: string;
-    tipSeconds?: number;
-  }[];
-};
-
-type MusicVoice = {
-  midi: number;
-  durationMs: number;
-  volume: number;
-  offsetMs?: number;
-};
-
-type PracticeSettings = {
-  teacher: string;
-  unlockedVar: string;
-  label: string;
-  dailyNewLessons: number;
-  leadInMs: number;
-  hitWindowMs: number;
-  samplePath: string;
-  notes: { key: string; label: string; midi: number }[]; // 按键与音区映射
-  lessons: {
-    id: string;
-    title: string;
-    guidance: string;
-    durationMs: number;
-    requiredHits: number;
-    notes: { atMs: number; key: string; sounds: MusicVoice[] }[];
-    accompaniment: (MusicVoice & { atMs: number })[];
-  }[];
-};
-```
-
-`cues.atMs` 相对演出时间轴，课程音符的 `atMs` 相对本轮练习起点；`offsetMs`
-相对一个短句触发点。`completedVar`、`unlockedVar`
-引用剧情布尔变量。多个剧本可贡献不同任务和交互，但同一内容包只有一份
-`clock`、`dining`、`performance`、`practice` 配置。
-
-### Scene：地图、实体和服务布局
-
-```ts
-type Visual = {
-  image: string;
-  size?: XY;
-  anchor?: XY;
-  offset?: XY;
-};
-
-type Scene = {
-  schema_version: '1.0';
-  content_version: string;
-  id: string;
-  name: string;
-  map: {
-    width: number;
-    height: number;
-    floorTile: number;
-    wallTile: number;
-    tileset?: 'tavern';
-    playerScale?: number;
-    collision?: string[];
-    blockedEdges?: [number, number, number, number][]; // ax, ay, bx, by
-    art?: (Visual & { position: XY; depth: number })[];
-  };
-  anchors: Record<string, XY>;
-  entities: Entity[];
-  dining?: {
-    entrance: XY;
-    counter: XY;
-    counterTiles?: XY[];
-    home: XY;
-    tables: {
-      id: string;
-      service: XY;
-      interactionTiles: XY[];
-      position: XY;
-      depth: number;
-    }[];
-  };
-};
-
-type Entity = {
-  id: string;
-  name: string;
-  position: XY;
-  character: string;
-  sprite?: Visual;
-  seatedOn?: string; // 初始绑定的座位 ID
-  seat?: {
-    table?: string;
-    orientation: number;
-    depth: number;
-    playerSprite: Visual;
-  };
-  interactionOffsets?: XY[]; // 相对实体格的交互站位
-  movable?: boolean;
-  portal?: { scene: string; anchor: string };
-};
-```
-
-`map.collision` 控制格子可通行性，`blockedEdges` 控制相邻格之间的边；`map.art`
-只负责显示，不会自动生成可交互实体。`Scene.dining` 的入口、服务站位和 `home` 是格坐标；餐桌
-`position` 与 `depth` 用于像素显示。实体 ID 跨场景引用，移动后的坐标写入 State。
-
-### 作者交付什么
-
-正式内容入口是
-`public/content/demo/manifest.json`。清单列出场景和剧本文件，并指定起始场景、入口和内容版本。
-
-- **场景文件**定义地图、通行限制、图层与实体外观、锚点、初始摆放、座位和场景连接。
-- **剧本文件**定义初始变量、对白、选项效果和任务，以及物品、商店、时钟、客流、作息、演出与练习等可选规则。
-- **素材文件**提供图像和音频，内容定义通过路径引用它们。
-
-`loadPackage` 读取清单，把多个剧本合成一份 story；重复定义的标识或配置会被拒绝。随后 `loadContent`
-校验内容并复制数据，得到
-`Content = { scenes, story }`。同一个世界只能加载一次内容；更换内容应创建新的运行。
-
-这里的“静态”指运行过程不把变化写回作者源文件，也不表示加载器把所有对象都递归冻结。边界主要由复制、受控加载与引擎对状态的独立维护建立。
-
-### 定义与进度分开
-
-| 世界定义中的内容               | 运行后变化的数据                               |
-| ------------------------------ | ---------------------------------------------- |
-| NPC 的初始场景和位置           | NPC 当前场景、位置、路线与过门进度             |
-| 绯月的对白和任务条件           | 是否已经见面、当前话题、任务已完成哪些步骤     |
-| 商品目录、价格和初始店存       | 玩家物品数量、商店剩余库存和下次补货时刻       |
-| 诗人的到场安排、曲谱与判定规则 | 演出进度、学会的课程和本轮命中结果             |
-| 阁楼楼梯与床边的睡眠选项       | 是否获得房间许可、玩家在哪里、睡醒后到什么时间 |
-
-上楼不会重新创建楼下酒馆，也不会把莉奈或库存恢复成初始值。渲染场景时，引擎结合固定定义与当前状态，查询此刻实际在场的实体。
-
-### 同名的 config 不一定是世界定义
-
-本文的 **World Config** 对应内容定义 `Content`。录制文件里另有一个名为 `config`
-的小对象，用来保存模拟步长与早期 NPC 初始参数；它并不是场景与剧本的总集合。
-
-完整恢复依赖 **内容定义 + 初始化参数 + 规则版本 + 恢复状态**。仅保存其中名为 `config`
-的字段是不够的。
-
-## 第二层：World State，保存此刻的事实 {#state}
-
-### State 顶层与实体状态
-
-```ts
-type State = {
-  sceneId: string;
-  player: Position;
-  orientation: number;
-  moving: null | { target: Position; arrivesAt: number; durationMs?: number };
-  seated?: { entity: string; returnPosition: Position };
-  entities: Record<
-    string,
-    {
-      sceneId: string;
-      position: XY;
-      path: XY[];
-      transit: null | { via: string; arrival: string };
-      moving: null | { target: Position; arrivesAt: number };
-      orientation: number;
-      seatedOn?: string;
-    }
-  >;
-  vars: Record<string, boolean>;
-  activeEntity: string | null;
-  interactionRevision: number;
-  dialogue: boolean;
-  dialogueTopic?: string;
-  greetedEntities?: string[];
-  dialogueSeed?: number;
-  npc: {
-    id: string;
-    position: Position;
-    interactions: number;
-    reply: string | null;
-  };
-  tasks: Record<
-    string,
-    {
-      activated?: true;
-      completed: string[]; // 已完成步骤 ID
-      steps: Record<string, { count: number; values: string[] }>;
-    }
-  >;
-  time: number; // 模拟毫秒
-  storyTime: number; // 已结算剧情秒
-  balance: number; // 剩余生命秒
-  clock?: { realSecondsPerTick: number; elapsedMs: number };
-  clues?: string[]; // 已获得线索 ID
-  commerce?: {
-    inventory: Record<string, number>; // 商品 ID → 玩家数量
-    stock: Record<string, Record<string, number>>; // 商人 ID → 商品 ID → 店存
-    nextRestock?: Record<string, number>; // 商人 ID → 下次补货的绝对剧情秒
-  };
-  schedules?: Record<string, 'active' | 'leaving' | 'away' | 'returning'>;
-  dining?: DiningState;
-  performance?: PerformanceState;
-  practice?: PracticeState;
-};
-```
-
-`moving.arrivesAt` 是绝对模拟毫秒；`transit.via` 是门实体 ID，`arrival`
-是目标入口锚点名。离场的具名 NPC 可能仍保留实体状态，但 `sceneId` 变成空字符串、作息为
-`away`，不再出现在场景中。`interactionRevision` 用于拒绝已过期的选项与交易确认。
-
-没有配置的可选系统一般不创建对应状态字段；例如没有商品定义就没有 `commerce`。`tasks.steps`
-中累计的值和 `completed` 中完成的步骤是两种信息；`activated` 用于带触发条件的任务。
-
-### DiningState：服务员、来客与清理
-
-```ts
-type DiningActor = {
-  position: XY;
-  path: XY[];
-  orientation: number;
-  moving: null | { target: XY; arrivesAt: number; durationMs?: number };
-  seatedOn?: string;
-};
-
-type DiningGuest = DiningActor & {
-  entered?: boolean;
-  startsAt: number;
-  look: number; // 外观配置索引
-  seat: string;
-  approach: XY;
-  exited: boolean;
-  audience?: {
-    preference: number; // 反应配置索引
-    delayMs: number;
-    heardAt?: number;
-    reacted?: boolean;
-    applauded?: boolean;
-    spot?: XY;
-    leaveAt?: number;
-    settled?: boolean;
-    speech?: { text: string; until: number };
-  };
-};
-
-type DiningGroup = {
-  id: number;
-  table: string;
-  phase: 'arriving' | 'waiting' | 'ordering' | 'ordered' | 'eating' | 'dirty';
-  guests: DiningGuest[];
-  order?: string;
-  due?: number;
-  cleaned: boolean;
-};
-
-type DiningState = {
-  seed: number;
-  nextArrival: number;
-  serial: number;
-  groups: DiningGroup[];
-  waiter: DiningActor;
-  idleUntil: number;
-  job: null | {
-    group: number;
-    phase: 'order' | 'pickup' | 'prepare' | 'deliver' | 'clean';
-    due?: number;
-  };
-  cleaning: null | { group: number; started: number; due: number; position: XY };
-  cleanedCount: number;
-  rewards: number;
-};
-```
-
-此处 `moving.target` 使用数组，和顶层玩家／通用实体的对象形式不同。`groups[].id` 被
-`job.group`、`cleaning.group` 引用；`seed`
-保存当前客流随机序列。到达、订单、清理、发言与离开期限使用模拟毫秒，`delayMs` 是持续时间，`rewards`
-是累计发放的生命秒数。
-
-### PerformanceState 与 PracticeState
-
-```ts
-type PerformanceState = {
-  phase: 'scheduled' | 'arriving' | 'waiting' | 'playing' | 'done';
-  elapsedMs: number;
-  cue: number; // 下一条演出提示索引
-  tips: number; // 诗人得到的生命秒数
-  audienceNextAt?: number;
-  applause?: number;
-  bubble?: { text: string; name: string; position: XY; untilMs: number };
-};
-
-type PracticeState = {
-  active: boolean;
-  learned: number; // 已学会课程数量
-  lesson: number; // 当前课程索引，从 0 开始
-  note: number; // 下一短句索引
-  played: number;
-  newLessonsToday: number;
-  finished: boolean;
-  hits: number;
-  results: ('hit' | 'wrong' | 'miss')[];
-  startedAt?: number;
-  lastSounds?: MusicVoice[];
-  lastKey?: string;
-  lastPlayedAt?: number;
-  wrong?: boolean;
-  lastLessonDay?: number;
-};
-```
-
-演出 `elapsedMs`、`bubble.untilMs`、`audienceNextAt` 和听众 `audience.heardAt`
-使用演出自己的毫秒时间轴。练习 `startedAt`、`lastPlayedAt` 使用绝对模拟毫秒，`lastLessonDay`
-是剧情秒折算的日编号。`played` 统计拨弦操作，`hits` 统计正确接上的短句，不能互换。
-
-`State`
-是整局世界的业务状态，不只是实体列表。其主要区域如下；这是职责分组，不是可直接提交给加载器的 JSON 模板。
-
-| 状态区域       | 记录的事实                                                                     |
-| -------------- | ------------------------------------------------------------------------------ |
-| 玩家与当前交互 | 场景、位置、朝向、正在走向哪里、座位及起身格、当前交互对象、对白与交互版本     |
-| 场景实体       | 当前场景和位置、路线、正在进行的一格移动、过门安排、固定坐姿                   |
-| 剧情与任务     | 变量、已激活任务、已完成步骤、累计事实、已获得线索、首次见面记录和对白随机序列 |
-| 时间与交易     | 模拟时间、剧情时间、生命余时、时钟段进度、物品数量、店存与补货期限             |
-| 日常与演出     | 餐桌、客人、莉奈的服务状态、人物作息阶段、首演阶段和听众回应                   |
-| 练习           | 已学习进度、每日新课计数、当前课程、短句判定与最近拨弦反馈                     |
-
-当前玩家仍保存在独立字段里；通用实体、客流中的服务员和来客也不全在同一个集合中。`State` 还保留早期
-`npc` 回复等字段，不能把它理解为已经完全统一的实体组件模型。
-
-### 状态如何变化
-
-玩家操作通过 `execute` 提交，模拟推进通过 `advance(ms)`
-提交。引擎从当前状态复制草稿，执行校验、计算相关系统的变化，再记录结果；记录成功后才替换正式状态。
-
-例如领取首次帮工谢礼，会一起更新背包、剧情变量、客房许可和任务进度。购买商品则需要一起更新余时、物品数量、店存与交互版本。这些不是几个互不关联的界面更新。
-
-失败通常保留原业务状态，并记录失败结果。有一个明确例外：当前 `memory-world-2`
-规则下，站立玩家尝试向受阻方向移动，虽然位置不变，朝向仍会更新。解析失败、重复请求和录制容量拒绝发生在不同边界，不会为每次输入尝试都追加事件。
-
-### State 不是完整恢复上下文
-
-`inspect()` 返回 State 的副本，但 `MemoryWorld` 还持有：
-
-- 本局固定内容与执行规则；
-- 请求去重缓存：同一个请求重试时返回原结果，避免重复扣款或发奖；
-- 当前内存段的事件、全局起始序号与载荷计数。
-
-因此，把 `inspect()`
-的返回值单独写进文件，再赋回去，不等于完整读档。去重信息虽然不在 State 内，也会影响之后的执行结果。
-
-### 三种时间不要混用
-
-| 时间                           | 单位与用途                                                                   |
-| ------------------------------ | ---------------------------------------------------------------------------- |
-| `State.time`                   | 模拟毫秒，驱动移动、服务、演奏与练习等过程                                   |
-| `State.storyTime` 与时钟段进度 | 剧情秒与尚未结算的段进度，表达酒馆的一天、营业与作息；当前流速也保存在状态中 |
-| `recordedAt`                   | 记录时的墙钟时间戳，属于元数据，不用它推动重放模拟                           |
-
-当前 Demo 每累计三十秒有效模拟时间，结算十分钟剧情时间与生命消耗。等待和睡眠走引擎的时间结算流程；普通交谈期间世界继续活动。后台与闲置暂停后不会补算离线经过的时间。
-
-界面通常按约一百毫秒合并提交模拟推进，人物到达、操作或暂停边界可以提前提交。画面插值不会每帧产生一个存档事件；重放保留原先的
-`advance` 分段，不能任意合并成一次大推进。
-
-## 第三层：记录、持久化与恢复 {#storage}
-
-### Recording：每个 UUID 文件的结构
-
-```ts
-type Result = { ok: true } | { ok: false; error: string };
-
-type Recording = {
-  format: 'remaining-time-run-1';
-  rules: 'memory-world-1' | 'memory-world-2';
-  content: Content;
-  config: { stepMs: number; npc: Position };
-  startSequence?: number; // 省略时从 0 开始
-  eventCount: number;
-  events: {
-    sequence: number;
-    recordedAt: number;
-    cause: Command | { type: 'advance'; ms: number };
-    result: Result;
-    state: State;
-  }[];
-  finalState: State;
-  snapshot?: {
-    format: 'memory-world-snapshot-1';
-    sequence: number;
-    requests: [
-      string,
-      {
-        fingerprint: string;
-        result: Result;
-        sequence: number;
-      },
-    ][];
-  };
-};
-
-type RecordingBundle = {
-  format: 'remaining-time-saves-1';
-  chunks: Recording[];
-};
-```
-
-`eventCount` 必须等于事件数组长度；首条事件序号为 `startSequence + 1`，末尾为
-`startSequence + eventCount`。`snapshot.sequence` 与末尾相同；`finalState` 应与最后一条事件的
-`state` 一致。当前写出的文件包含 `snapshot`，可选标记用于兼容旧档。
-
-`requests` 是 `[requestId, 缓存项]` 的数组，不是 JSON 对象字典。`fingerprint`
-是规范化命令的 JSON 字符串；缓存同时记录成功与失败结果以及原事件序号。保存一个前缀时，仅包含该结束位置之前的请求。
-
-`RecordingBundle` 是引擎支持的多段输入形式，不是 OPFS 存档索引。浏览器的每个 UUID 文件保存一段
-`Recording`。
-
-### Command：事件原因中的命令结构
-
-```ts
-type Command = { requestId: string } & (
-  | { type: 'move'; dx: number; dy: number; sprint?: boolean }
-  | { type: 'interact'; target: string }
-  | { type: 'choose'; choice: string; revision: number; hours?: number }
-  | { type: 'buy' | 'sell'; target: string; item: string; quantity: number; revision: number }
-  | { type: 'clean'; target: string }
-  | { type: 'waitUntil'; time: number }
-  | { type: 'advanceStoryTime'; seconds: number }
-  | { type: 'setClockSpeed'; seconds: number }
-  | { type: 'practice'; lesson: number; revision: number }
-  | { type: 'startPractice'; revision: number }
-  | { type: 'playNote'; key: string; revision: number }
-  | { type: 'cancel' | 'closeDialogue' | 'skipPerformance' | 'trade' | 'nextScene' | 'stand' }
-);
-```
-
-`target` 一般是交互对象 ID，清理时是餐桌 ID；`revision` 对应当前
-`interactionRevision`。`waitUntil.time` 是目标绝对剧情秒，`advanceStoryTime.seconds`
-是剧情秒增量，`setClockSpeed.seconds` 是每个结算段需要的模拟秒。`choose.hours`
-用于一至二十四小时的睡眠选择；`practice.lesson` 是从零开始的课程索引。
-
-`advance(ms)` 事件没有 `requestId`，由模拟调度直接调用；它与 `advanceStoryTime`
-命令不同，后者只推进剧情时钟及相关补货，不等同于普通等待或睡眠。
-
-### Catalogue：存档 manifest.json 的结构
-
-```ts
-type SaveHead = {
-  revision: string;
-  slot: number;
-  sequence: number;
-};
-
-type SaveSlot = {
-  id: number;
-  file: string;
-  savedAt: number;
-  start: number;
-  end: number;
-  scene: string;
-  time: number;
-  balance: number;
-  bytes?: number;
-  tasks?: { active: string[]; completed: string[] };
-};
-
-type Catalogue = {
-  head: SaveHead;
-  slots: SaveSlot[];
-};
-```
-
-| 字段                               | 含义与约束                                                        |
-| ---------------------------------- | ----------------------------------------------------------------- |
-| `head.revision`                    | 并发写入版本；初始空索引为 `empty`，时间线发布后使用新 UUID       |
-| `head.slot`                        | 当前最后槽位号，等于 `slots.length`，空时间线为 0                 |
-| `head.sequence`                    | 已保存的末尾全局事件序号，空时间线为 0                            |
-| `slots[].id`                       | 从 1 连续增长的槽位号                                             |
-| `file`                             | 本目录下 `<uuid>.json` 文件名                                     |
-| `savedAt`                          | 保存时的 Unix 毫秒时间戳                                          |
-| `start` / `end`                    | 开始前的事件游标／结束事件序号；下一档的 `start` 等于上一档 `end` |
-| `scene`                            | 档末场景的显示名称，找不到名称时使用场景 ID                       |
-| `time` / `balance`                 | 档末模拟毫秒／剩余生命秒，用于存档卡片                            |
-| `bytes`                            | JSON 文件字节数；旧索引可能暂缺                                   |
-| `tasks.active` / `tasks.completed` | 用于列表展示的任务标题数组，不是任务 ID 或完整任务状态            |
-
-索引只负责定位文件与展示摘要，不能用它重建 State。完整任务进度和物品数量仍从 `Recording.finalState`
-恢复。旧索引缺少 `bytes` 或任务摘要时，打开详情列表会从对应文件补齐。
-
-### 只存在于内存的恢复结构
-
-`MemoryWorld.checkpoint()`
-返回恢复闭包，捕获 State、请求 Map、当前段事件、起始序号和载荷计数；它不是上述 JSON 文件的一部分。浏览器的回放会话持有
-`id`、`head`、`slots` 和 `replay` 控制器，播放倍速、游标与界面开关也不会作为独立世界字段落盘。
-
-### 录制保存的内容
-
-一段录制包含以下几类数据：
-
-| 数据                               | 用途                                                 |
-| ---------------------------------- | ---------------------------------------------------- |
-| 格式与规则标识                     | 识别录制格式，并选择支持的执行语义                   |
-| 本局内容与初始化参数               | 固定这次运行所用的场景、剧本和模拟设置               |
-| 全局起始序号与事件数量             | 连接相邻记录段，发现缺失或不连续的历史               |
-| 每条事件的原因、结果和提交后 State | 重现命令或时间推进，并比较执行结果                   |
-| `finalState`                       | 本段最后一条事件之后的状态                           |
-| `snapshot`                         | 快照版本、末尾全局序号，以及截至该位置的请求去重信息 |
-
-当前录制标识是 `remaining-time-run-1`，快照标识是 `memory-world-snapshot-1`；新运行使用
-`memory-world-2` 规则，也保留对 `memory-world-1` 的支持。这些标识与本文日期各有用途。
-
-**快照状态实际取自 `finalState`**，`snapshot`
-补充恢复所需的序号和请求缓存，并没有再独立存一份业务状态。
-
-每条事件目前携带完整 State；文件还嵌入完整内容定义。所以它既有可重演的输入，也有用于校验与快速恢复的状态副本，不是一份只有命令的精简日志。实体也不会各自保存独立的完整历史。
-
-### 浏览器中的文件
-
-存档位于当前网站来源的浏览器私有文件系统 **OPFS**：
+路径相对逻辑内容包根目录；引用对象只写 `source`。地图 JSON 的实际源文件在 `src/content/demo/maps/`，由 Vite 发布，部署修改需要重新构建。
+加载后 Scene 内的 `map` 已展开，不再是一条待解析路径。
+
+| 想改什么 | 编辑位置 |
+| --- | --- |
+| NPC／物件初始位置、外观、座位、隔柜台交互站位 | Scene 的 `entities`，使用 `sprite`、`seat`、`interactionOffsets` 等字段 |
+| 出生点、楼梯落点、门的目的地 | Scene 的 `anchors` 与 `portal:{scene,anchor}`；Story 配开放条件及 `travel` |
+| 通行格、格间阻挡 | Map 的 `collision`、可选 `blockedEdges` |
+| 瓦片、环境动画、像素美术图层、玩家显示比例 | Map 的 `render`、可选 `art`、`playerScale` |
+| 餐桌、柜台服务站位 | Scene 的 `dining` 布局；客流和服务规则在 Story |
+| 台词、任务和交互结果 | Story 的 `interactions` 与 `tasks` |
+
+### 矩阵、坐标与单位
+
+- 地图有 `width`、`height`；新配置的 `render.matrixOrder` 为 `"yx"`。
+- 碰撞是 `collision[y][x]`：`.` 可通行，`#` 阻挡。
+- 瓦片是 `bgTiles[层][y][x]`、`objectTiles[层][y][x]`；每层 `height` 行、每行 `width` 个整数。一行矩阵对应一行文本，`-1` 表示不画，`0` 起是图集编号。
+- **位置坐标仍是 `[x,y]`**，例如帐篷门 `[10,9]` 对应矩阵 `[9][10]`；入口、路线与交互偏移以格为单位。像素图层的位置、尺寸与偏移以像素为单位，视觉 `anchor` 是归一化锚点。
+- 瓦片固定 32 像素。`showTiles` 显式控制瓦片绘制，当前室内为 `false`、室外为 `true`；瓦片编号与是否阻挡互相独立。
+
+`render.animationSheets` 按名称关联图片与帧配置，`animatedSprites` 指定所用 sheet、动画名和像素位置／尺寸，新增动画名无需源码注册。
+当前环境动画绘制在瓦片层之后，已有 `layer` 字段不提供任意层间穿插。
+没有 `matrixOrder` 的旧录制仍按原列优先含义读取；转换集中在渲染适配处。
+
+新增场景时，添加 Scene、Map 和 manifest 条目；需要通行时再配置两端 portal、落点与 Story 选项。
+当前室外使用同一个本地世界与存档流程，只提供探索和通行，没有接入 Convex 模拟或室外 NPC 生成。
+
+## Object：交互目标与活动归属 {#objects}
+
+物件先是场景中的位置与交互目标；是否能操作，由显式配置和对应系统决定。**一张图片不会自动变成可交互对象。**
+
+| 对象 | 配置与入口 | 活动／结果保存在哪里 |
+| --- | --- | --- |
+| 书、告示等可查看物件 | Scene 条目 + `interactions[ID]`；`interact` 后显示正文及选项 | 当前目标、话题和交互版本；效果写入变量、任务、线索等状态 |
+| 床 | 普通物件交互 + `sleep` 选项，复用等待结算 | 玩家时间、余时及推进后的世界状态；当前睡眠没有上床姿态 |
+| 座椅 | Scene 的 `seat`；`interact` 直接坐下，`stand` 起身 | 玩家 `seated:{entity,returnPosition}`；NPC 固定坐姿引用 `seatedOn` |
+| 门、楼梯、帐篷入口 | Scene 的 `portal` + Story 条件与 `travel`；玩家尝试走进入口格触发 | 当前场景与玩家位置；入口不通过普通邻近交谈触发 |
+| 脏餐桌 | `Scene.dining.tables` 的交互站位 + `clean` 命令 | `State.dining.groups` 与 `cleaning:{group,started,due,position}`；桌子没有独立活动日志 |
+| 纯装饰和地形 | Map 的瓦片或 `art` 图层 | 只参与显示；通行另由碰撞配置决定 |
+
+普通物件与 NPC 共用交互校验：目标在当前场景、处于可交互状态，并且玩家在相邻格或明确配置的 `interactionOffsets` 上。
+选项与交易再次检查条件及 `interactionRevision`，防止提交过期操作；餐桌清理和 portal 走各自的站位／通行校验。
+
+一次交互的持久变化进入整局 State，持续活动保存在执行它的系统中，历史统一进入世界录制。添加可阅读物件通常只改 Scene 与 Story；新增一种真实行为时才扩展对应能力。
+
+## State：当前事实与一次提交 {#state}
+
+| 状态区域 | 当前关键结构 |
+| --- | --- |
+| 玩家 | `sceneId`、`player:{x,y}`、`orientation`、`moving`；可选 `seated` |
+| 身份与位置 | `entities[ID]`；服务员和顾客共享同一人物位置来源 |
+| 交互 | `activeEntity`、`interactionRevision`、`dialogue`；可选话题、首次见面记录和对白随机状态；早期 `npc.reply` 字段仍承载当前正文 |
+| 剧情与任务 | `vars`；`tasks[ID]` 的可选 `activated`、已完成步骤 `completed`、每步的 `{count,values}`；可选已获 `clues` |
+| 交易 | 可选 `commerce`：`inventory[商品ID]`、`stock[商人ID][商品ID]`、可选补货期限 `nextRestock` |
+| 时间 | `time` 为模拟毫秒；`storyTime`、`balance` 为剧情秒／生命秒；可选 `clock` 保存当前流速与段内进度 |
+| 能力进度 | 可选 `schedules`、`dining`、`performance`、`practice`，保存作息、服务、演出与学习事实 |
+
+移动截止点、清理期限使用模拟毫秒；营业与作息使用剧情时间；演出和练习有各自的相对毫秒时间轴。记录的 `recordedAt` 是墙钟时间戳，不驱动回放。
+
+命令由 `execute()` 处理，模拟由 `advance(ms)` 推进：复制当前状态为草稿，校验并计算，记录成功后提交状态与请求缓存。
+交易的扣时、增减物品和店存一起提交。失败不提交部分业务效果；新规则允许受阻移动只更新朝向。
+请求 ID 用于去重，避免重试重复执行。
+
+`inspect()` 仅返回 State 副本。完整恢复还需要本局 Content、规则、初始化参数、事件序号与请求缓存，不能仅把这个副本存下来再赋回去。
+
+## Storage：记录、恢复与回放 {#storage}
+
+每段 `Recording` 保存以下结构；它是输入与完整状态的记录，不是纯命令日志：
+
+| 字段 | 用途 |
+| --- | --- |
+| `format`、`rules` | 当前格式 `remaining-time-run-1`；新运行规则 `memory-world-3` |
+| `content` | 本局展开后的场景、地图、动画帧与 Story |
+| `config` | 模拟步长与早期 NPC 初始参数，区别于完整世界定义 Content |
+| 可选 `startSequence`、`eventCount` | 全局起始游标与本段事件数；省略起点时为 0 |
+| `events[]` | 每条的 `sequence`、`recordedAt`、命令或推进原因 `cause`、`result`、提交后完整 `state` |
+| `finalState` | 档末状态 |
+| `snapshot` | 当前写入格式为 `memory-world-snapshot-1`，补充结束序号与请求去重缓存；旧档可能缺少 |
+
+浏览器使用同一来源的 OPFS：
 
 ```text
 remaining-time-saves/
-  manifest.json       存档索引、当前 head revision、全局结束序号与槽位摘要
-  <uuid>.json         一段录制及其恢复信息
+  manifest.json      head:{revision,slot,sequence} + slots:[文件及摘要]
+  <uuid>.json        一段 Recording
 ```
 
-这里的 `manifest.json` 是**存档索引**，与内容包里的同名入口清单不是同一个文件。
+存档 manifest 与内容 manifest 是两个不同文件。索引负责定位与展示，不能替代完整状态。
+自动保存每秒检查，达到 1000 个事件后保存最前面的 1000 条：**先写记录文件，再发布索引，成功后释放内存前缀**。
+Web Lock 与 head revision 协调同来源页面的读写；失败时保留有效索引和未保存进度。
 
-槽位是同一条时间线的连续片段，不是多条互相独立的角色存档。当前没有云端同步；IndexedDB 只用于读取并迁移更早的本地存档格式，日常保存使用 OPFS。
+### 四条使用路径 {#flows}
 
-### 一次自动保存的顺序
+| 操作 | 当前行为 |
+| --- | --- |
+| 新开时间线 | 用当前 Content 初始化，确认后替换现有时间线 |
+| 刷新／加载 | 使用存档嵌入的 Content，直接恢复档末状态、序号与去重缓存；加载早期槽位会清除未来 |
+| 观看／定位 | 从段起点或检查点执行原命令与推进，逐事件比较结果和录制状态；观看本身不截断 |
+| 从回放游标续玩 | 保留已播放前缀，清除之后的记录，再追加新事件 |
 
-浏览器每秒检查一次，在待保存事件达到一千条时，截取**当前段最前面的一千条**：
+槽位是同一时间线的连续片段；当前不保留多条并行分支。存档嵌入内容，但页面启动仍需加载部署内容，媒体资源也仍依赖外部文件。
 
-1. 以这一千条的最后状态作为 `finalState`，只带上该结束位置之前的请求缓存。
-2. 写入新的 UUID JSON 文件，完成关闭发布。
-3. 发布引用新文件的存档索引。
-4. 索引发布成功后，才释放引擎中对应的事件前缀。
+旧规则 `memory-world-1/2` 在录制边界转换实体布局，运行内部使用统一状态，读写仍沿用该时间线原规则；不会自动升级为版本 3。
+旧档缺少的已离场顾客身份无法补回。更早的存档可补齐快照元数据，这与更换游戏规则是两件事。
 
-保存期间继续产生的事件留在内存，归入下一档。事件数量固定，不代表每档涵盖的游戏时间固定。
+## 当前边界与源码入口 {#limits}
 
-文件访问共用 Web Lock；写入还核对 head
-revision，阻止旧页面覆盖另一页面已经更新的时间线。它是当前浏览器来源内的协调，不是跨设备同步。
+每条事件携带完整状态，每段也保存完整 Content；离场 NPC 的身份保留会增加体积。
+内存段保护上限为 100000 个事件或 16 MiB 累计 UTF-8 事件载荷；不足 1000 条就触及预算时，当前暂停并保留进度，不自动生成更短的存档。
+未成功落盘的尾部进度不保证保留，当前没有云同步。
 
-写文件或发布索引失败时，上一份有效索引与内存进度保留，并提示重试。删除未来记录时先发布新的索引，再清理文件；没有被索引引用的残留文件不会重新成为可加载槽位。网页关闭前未成功发布的尾部进度不保证保存。
+本地可回放依赖记录的输入、受控随机状态与支持的规则。外部 Agent 的观察权限、动作发现及异步决策录制仍未接入。
 
-## 四条实际使用路径 {#flows}
+### 源码入口 {#sources}
 
-### 新开时间线
+以下路径相对游戏仓库，供有源码访问权限的读者定位：
 
-页面读取当前部署的内容包，创建 `MemoryWorld`
-并初始化状态。存档窗口中的“存档 0”是新游戏入口；确认开始会清除现有时间线，之后从全局事件零重新累计。
+| 入口 | 职责 |
+| --- | --- |
+| `prototype/package.ts`、`content.ts`、`mapData.ts` | 内容加载、配置与地图校验 |
+| `prototype/map.ts`、`src/components/PixiStaticMap.tsx` | 地图适配与渲染 |
+| `prototype/entities.ts`、`world.ts` | 身份、查询、State、命令和提交 |
+| `prototype/taskFacts.ts`、`dining.ts`、`schedules.ts`、`performance.ts`、`practice.ts` | 任务事实与具体能力 |
+| `prototype/entityRecording.ts`、`replay.ts` | 新旧布局、恢复、回放与定位 |
+| `src/lib/autosaves.ts`、`src/components/AutoSaves.tsx` | OPFS、索引与时间线操作 |
+| `src/components/LocalGame.tsx` | 内容入口、玩家输入、模拟推进与界面 |
 
-内容文件修改后，刷新通常仍会恢复已有存档绑定的旧内容。要体验新内容，需要加载新的内容包并新开时间线，现有运行没有规则热迁移。
-
-### 刷新或加载某个槽位
-
-启动时，页面同时获取当前内容包和本地存档信息。有存档时，实际运行优先采用恢复出的世界及其嵌入内容。当前页面仍等待内容包加载成功才进入游戏，因此“存档嵌入内容”不等于启动完全不依赖部署文件。
-
-普通加载读取目标槽位，校验内容、规则、快照结构和结束位置，**直接恢复档末状态、序号和去重缓存，不逐事件执行之前的历史**。旧文件若没有快照元数据，会首次扫描之前的命令补齐去重信息，而不是重跑模拟。
-
-加载较早槽位成功后，发布截断后的索引并清除后续槽位；当前尚未保存的进度也会被放弃。校验失败时保留当前世界与已有时间线。
-
-### 观看、定位与切档
-
-播放第一档时从本局初始状态开始；播放之后的某档时，用前一档末尾快照作为起点。通常只读取目标档和前一档，不从事件零重新计算全部前缀。
-
-回放调用相同的 `execute` 与
-`advance`，比较每一步的结果和 State，并在段末核对记录。向后定位利用内存检查点恢复后再执行；它与磁盘中的恢复快照是两种不同机制。当前每二千个事件建立一个检查点，最多保留起点和八个非起点检查点。
-
-播放速度按记录的**模拟时长**计算，可选 1×、2×、4×、8×；命令事件不额外等待。观看和定位本身不截断时间线，退出可以返回观看前的世界及未保存事件。
-
-### 从回放位置继续
-
-只有确认从游标位置继续，才修改保存的时间线：
-
-- 游标在档末：保留该档，清除后续档案，从这里追加新事件。
-- 游标在档内：磁盘保留此前完整档，本档已播放部分留在内存，与之后的新事件凑满一千条再保存。
-
-当前提供的是**保留前缀后改写未来**，不是同时保留多条可切换的分支。
-
-## 当前边界 {#limits}
-
-- **存储成本：** 每段最多十万个事件或 16 MiB 累计 UTF-8
-  JSON 事件载荷。这是序列化载荷预算，不是浏览器实际堆内存上限。
-- **容量失败：**
-  如果不足一千条就触及内存保护，当前进度保留并暂停相关操作，不会自动生成一个不足阈值的小存档。请求去重表随命令数增长，存档索引随槽位数增长。
-- **长期规模：**
-  槽位没有应用层数量上限，但仍受浏览器配额约束。完整 bundle 回放接口会持有全部输入；当前没有紧凑增量日志或长篇运行的性能保证。
-- **校验范围：**
-  快照加载检查恢复结构与结束位置，回放检查实际经过的事件。二者都不代表签名认证，也不保证任意外部文件可信。
-- **版本与素材：**
-  内容定义会固定在录制中，图片和音频字节仍是外部资源。规则标识也不是整份引擎源码的封存；后续代码与素材变更仍可能影响旧档体验。
-- **随机与 Agent：**
-  当前内容驱动的行为通过受控状态推进。尚未接入任意异步 Agent 决策的录制合同，不能据此承诺外部模型调用可确定性重放。
-- **浏览器范围：**
-  不同来源、端口、浏览器的文件不共享；清除网站数据会删除存档。持久存储请求不是云备份，也不是断电安全保证。
-
-## 对应代码与维护方式 {#sources}
-
-| 代码位置                                       | 本文对应职责                                  |
-| ---------------------------------------------- | --------------------------------------------- |
-| `prototype/package.ts`、`prototype/content.ts` | 内容包组装、边界校验与内容定义                |
-| `prototype/world.ts`                           | State、命令与时间推进、记录、检查点和快照恢复 |
-| `prototype/replay.ts`                          | 录制验证、直接恢复、逐事件回放与定位          |
-| `src/lib/autosaves.ts`                         | OPFS 文件、索引、旧档迁移和时间线截断         |
-| `src/components/AutoSaves.tsx`                 | 自动保存触发和存档窗口操作                    |
-| `src/components/LocalGame.tsx`                 | 启动、输入、模拟调度、回放与界面衔接          |
-
-本文只对页首标明的代码版本负责。修正文档中的事实错误时保留版本依据；如果职责边界或存储方式发生实质变化，另写新日期快照并相互链接，无需为每次功能改动重写本文。
-
-玩家可见的操作规则见[主要系统：存档](/systems/#saves)，本版本附近的玩法变化见
-[Daily Build 更新](/daily-build/)。
+本文只描述页首代码版本；玩家可见的存档规则见[主要系统](/systems/#saves)。
