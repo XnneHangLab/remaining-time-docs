@@ -1,12 +1,12 @@
 ---
 title: 世界架构 · 2026-09-15
-description: 当前本地运行时的配置、状态与存储边界，以及 NPC、Story 与 ability、Scene 与 Map 的职责和编辑方式。
+description: 当前本地运行时的配置、状态与存储边界，以及 NPC 能力归属、活动执行、剧情编排和场景地图编辑。
 ---
 
 # 世界架构 · 2026-09-15
 
-依据游戏仓库 `NevaMind-AI/remaining-time` 的实现提交
-`84177e2ffc2abcd3f0143dd6783c1d96e49110f2`（[代码 PR #64](https://github.com/NevaMind-AI/remaining-time/pull/64)），内容版本 `npc-abilities-1`。本页描述该提交，集成状态见对应 PR。
+依据游戏仓库 `NevaMind-AI/remaining-time` 已合入 `dev` 的提交
+`58883cf17148de4e2fdeda88ae9da7e8a8079333`（[代码 PR #64](https://github.com/NevaMind-AI/remaining-time/pull/64)），内容版本 `npc-abilities-1`。
 适用于 `npm run play:local` 的本地 memory 模式，包括酒馆、客房与室外场景。下文区分当前实现与已确定的扩展方向；日期不等于存档格式版本。
 
 ## Config → State → Storage {#overview}
@@ -38,7 +38,7 @@ JSON 内容包 → 加载与校验 → 本局 Content → 初始化 State
 
 ```text
 public/content/demo/
-  manifest.json          场景和剧本清单、起始 scene/anchor、版本
+  manifest.json          场景、NPC 和剧本清单、起始 scene/anchor、版本
   scenes/*.json          场景身份、初始摆放、交互站位、场景连接
   npcs/*.json            NPC 身份及其 abilities
   stories/*.json         对白、条件、任务、商品目录与世界时钟
@@ -48,7 +48,7 @@ src/content/demo/
 public/assets/           图片、音频等资源
 ```
 
-`loadPackage()` 合并剧本，展开地图与动画帧引用，再由 `loadContent()` 校验，形成
+`loadPackage()` 读取 NPC 定义、合并剧本，展开地图与动画帧引用，再由 `loadContent()` 校验，形成
 `Content = { scenes, story, npcs? }`。`npcs` 按人物 ID 索引，旧内容可省略。重复 ID、未知字段和无效引用会被拒绝。
 
 | 结构 | 关键字段与引用 |
@@ -93,25 +93,9 @@ State.entities[id] = {
 `getEntity(id)` 返回副本：未知 ID 为 `undefined`，场外人物的 `location` 为 `null`；当前所在位置读取 `location`。
 `scene(id).entities` 筛选该场景内的条目，并提供当前坐标。查询副本不能用来写回世界。
 
-## Story + ability：编排与执行 {#story-body}
+## NPC 能力与系统执行 {#abilities}
 
-**Ability 属于 NPC，描述能做什么；activity 保存此刻的活动；Story 编排对白、开放条件与任务推进。** 同一个 NPC 可具备多种能力，具备能力不代表正在执行。
-
-例如诗人具备演出和教学能力；Story 在正式认识后开放学习入口，教学系统启动练习，达标后产生 `practice.completed` 事实推进任务。座位绑定属于活动，NPC 当前位置仍只有一份。
-
-当前已经由 JSON 配置的内容包括：
-
-| Story 内容 | 当前表达 |
-| --- | --- |
-| 初始变量 | `vars`，值为布尔值；运行值进入 `State.vars` |
-| 对白与话题 | `interactions[目标ID]`，包含正文、首次对白、条件对白、话题与选项 |
-| 条件 | 布尔变量、任务当前步骤、营业状态或待服务桌数 |
-| 选项效果 | `set`、`pay_time`、`give_item`、`grant_clue`、`travel`、`move_entity`、`sleep` |
-| 任务 | `tasks[].steps` 顺序推进；不同任务并行统计；可选触发条件和完成总结 |
-| 能力衔接 | 用变量与任务条件开放现有交互入口，根据完成事实推进；能力参数在 NPC 配置中 |
-
-任务按事实推进：移动完成、交互开始、选项确认、清桌完成、进入场景、练习完成。
-`where` 过滤事实字段，`count` 统计次数，`collect` 统计不同值。每个任务只统计当前步骤，不追溯激活前的行为；选择启动 NPC 移动不代表 NPC 已抵达。
+**NPC 持有能力，系统执行能力，活动状态保存过程，Story 编排剧情并消费结果。** 同一个 NPC 可具备多种能力，具备能力不代表正在执行。
 
 NPC 的 `abilities` 当前支持：
 
@@ -125,18 +109,35 @@ NPC 的 `abilities` 当前支持：
 | `teaching` | 课程、判定与解锁参数；所属 NPC 即老师 |
 
 NPC 文件由 manifest.npcs 加载，服务员／演出者／老师的 ID 不在能力内重复填写。
-`abilitySettings()` 给既有系统提供参数视图，校验器也复用原规则；新包的 Story 不存放这些能力参数，录制保存完整 NPC 配置。
+`abilitySettings()` 给既有系统提供参数视图，校验器也复用原规则；新包的能力参数统一存放在 NPC 配置中，录制保存完整 NPC 配置。
+旧 Story 中的能力字段用于读取旧内容与录制；新包校验时拒绝混用这些字段。
 `getEntity().capabilities` 继续提供只读能力标记。
 
 座位绑定已进入 `activity.seatedOn`；订单、餐饮阶段、演出与练习进度仍保存在相应共享系统状态中。
 当前每个内容包各支持一份 service、performance、teaching，重复配置会被拒绝；这是现有执行系统的限制。
 
-扩展流程保持简单：先用已有条件、效果和能力编排；确实缺少行为时，再补对应能力的配置、执行与结果，让 Story 能据真实结果推进。
+## Story：剧情编排与结果衔接 {#story-body}
+
+Story 负责对白、选项、剧情条件和任务。能力的校验、执行与过程推进由对应系统负责。
+例如正式认识诗人后，Story 开放学习入口；诗人的教学系统启动练习并判定成绩，达标后产生 `practice.completed`，任务据此推进。
+
+| Story 内容 | 当前表达 |
+| --- | --- |
+| 初始变量 | `vars`，值为布尔值；运行值进入 `State.vars` |
+| 对白与话题 | `interactions[目标ID]`，包含正文、首次对白、条件对白、话题与选项 |
+| 条件 | 布尔变量、任务当前步骤、营业状态或待服务桌数 |
+| 选项效果 | `set`、`pay_time`、`give_item`、`grant_clue`、`travel`、`move_entity`、`sleep` |
+| 任务 | `tasks[].steps` 顺序推进；不同任务并行统计；可选触发条件和完成总结 |
+
+任务按事实推进：移动完成、交互开始、选项确认、清桌完成、进入场景、练习完成。
+`where` 过滤事实字段，`count` 统计次数，`collect` 统计不同值。每个任务只统计当前步骤，不追溯激活前的行为；选择启动 NPC 移动不代表 NPC 已抵达。
+
+新增人物或调整已有能力，编辑 NPC 配置；修改对白、条件与任务，编辑 Story；新增真实行为，扩展对应执行系统并提供可供剧情使用的结果。
 物品交付／扣除，以及任务完成后自动发奖／写变量已登记为待实现需求；当前 `tasks[].completion` 只有总结文案。已有对话选项可以赠送物品和写变量。
 
 ## Scene + Map：编辑空间与画面 {#scene-map}
 
-**Scene 放身份、站位和连接；Map 放地形、通行与显示。** 当前 Scene 使用：
+**Scene 定义场景及其摆放、站位和连接；Map 定义地形、通行与显示。** NPC 身份与能力由人物配置提供。当前 Scene 使用：
 
 ```json
 "map": { "source": "maps/woodland.json" }
