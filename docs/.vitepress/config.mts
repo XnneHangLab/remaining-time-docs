@@ -12,12 +12,16 @@ export default defineConfig({
       { text: '每日更新', link: '/daily-build/' },
       { text: '剧本时间线', link: '/story/timeline' },
       { text: '主要系统', link: '/systems/' },
+      { text: '架构快照', link: '/architecture/world-model-2026-09-15' },
     ],
     sidebar: [
       { text: '酒馆手记', items: [
         { text: 'Daily Build 更新', link: '/daily-build/' },
         { text: '剧本时间线', link: '/story/timeline' },
         { text: '如何开始', link: '/guide/getting-started' },
+      ] },
+      { text: '架构快照', items: [
+        { text: '世界数据模型 · 2026-09-15', link: '/architecture/world-model-2026-09-15' },
       ] },
       { text: '主要系统', items: [
         { text: '货币 · 时间有价', link: '/systems/#currency' },
