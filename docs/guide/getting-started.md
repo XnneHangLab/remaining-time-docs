@@ -9,7 +9,7 @@ description: 使用 just、make 或 npm 在本地运行余时遗物，并将酒�
 
 ## 准备环境
 
-- **Node.js 22 LTS 与 npm**。
+- **Node.js 22 LTS 与 npm**；包含 pre-commit 的版本需 **22.22.1 或更新补丁版本**。
 - **Git**，用于获取源码。
 - **just 或 make**，任选一个；也可以直接使用 npm。
 - 建议使用较新的 Chrome 或 Edge，存档需要浏览器支持本地文件存储。
@@ -58,6 +58,72 @@ npm run play:local
 | 隐藏或显示 HUD | H |
 
 存档入口在**设置 → 存档**。你可以回看已经记录的过程，也可以在回放中选择一个历史时刻重新接手，详见[存档系统](/systems/#saves)。
+
+## 开发中的格式化 {#formatting}
+
+本节适用于包含 [游戏 PR #67](https://github.com/NevaMind-AI/remaining-time/pull/67) 的版本；使用前请确认当前分支已包含该改动。所有命令都在**游戏仓库根目录**执行。
+
+### 启用 pre-commit
+
+安装或更新依赖时，`npm ci` 或 `npm install` 会安装 lint-staged，并通过 `prepare` 自动启用 Git hook。已经安装本版本依赖，但安装时使用了 `--ignore-scripts`，执行一次：
+
+```sh
+npm run prepare
+```
+
+确认当前仓库配置：
+
+```sh
+git config --get core.hooksPath
+```
+
+应输出 `.githooks`。该设置位于本地 Git 配置中，不会随推送传给其他开发者，每位开发者都需要在自己的克隆中启用。
+
+如果原本设置了其他 `core.hooksPath`，先合并已有 hook：`prepare` 会将路径设为 `.githooks`，原路径中的 hook 不会继续自动执行。
+
+### 日常提交：增量自动格式化
+
+编辑完成后，只暂存本次要提交的内容，再正常提交。以下以 `README.md` 为例：
+
+```sh
+git add README.md
+git commit
+```
+
+pre-commit 会通过 lint-staged 调用 `prettier --write --ignore-unknown`，自动格式化本次暂存文件，并将结果更新到暂存区后继续提交。普通格式差异会直接修正，无需先处理检查失败。忽略规则继续生效，不支持的格式跳过；hook 不运行 lint、类型检查或测试。
+
+也可以提前运行 `npm run fmt:staged`、`make fmt-staged` 或 `just fmt-staged`。这些命令会改写本次暂存文件并暂存格式化结果。
+
+### 部分暂存与执行失败
+
+使用 `git add -p` 只提交部分修改时，lint-staged 会暂时隐藏同文件中的未暂存修改，格式化并暂存本次内容后，再恢复未暂存修改。不要自行追加 `git add .`，以免带入其他修改。
+
+如果文件有语法错误、Prettier 无法解析，或未暂存修改恢复时发生冲突，提交会停止并显示具体原因。lint-staged 默认创建备份并在失败时恢复原状态；按终端提示处理，必要时用 `git stash list` 查找它保留的备份。保留默认的 stash 与部分暂存保护选项，不使用 `--no-stash` 或 `--no-hide-partially-staged` 关闭保护。
+
+### 存量检查与 Make／Just 入口
+
+提交 hook 只覆盖暂存文件。要检查所有存量文件，运行以下任意一个命令：
+
+```sh
+npm run fmt:check
+# 或
+make fmt-check
+# 或
+just fmt-check
+```
+
+全量检查读取整个工作区，包含未暂存和未跟踪的受支持文件，并遵守忽略规则；没有暂存改动时也能运行。它不改写文件或暂存状态，用于了解存量格式情况。
+
+| 操作 | npm | Make | Just |
+| --- | --- | --- | --- |
+| 启用提交 hook | `npm run prepare` | `make hooks-install` | `just hooks-install` |
+| 自动格式化本次暂存内容 | `npm run fmt:staged` | `make fmt-staged` | `just fmt-staged` |
+| 检查所有存量文件 | `npm run fmt:check` | `make fmt-check` | `just fmt-check` |
+| 全量格式化工作区 | `npm run fmt` | `make fmt` | `just fmt` |
+
+需要一次性修正存量格式时，使用 `make fmt`、`just fmt` 或 `npm run fmt`。这些命令可能修改本次任务之外的文件，运行后先查看 diff，再选择要暂存的改动；不会自动暂存。
+
+自动 CI 仅在目标分支为 `main` 的 PR 上运行格式检查，也保留手动入口；向 `dev` 提交 PR 或推送不会自动运行该检查。
 
 ## 构建当前酒馆版本
 
