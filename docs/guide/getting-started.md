@@ -59,6 +59,66 @@ npm run play:local
 
 存档入口在**设置 → 存档**。你可以回看已经记录的过程，也可以在回放中选择一个历史时刻重新接手，详见[存档系统](/systems/#saves)。
 
+## 开发中的格式检查 {#formatting}
+
+本节适用于包含 [游戏 PR #67](https://github.com/NevaMind-AI/remaining-time/pull/67) 的版本；使用前请确认当前分支已包含该改动。所有命令都在**游戏仓库根目录**执行。
+
+### 启用 pre-commit
+
+安装依赖时，`npm ci` 或 `npm install` 会通过 `prepare` 自动启用 Git hook。已有依赖、刚更新到包含 hook 的版本，或安装时使用了 `--ignore-scripts`，执行一次：
+
+```sh
+npm run prepare
+```
+
+确认当前仓库配置：
+
+```sh
+git config --get core.hooksPath
+```
+
+应输出 `.githooks`。该设置位于本地 Git 配置中，不会随推送传给其他开发者，每位开发者都需要在自己的克隆中启用。
+
+如果原本设置了其他 `core.hooksPath`，先合并已有 hook：`prepare` 会将路径设为 `.githooks`，原路径中的 hook 不会继续自动执行。
+
+### 日常提交
+
+编辑完成后，只暂存本次要提交的内容。以下以 `README.md` 为例：
+
+```sh
+git add README.md
+npm run fmt:staged
+git commit
+```
+
+`npm run fmt:staged` 可提前检查；即使省略它，`git commit` 也会自动执行相同检查。hook 使用现有 Prettier，只检查已暂存且受支持的常规文件，遵守 `.gitignore` 和 `.prettierignore`，跳过符号链接和 submodule。
+
+检查读取 **Git 暂存区中的版本**，不自动格式化、修改文件或重新暂存。未暂存的编辑不会被混入提交；hook 不运行 lint、类型检查或测试。
+
+### 格式不合规时
+
+hook 会列出文件并阻止本次提交。对提示的文件运行格式化，再重新暂存所需改动。例如：
+
+```sh
+npx prettier --write README.md
+git add README.md
+npm run fmt:staged
+git commit
+```
+
+如果该文件只暂存了部分修改，格式化后使用 `git add -p README.md` 重新选择提交片段，并用 `git diff --cached -- README.md` 检查。不要直接暂存整份文件，以免带入其他修改；重新选出的暂存版本仍需通过格式检查。
+
+仅在工作区把文件格式化、没有重新暂存时，旧的暂存版本仍会被拦截。
+
+| 命令 | 范围与作用 |
+| --- | --- |
+| `npm run prepare` | 为本地仓库启用 hook。 |
+| `npm run fmt:staged` | 只检查暂存内容，不改写文件。 |
+| `npm run fmt:check` | 检查整个工作区中未忽略的受支持文件。 |
+| `npm run fmt` | 格式化整个工作区，可能修改本次任务之外的文件。 |
+
+自动 CI 仅在目标分支为 `main` 的 PR 上运行格式检查，也保留手动入口；向 `dev` 提交 PR 或推送不会自动运行该检查。
+
 ## 构建当前酒馆版本
 
 在游戏仓库根目录执行：
