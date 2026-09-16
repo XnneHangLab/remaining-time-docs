@@ -9,7 +9,7 @@ description: 使用 just、make 或 npm 在本地运行余时遗物，并将酒�
 
 ## 准备环境
 
-- **Node.js 22 LTS 与 npm**。
+- **Node.js 22 LTS 与 npm**；包含 pre-commit 的版本需 **22.22.1 或更新补丁版本**。
 - **Git**，用于获取源码。
 - **just 或 make**，任选一个；也可以直接使用 npm。
 - 建议使用较新的 Chrome 或 Edge，存档需要浏览器支持本地文件存储。
@@ -59,13 +59,13 @@ npm run play:local
 
 存档入口在**设置 → 存档**。你可以回看已经记录的过程，也可以在回放中选择一个历史时刻重新接手，详见[存档系统](/systems/#saves)。
 
-## 开发中的格式检查 {#formatting}
+## 开发中的格式化 {#formatting}
 
 本节适用于包含 [游戏 PR #67](https://github.com/NevaMind-AI/remaining-time/pull/67) 的版本；使用前请确认当前分支已包含该改动。所有命令都在**游戏仓库根目录**执行。
 
 ### 启用 pre-commit
 
-安装依赖时，`npm ci` 或 `npm install` 会通过 `prepare` 自动启用 Git hook。已有依赖、刚更新到包含 hook 的版本，或安装时使用了 `--ignore-scripts`，执行一次：
+安装或更新依赖时，`npm ci` 或 `npm install` 会安装 lint-staged，并通过 `prepare` 自动启用 Git hook。已经安装本版本依赖，但安装时使用了 `--ignore-scripts`，执行一次：
 
 ```sh
 npm run prepare
@@ -81,34 +81,24 @@ git config --get core.hooksPath
 
 如果原本设置了其他 `core.hooksPath`，先合并已有 hook：`prepare` 会将路径设为 `.githooks`，原路径中的 hook 不会继续自动执行。
 
-### 日常提交
+### 日常提交：增量自动格式化
 
-编辑完成后，只暂存本次要提交的内容。以下以 `README.md` 为例：
+编辑完成后，只暂存本次要提交的内容，再正常提交。以下以 `README.md` 为例：
 
 ```sh
 git add README.md
-npm run fmt:staged
 git commit
 ```
 
-`npm run fmt:staged` 可提前检查；即使省略它，`git commit` 也会自动执行相同检查。hook 使用现有 Prettier，只检查已暂存且受支持的常规文件，遵守 `.gitignore` 和 `.prettierignore`，跳过符号链接和 submodule。
+pre-commit 会通过 lint-staged 调用 `prettier --write --ignore-unknown`，自动格式化本次暂存文件，并将结果更新到暂存区后继续提交。普通格式差异会直接修正，无需先处理检查失败。忽略规则继续生效，不支持的格式跳过；hook 不运行 lint、类型检查或测试。
 
-检查读取 **Git 暂存区中的版本**，不自动格式化、修改文件或重新暂存。未暂存的编辑不会被混入提交；hook 不运行 lint、类型检查或测试。
+也可以提前运行 `npm run fmt:staged`、`make fmt-staged` 或 `just fmt-staged`。这些命令会改写本次暂存文件并暂存格式化结果。
 
-### 格式不合规时
+### 部分暂存与执行失败
 
-hook 会列出文件并阻止本次提交。对提示的文件运行格式化，再重新暂存所需改动。例如：
+使用 `git add -p` 只提交部分修改时，lint-staged 会暂时隐藏同文件中的未暂存修改，格式化并暂存本次内容后，再恢复未暂存修改。不要自行追加 `git add .`，以免带入其他修改。
 
-```sh
-npx prettier --write README.md
-git add README.md
-npm run fmt:staged
-git commit
-```
-
-如果该文件只暂存了部分修改，格式化后使用 `git add -p README.md` 重新选择提交片段，并用 `git diff --cached -- README.md` 检查。不要直接暂存整份文件，以免带入其他修改；重新选出的暂存版本仍需通过格式检查。
-
-仅在工作区把文件格式化、没有重新暂存时，旧的暂存版本仍会被拦截。
+如果文件有语法错误、Prettier 无法解析，或未暂存修改恢复时发生冲突，提交会停止并显示具体原因。lint-staged 默认创建备份并在失败时恢复原状态；按终端提示处理，必要时用 `git stash list` 查找它保留的备份。保留默认的 stash 与部分暂存保护选项，不使用 `--no-stash` 或 `--no-hide-partially-staged` 关闭保护。
 
 ### 存量检查与 Make／Just 入口
 
@@ -122,12 +112,12 @@ make fmt-check
 just fmt-check
 ```
 
-全量检查读取整个工作区，包含未暂存和未跟踪的受支持文件，并遵守忽略规则；没有暂存改动时也能运行。它不改写文件或暂存状态，与提交时读取 Git 暂存版本的检查相互补充。
+全量检查读取整个工作区，包含未暂存和未跟踪的受支持文件，并遵守忽略规则；没有暂存改动时也能运行。它不改写文件或暂存状态，用于了解存量格式情况。
 
 | 操作 | npm | Make | Just |
 | --- | --- | --- | --- |
 | 启用提交 hook | `npm run prepare` | `make hooks-install` | `just hooks-install` |
-| 检查本次暂存内容 | `npm run fmt:staged` | `make fmt-staged` | `just fmt-staged` |
+| 自动格式化本次暂存内容 | `npm run fmt:staged` | `make fmt-staged` | `just fmt-staged` |
 | 检查所有存量文件 | `npm run fmt:check` | `make fmt-check` | `just fmt-check` |
 | 全量格式化工作区 | `npm run fmt` | `make fmt` | `just fmt` |
 
