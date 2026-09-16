@@ -110,12 +110,28 @@ git commit
 
 仅在工作区把文件格式化、没有重新暂存时，旧的暂存版本仍会被拦截。
 
-| 命令 | 范围与作用 |
-| --- | --- |
-| `npm run prepare` | 为本地仓库启用 hook。 |
-| `npm run fmt:staged` | 只检查暂存内容，不改写文件。 |
-| `npm run fmt:check` | 检查整个工作区中未忽略的受支持文件。 |
-| `npm run fmt` | 格式化整个工作区，可能修改本次任务之外的文件。 |
+### 存量检查与 Make／Just 入口
+
+提交 hook 只覆盖暂存文件。要检查所有存量文件，运行以下任意一个命令：
+
+```sh
+npm run fmt:check
+# 或
+make fmt-check
+# 或
+just fmt-check
+```
+
+全量检查读取整个工作区，包含未暂存和未跟踪的受支持文件，并遵守忽略规则；没有暂存改动时也能运行。它不改写文件或暂存状态，与提交时读取 Git 暂存版本的检查相互补充。
+
+| 操作 | npm | Make | Just |
+| --- | --- | --- | --- |
+| 启用提交 hook | `npm run prepare` | `make hooks-install` | `just hooks-install` |
+| 检查本次暂存内容 | `npm run fmt:staged` | `make fmt-staged` | `just fmt-staged` |
+| 检查所有存量文件 | `npm run fmt:check` | `make fmt-check` | `just fmt-check` |
+| 全量格式化工作区 | `npm run fmt` | `make fmt` | `just fmt` |
+
+需要一次性修正存量格式时，使用 `make fmt`、`just fmt` 或 `npm run fmt`。这些命令可能修改本次任务之外的文件，运行后先查看 diff，再选择要暂存的改动；不会自动暂存。
 
 自动 CI 仅在目标分支为 `main` 的 PR 上运行格式检查，也保留手动入口；向 `dev` 提交 PR 或推送不会自动运行该检查。
 
