@@ -9,6 +9,8 @@ description: 当前本地运行时的配置、状态与存储边界，以及 NPC
 `58883cf17148de4e2fdeda88ae9da7e8a8079333`（[代码 PR #64](https://github.com/NevaMind-AI/remaining-time/pull/64)），内容版本 `npc-abilities-1`。
 适用于 `npm run play:local` 的本地 memory 模式，包括酒馆、客房与室外场景。下文区分当前实现与已确定的扩展方向；日期不等于存档格式版本。
 
+后续的运行边界核对与多人云存档规划见[前后端分工与多人云存档 · 2026-09-18](./client-server-2026-09-18)，其中设计方向尚未全部实现。
+
 ## Config → State → Storage {#overview}
 
 | 职责 | 保存什么 | 谁负责修改 |
