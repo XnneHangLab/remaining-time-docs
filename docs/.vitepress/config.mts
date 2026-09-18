@@ -24,6 +24,7 @@ export default defineConfig({
       ] },
       { text: '架构快照', items: [
         { text: '世界架构 · 2026-09-15', link: '/architecture/world-model-2026-09-15' },
+        { text: '前后端分工与多人云存档 · 2026-09-18', link: '/architecture/client-server-2026-09-18' },
       ] },
       { text: '主要系统', items: [
         { text: '货币 · 时间有价', link: '/systems/#currency' },
