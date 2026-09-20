@@ -12,6 +12,7 @@ export default defineConfig({
       { text: '每日更新', link: '/daily-build/' },
       { text: '世界背景', link: '/story/background' },
       { text: '剧本时间线', link: '/story/timeline' },
+      { text: '编剧任务卡', link: '/story/task-card' },
       { text: '主要系统', link: '/systems/' },
       { text: '架构快照', link: '/architecture/world-model-2026-09-15' },
     ],
@@ -20,6 +21,7 @@ export default defineConfig({
         { text: 'Daily Build 更新', link: '/daily-build/' },
         { text: '世界背景', link: '/story/background' },
         { text: '剧本时间线', link: '/story/timeline' },
+        { text: '编剧任务卡', link: '/story/task-card' },
         { text: '如何开始', link: '/guide/getting-started' },
       ] },
       { text: '架构快照', items: [
