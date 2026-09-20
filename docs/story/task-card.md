@@ -1,85 +1,102 @@
 ---
-title: 编剧任务卡
-description: 编剧提交可制作剧情任务时使用的最小信息标准。
+title: Agent 任务卡
+description: 面向编剧 Agent 的高度压缩剧情任务交付格式。
 ---
 
-# 编剧任务卡
+# Agent 任务卡
 
-这张卡用于把一个剧情任务交给其他编剧和工程成员。先写清玩家要经历什么、怎样算完成；完整台词、素材和 JSON 可以在审核后补充。
+这不是面向玩家或普通读者的剧情说明，而是交给编剧 Agent 继续加工的**最小任务规格**。一张卡只描述一个任务；所有字段都必须填写，确实不存在时写 `none`，未知内容写 `TODO`，禁止留空或让 Agent 猜测。
 
-一张卡只描述一个任务。几个目标可以并行时，拆成多张卡，并在“关联任务”中互相注明。不要为了填写格式猜测尚未确定的 NPC、奖励或系统能力。
+## 标准格式
 
-## 最小模板
+```yaml
+task:
+  id: stable-task-id
+  title: 玩家看到的任务名
+  status: proposal | reviewed | ready
+  package: 内容包 / 章节
 
-复制下面的内容开始填写：
+  trigger:
+    time: 触发时间、时间段或事件；无固定时间写 none
+    place: 场景、anchor、实体或区域；无固定地点写 none
+    requires: [必须先满足的变量、任务步骤或事实；无则 none]
 
-```md
-# [任务编号] 任务名称
+  actors: [实体或人物: 本任务中的职责；未知 ID 写 TODO]
+  objects: [物件: 初始持有者/位置/用途；无则 none]
 
-- **状态：** 提案 / 待审 / 可制作
-- **内容包：** 所属内容包或章节
-- **关联任务：** 无；或写前置、后续、并行任务
-- **任务起因：** 玩家为什么会遇到这件事？开场时玩家已经知道什么？
-- **激活条件：** 任务何时出现？写一个明确条件；多个条件注明“全部”或“任一”。
-- **最终目标：** 玩家实际完成什么动作才算成功？
-- **完成结果：** 信息、关系、物品、变量或后续入口发生什么变化？没有就写“无”。
+  stages:
+    - id: s1
+      time: 本阶段开放时间或时间条件；无则 none
+      place: 本阶段实际发生地点、交互实体或目标；必须可定位
+      reveal: 玩家进入本阶段时已经知道的信息
+      action: 玩家必须做的可观察动作
+      success: 推进本阶段的唯一成功条件
+      effect: 成功后的变量、物品、关系、开放入口或下一阶段
+      next: 下一阶段 ID；结束写 done
 
-## 阶段
-
-| 阶段 | 玩家当前知道什么 | 玩家要做什么 | 完成条件 | 成功后发生什么 |
-| --- | --- | --- | --- | --- |
-| 1 · 阶段名称 | 此阶段可公开的信息 | 可观察、可操作的目标 | 哪个成功动作推进阶段 | 下一阶段、信息或结果 |
-
-## 边界
-
-- **可以提前做什么：**
-- **不能提前确认什么：**
-- **取消、离开、拒绝后：**
-- **重复完成后：**
-- **待确认的问题：**
+  result:
+    success: 任务完成时玩家实际得到或改变的结果；无则 none
+    cancel: 取消、离开或中断后的状态
+    reject: 玩家拒绝后的状态与回来方式
+    repeat: 已完成后再次操作的行为
+    unresolved: 尚未决定、禁止 Agent 自行补全的问题；无则 none
 ```
 
-## 填写规则
+## 强制规则
 
-- “最终目标”必须是玩家实际做成的事，例如“把门牌放入柜中”，不能只写“理解真相”。
-- “完成条件”要写成功动作，不把打开话题、作出承诺或开始操作当成完成。
-- 每个阶段只写玩家当时已经知道的内容，不提前泄露后续人物关系、奖励或结局。
-- 有顺序依赖的阶段放在同一张卡中；互不依赖的目标拆卡，并注明“顺序不限”。
-- 奖励、物品去向和变量变化写在“完成结果”或“成功后发生什么”中；不确定时写入“待确认的问题”。
-- 先用自然语言交付，不编写运行 JSON，也不发明尚未支持的系统能力。
+- `trigger.time`、`trigger.place` 和每个阶段的 `time`、`place` 都必须出现；没有限制也写 `none`。
+- `requires` 写必要条件，不把叙事顺序误写成前置；多个条件注明 `all` 或 `any`。
+- `action` 写玩家实际操作，`success` 写系统可以判定的成功结果；“理解”“感动”“答应”不能单独作为完成条件。
+- `effect` 只写确认过的变化。物品去向、变量名、入口和后续任务不确定时写 `TODO`，不让 Agent 猜。
+- `reveal` 只包含该阶段可知的信息，不能提前泄露后续人物关系、奖励或结局。
+- 独立目标拆成不同任务；有明确前后依赖的阶段才放在同一任务中。
+- 对白、素材、实体 ID、Story JSON 和工程验收不写进最小卡；审核通过后再由 Agent 拆成具体交付物。
 
-## 审核后再补充
+## 压缩示例
 
-任务卡通过内容审核后，再补充以下材料：具体对白与选项、人物和物件 ID、素材需求、引擎能力映射、验收路径，以及对应 Story 文件。工程成员负责把已确认的内容映射到运行时，不替编剧猜测玩家选什么、何时获得物品或什么行为算完成。
-
-## 示例
-
-```md
-# tavern-help · 老板娘的招呼
-
-- **状态：** 可制作
-- **内容包：** 酒馆
-- **关联任务：** 后续连接“一个落脚点”；与遗物线索顺序不限
-- **任务起因：** 客人离席后留下未清理的餐桌，绯月需要帮手。
-- **激活条件：** 酒馆出现至少一张待清理餐桌。
-- **最终目标：** 接受请托，清理一张餐桌，并回柜台领取谢礼。
-- **完成结果：** 获得一瓶柚光汽水；开放客房和后续按桌帮工。没有其他结果。
-
-## 阶段
-
-| 阶段 | 玩家当前知道什么 | 玩家要做什么 | 完成条件 | 成功后发生什么 |
-| --- | --- | --- | --- | --- |
-| 1 · 接受请托 | 绯月说莉奈忙不过来 | 确认愿意帮忙 | 选择确认帮工 | 开放清桌目标 |
-| 2 · 清理一桌 | 需要等客人离席 | 清理一张留有餐具的桌子 | 玩家实际完成清理 | 开放回柜台领取谢礼 |
-| 3 · 领取谢礼 | 绯月答应请一瓶汽水 | 回柜台确认领取 | 谢礼成功发放 | 任务完成，开放后续安排 |
-
-## 边界
-
-- **可以提前做什么：** 接受请托前可以交谈和探索，但不能推进清桌步骤。
-- **不能提前确认什么：** 只打开话题、承诺帮忙或开始清理都不算完成。
-- **取消、离开、拒绝后：** 保留已有进度，可以回来继续；拒绝不激活清桌目标。
-- **重复完成后：** 不重复发放首桌谢礼；后续清桌按独立规则结算。
-- **待确认的问题：** 无。
+```yaml
+task:
+  id: tavern-help
+  title: 老板娘的招呼
+  status: ready
+  package: tavern
+  trigger:
+    time: dining active
+    place: tavern / dirty table exists
+    requires: none
+  actors: [tavern.hostess: requester, tavern.waiter: service owner]
+  objects: [dirty table: dining state / tavern]
+  stages:
+    - id: accept
+      time: after trigger
+      place: tavern.hostess / counter
+      reveal: 绯月需要帮手清理离席餐桌
+      action: confirm help
+      success: choice.accept_help confirmed
+      effect: unlock clean; next clean
+      next: clean
+    - id: clean
+      time: after accept; guest departed
+      place: tavern / dirty table
+      reveal: 桌上留下餐具，需要玩家处理
+      action: complete one manual clean
+      success: dining.cleaned(tavern) = 1
+      effect: unlock reward; next reward
+      next: reward
+    - id: reward
+      time: after clean
+      place: tavern.hostess / counter
+      reveal: 绯月答应提供一瓶汽水
+      action: confirm reward
+      success: item transfer succeeds
+      effect: citrus-soda +1; room access on; done
+      next: done
+  result:
+    success: 首桌谢礼、客房入口、后续按桌帮工
+    cancel: 保留已完成阶段
+    reject: 不开放清桌；可再次交谈
+    repeat: 不重复发首桌谢礼；后续清桌按独立规则结算
+    unresolved: none
 ```
 
-这张卡只约束内容交付格式，不替代[剧本时间线](/story/timeline)或具体能力说明。完成后的运行版本仍以游戏内容包和对应代码版本为准。
+这张卡只定义内容事实和玩家行为，不定义运行时语法。实现能力、具体 ID 和可执行对白由后续拆解确认；任何未确认事项都必须留在 `unresolved`，不能由 Agent 补设定。
