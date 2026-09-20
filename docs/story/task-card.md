@@ -17,7 +17,7 @@ task:
   package: 内容包 / 章节
 
   trigger:
-    time: 触发时间、时间段或事件；无固定时间写 none
+    time: 触发时间或时间条件，例如 18:00、第一天 18:00 后、首演结束后；无时间触发写 none
     place: 场景、anchor、实体或区域；无固定地点写 none
     requires: [必须先满足的变量、任务步骤或事实；无则 none]
 
@@ -26,7 +26,6 @@ task:
 
   stages:
     - id: s1
-      time: 本阶段开放时间或时间条件；无则 none
       place: 本阶段实际发生地点、交互实体或目标；必须可定位
       reveal: 玩家进入本阶段时已经知道的信息
       action: 玩家必须做的可观察动作
@@ -44,9 +43,9 @@ task:
 
 ## 强制规则
 
-- `trigger.time`、`trigger.place` 和每个阶段的 `time`、`place` 都必须出现；没有限制也写 `none`。
-- 时间只表达**开放、失效、作息、营业或截止约束**。使用能表达约束的最粗粒度：`第一天傍晚`、`首演结束后`、`营业时间内`、`午夜前`。只有运行规则确实依赖精确时刻时才写小时或分钟。
-- 不要用时间记录完整剧情进度、人物每分钟做什么或玩家完成动作需要几分钟；阶段先后用 `requires`、`next` 和 `success` 表达。没有实际时间限制时写 `none`。
+- `trigger.time` 是任务级触发条件；需要按时刻触发时写具体值，例如 `18:00`、`第一天 18:00 后` 或 `首演结束后`。没有时间触发写 `none`。
+- 时间暂不作为阶段时间轴。不要给每个阶段标注分钟、小时或动作耗时；阶段先后用 `requires`、`next` 和 `success` 表达。只有未来明确需要阶段独立限时或失效条件时，才扩展字段。
+- `trigger.place` 和每个阶段的 `place` 都必须出现；没有固定地点写 `none`，但阶段通常应给出可定位的场景、实体或区域。
 - `requires` 写必要条件，不把叙事顺序误写成前置；多个条件注明 `all` 或 `any`。
 - `action` 写玩家实际操作，`success` 写系统可以判定的成功结果；“理解”“感动”“答应”不能单独作为完成条件。
 - `effect` 只写确认过的变化。物品去向、变量名、入口和后续任务不确定时写 `TODO`，不让 Agent 猜。
@@ -70,7 +69,6 @@ task:
   objects: [dirty table: dining state / tavern]
   stages:
     - id: accept
-      time: after trigger
       place: tavern.hostess / counter
       reveal: 绯月需要帮手清理离席餐桌
       action: confirm help
@@ -78,7 +76,6 @@ task:
       effect: unlock clean; next clean
       next: clean
     - id: clean
-      time: after accept; guest departed
       place: tavern / dirty table
       reveal: 桌上留下餐具，需要玩家处理
       action: complete one manual clean
@@ -86,7 +83,6 @@ task:
       effect: unlock reward; next reward
       next: reward
     - id: reward
-      time: after clean
       place: tavern.hostess / counter
       reveal: 绯月答应提供一瓶汽水
       action: confirm reward
