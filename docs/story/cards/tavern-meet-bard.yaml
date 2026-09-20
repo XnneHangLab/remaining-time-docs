@@ -1,0 +1,72 @@
+task:
+  id: tavern-meet-bard
+  title: 酒馆里的老朋友
+  status: ready
+  package: tavern
+  background: 首演结束后，绯月向诗人熟稔地点头，玩家可以正式认识这位演奏者。
+  trigger:
+    time: first performance ended
+    place: tavern / performance area
+    requires: bard_debut_finished=true
+  actors:
+    - id: tavern.hostess
+      name: 绯月
+      role: introducer
+    - id: tavern.bard
+      name: 诗人
+      role: new acquaintance
+    - id: player
+      name: 玩家
+      role: listener
+  objects:
+    - id: tavern-rug
+      state: performance area
+  stages:
+    - id: introduction
+      place: tavern.hostess / counter
+      reveal: 首演已经结束，绯月认识这位演奏者。
+      writer:
+        background: 曲子结束后，绯月向那位演奏者点头致意。你想知道他是谁。
+        script:
+          - speaker: tavern.hostess
+            text: 他是四处旅行的吟游诗人，店里一直给艺人留着那块花毯。
+          - speaker: player
+            choice: ask_bard
+            text: 我去向他问个好。
+      coder:
+        dialogue:
+          purpose: 完成绯月的引介并开放正式认识
+          facts: [诗人四处旅行, 酒馆为艺人留花毯, 客人可以自愿打赏]
+          forbid: [提前承诺诗人的后续任务]
+          tone: welcoming
+        action: choice.ask_bard
+        success: introduction choice confirmed
+        effects: [unlock bard introduction]
+        next: meet
+    - id: meet
+      place: tavern.bard / performance area
+      reveal: 绯月已经介绍诗人，诗人就在花毯旁且可以交谈。
+      writer:
+        background: 你走到花毯旁，诗人收起琴，转身听你自我介绍。
+        script:
+          - speaker: tavern.bard
+            text: 我一路唱歌、弹琴，也记下遇到的故事。
+          - speaker: player
+            choice: introduce_self
+            text: 绯月向我提起过你，很高兴认识你。
+      coder:
+        dialogue:
+          purpose: 建立玩家与诗人的正式相识
+          facts: [诗人沿途唱歌弹琴并记录故事]
+          forbid: [新增未确认的身世关系, 直接承诺借琴]
+          tone: cordial
+        action: choice.introduce_self
+        success: choice confirmed while bard is present and talkable
+        effects: [bard_met=true, unlock tavern-guitar-practice]
+        next: done
+  result:
+    success: 正式认识诗人，开放指定课程入口
+    cancel: 引介进度保留，可稍后继续
+    reject: 不完成相识，不开放学琴任务
+    repeat: 相识对白可回顾，不重复设置变量
+    unresolved: 诗人后续山歌和海边故事

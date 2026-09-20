@@ -1,0 +1,50 @@
+task:
+  id: tavern-guitar-practice
+  title: 弦上的第一步
+  status: ready
+  package: tavern
+  background: 玩家正式认识诗人后，可以在他有空时完成一次指定的吉他课程。
+  trigger:
+    time: none
+    place: tavern / performance area
+    requires: bard_met=true
+  actors:
+    - id: tavern.bard
+      name: 诗人
+      role: teacher
+    - id: player
+      name: 玩家
+      role: learner
+  objects:
+    - id: song-of-growth
+      state: guided practice lesson
+    - id: bard-guitar
+      state: belongs to bard
+  stages:
+    - id: practice
+      place: tavern.bard / performance area
+      reveal: 诗人已经同意指导玩家，课程使用《Song Of Growth》进行跟弹练习。
+      writer:
+        background: 诗人有空时，你可以借用他的琴，跟着和弦与谱面提示完成练习。
+        script:
+          - speaker: tavern.bard
+            text: 先跟着这首曲子的节奏来，不必急着弹得完美。
+          - speaker: player
+            choice: start_practice
+            text: 好，我准备好了。
+      coder:
+        dialogue:
+          purpose: 开始一次可判定的指定课程
+          facts: [课程为《Song Of Growth》, 使用W/A/S演奏, 需要完成整曲并达到命中要求]
+          forbid: [把乐器写成玩家获得的物品, 承诺额外奖励]
+          tone: patient
+        action: start guided practice and perform W/A/S
+        success: course ends with at least 30 short-note hits
+        effects: [preserve lesson progress, practice complete]
+        next: done
+  result:
+    success: 完成一次指定课程并保留学习进度
+    cancel: 练习中断，不计为完成，可在诗人有空时重试
+    reject: 不开始课程，任务保持待完成
+    repeat: 可复习课程，不重复发放乐器或物品
+    unresolved: 山歌、海边故事和后续乐器传承
