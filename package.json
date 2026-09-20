@@ -11,6 +11,7 @@
     "vitepress": "^1.6.3"
   },
   "dependencies": {
-    "ai-town": "file:.."
+    "ai-town": "file:..",
+    "yaml": "^2.9.1"
   }
 }
