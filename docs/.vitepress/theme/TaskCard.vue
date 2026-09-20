@@ -9,6 +9,12 @@ const card = parse(props.source).task;
 const view = ref<View>('writer');
 const stageIndex = ref(0);
 const currentStage = computed(() => card.stages[stageIndex.value]);
+const speakerNames = new Map<string, string>([
+  ['narrator', '旁白'],
+  ['player', '玩家'],
+  ...card.actors.map((actor: { id: string; name?: string }) =>
+    [actor.id, actor.name || '未命名角色'] as [string, string]),
+]);
 
 function list(value: unknown) {
   if (Array.isArray(value)) return value.join('、');
@@ -65,8 +71,8 @@ function moveStage(delta: number) {
         <p class="task-card__background">{{ currentStage.writer.background }}</p>
         <div class="task-card__script">
           <div v-for="(line, index) in currentStage.writer.script" :key="index" class="task-card__line">
-            <strong>{{ line.speaker }}</strong>
-            <span v-if="line.choice" class="task-card__choice">{{ line.choice }}</span>
+            <strong>{{ speakerNames.get(line.speaker) || '未定义角色' }}</strong>
+            <span v-if="line.choice" class="task-card__choice">玩家选项</span>
             <p>{{ line.text }}</p>
           </div>
         </div>

@@ -10,8 +10,10 @@ task:
     requires: none
   actors:
     - id: tavern.hostess
+      name: 绯月
       role: requester
     - id: tavern.waiter
+      name: 莉奈
       role: service owner
   objects:
     - id: dirty-table
@@ -48,7 +50,7 @@ task:
         script:
           - speaker: narrator
             text: 一张桌子的客人离开了，桌面上留下用过的餐具。
-          - speaker: waiter
+          - speaker: tavern.waiter
             text: 客人刚走。你可以先把这张桌子收拾好。
       coder:
         dialogue:
