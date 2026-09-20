@@ -7,6 +7,16 @@ description: 面向编剧 Agent 的高度压缩剧情任务交付格式。
 
 这不是面向玩家或普通读者的剧情说明，而是交给编剧 Agent 继续加工的**最小任务规格**。一张卡只描述一个任务；所有字段都必须填写，确实不存在时写 `none`，未知内容写 `TODO`，禁止留空或让 Agent 猜测。
 
+<script setup>
+import TaskCard from '../.vitepress/theme/TaskCard.vue'
+</script>
+
+## Card 预览
+
+下面的卡片由同目录的 `task-card-example.yaml` 在构建时解析生成；YAML 是 Agent 的输入，卡片是编剧成员的阅览形式。
+
+<TaskCard />
+
 ## 标准格式
 
 ```yaml

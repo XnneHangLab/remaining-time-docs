@@ -1,0 +1,61 @@
+task:
+  id: tavern-help
+  title: 老板娘的招呼
+  status: ready
+  package: tavern
+  background: 客人离席后留下未清理的餐桌，绯月需要帮手。
+  trigger:
+    time: dining active
+    place: tavern / dirty table exists
+    requires: none
+  actors:
+    - id: tavern.hostess
+      role: requester
+    - id: tavern.waiter
+      role: service owner
+  objects:
+    - id: dirty-table
+      state: dining / tavern
+  stages:
+    - id: accept
+      place: tavern.hostess / counter
+      reveal: 绯月需要帮手清理离席餐桌
+      dialogue:
+        purpose: 请求玩家确认是否帮忙
+        facts: [莉奈忙不过来, 清理一张离席餐桌]
+        forbid: [提前承诺谢礼内容]
+        tone: warm
+      action: confirm help
+      success: choice.accept_help confirmed
+      effect: unlock clean; next clean
+      next: clean
+    - id: clean
+      place: tavern / dirty table
+      reveal: 桌上留下餐具，需要玩家处理
+      dialogue:
+        purpose: 说明当前清理目标
+        facts: [玩家需要手动清理一张餐桌]
+        forbid: none
+        tone: practical
+      action: complete one manual clean
+      success: dining.cleaned(tavern) = 1
+      effect: unlock reward; next reward
+      next: reward
+    - id: reward
+      place: tavern.hostess / counter
+      reveal: 绯月答应提供一瓶汽水
+      dialogue:
+        purpose: 确认谢礼和后续安排
+        facts: [一瓶柚光汽水, 客房入口, 后续按桌帮工]
+        forbid: [把乐器或其他物品写成奖励]
+        tone: grateful
+      action: confirm reward
+      success: item transfer succeeds
+      effect: citrus-soda +1; room access on; done
+      next: done
+  result:
+    success: 首桌谢礼、客房入口、后续按桌帮工
+    cancel: 保留已完成阶段
+    reject: 不开放清桌；可再次交谈
+    repeat: 不重复发首桌谢礼；后续清桌按独立规则结算
+    unresolved: none
