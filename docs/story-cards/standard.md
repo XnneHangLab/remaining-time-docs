@@ -9,12 +9,12 @@ description: 面向编剧 Agent 的高度压缩剧情任务交付格式。
 
 <script setup>
 import TaskCard from '../.vitepress/theme/TaskCard.vue'
-import taskCardYaml from './task-card-example.yaml?raw'
+import taskCardYaml from '../story/task-card-example.yaml?raw'
 </script>
 
 ## Card 预览
 
-下面的卡片由同目录的 `task-card-example.yaml` 在构建时解析生成；YAML 是 Agent 的输入，卡片是编剧成员的阅览形式。
+下面的卡片由 `docs/story/task-card-example.yaml` 在构建时解析生成；YAML 是 Agent 的输入，卡片是编剧成员的阅览形式。
 
 <TaskCard :source="taskCardYaml" />
 
