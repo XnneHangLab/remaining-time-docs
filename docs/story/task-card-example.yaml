@@ -20,39 +20,69 @@ task:
     - id: accept
       place: tavern.hostess / counter
       reveal: 绯月需要帮手清理离席餐桌
-      dialogue:
-        purpose: 请求玩家确认是否帮忙
-        facts: [莉奈忙不过来, 清理一张离席餐桌]
-        forbid: [提前承诺谢礼内容]
-        tone: warm
-      action: confirm help
-      success: choice.accept_help confirmed
-      effect: unlock clean; next clean
-      next: clean
+      writer:
+        background: 客人已经离席，桌上还留着餐具。绯月需要一个人帮莉奈搭把手。
+        script:
+          - speaker: narrator
+            text: 绯月看见你走近柜台，朝忙碌的餐区看了一眼。
+          - speaker: tavern.hostess
+            text: 刚走的那桌还没收，莉奈又要招呼新来的客人。能麻烦你帮她收拾一下吗？
+          - speaker: player
+            choice: accept_help
+            text: 好，我帮莉奈收一张桌子。
+      coder:
+        dialogue:
+          purpose: 请求玩家确认是否帮忙
+          facts: [莉奈忙不过来, 玩家需要清理一张离席餐桌]
+          forbid: [提前承诺具体谢礼]
+          tone: warm
+        action: choice.accept_help
+        success: choice.confirmed(tavern.hostess, accept_help)
+        effects: [help_accepted=true]
+        next: clean
     - id: clean
       place: tavern / dirty table
       reveal: 桌上留下餐具，需要玩家处理
-      dialogue:
-        purpose: 说明当前清理目标
-        facts: [玩家需要手动清理一张餐桌]
-        forbid: none
-        tone: practical
-      action: complete one manual clean
-      success: dining.cleaned(tavern) = 1
-      effect: unlock reward; next reward
-      next: reward
+      writer:
+        background: 你已经答应帮忙。现在需要等一桌客人离席，再亲手收拾留下的餐具。
+        script:
+          - speaker: narrator
+            text: 一张桌子的客人离开了，桌面上留下用过的餐具。
+          - speaker: waiter
+            text: 客人刚走。你可以先把这张桌子收拾好。
+      coder:
+        dialogue:
+          purpose: 说明当前清理目标
+          facts: [玩家需要手动清理一张餐桌]
+          forbid: none
+          tone: practical
+        action: complete manual clean
+        success: dining.cleaned(tavern) = 1
+        effects: [unlock reward]
+        next: reward
     - id: reward
       place: tavern.hostess / counter
       reveal: 绯月答应提供一瓶汽水
-      dialogue:
-        purpose: 确认谢礼和后续安排
-        facts: [一瓶柚光汽水, 客房入口, 后续按桌帮工]
-        forbid: [把乐器或其他物品写成奖励]
-        tone: grateful
-      action: confirm reward
-      success: item transfer succeeds
-      effect: citrus-soda +1; room access on; done
-      next: done
+      writer:
+        background: 桌子已经收好。你回到柜台，绯月准备兑现答应的谢礼。
+        script:
+          - speaker: player
+            choice: claim_drink
+            text: 谢谢，汽水我收下了。
+          - speaker: tavern.hostess
+            text: 收得真利落，谢谢你。这瓶柚光汽水是说好的谢礼。
+          - speaker: tavern.hostess
+            text: 楼上的房间可以给你暂住。以后有空再帮忙收桌，每桌另算。
+      coder:
+        dialogue:
+          purpose: 确认谢礼和后续安排
+          facts: [一瓶柚光汽水, 客房入口, 后续按桌帮工]
+          forbid: [把乐器或其他物品写成奖励]
+          tone: grateful
+        action: choice.claim_drink
+        success: choice.confirmed(tavern.hostess, claim_drink) and item transfer succeeds
+        effects: [citrus-soda +1, room_available=true]
+        next: done
   result:
     success: 首桌谢礼、客房入口、后续按桌帮工
     cancel: 保留已完成阶段
