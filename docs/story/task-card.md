@@ -15,6 +15,7 @@ task:
   title: 玩家看到的任务名
   status: proposal | reviewed | ready
   package: 内容包 / 章节
+  background: 任务起因和世界事实；写事实摘要，不要求成稿
 
   trigger:
     time: 触发时间或时间条件，例如 18:00、第一天 18:00 后、首演结束后；无时间触发写 none
@@ -32,6 +33,11 @@ task:
     - id: s1
       place: 本阶段实际发生地点、交互实体或目标；必须可定位
       reveal: 玩家进入本阶段时已经知道的信息
+      dialogue:
+        purpose: 本阶段对白要完成的沟通目的
+        facts: [必须传达的事实；无则 none]
+        forbid: [不能提前说或不能承诺的内容；无则 none]
+        tone: 语气或情绪；无特殊要求写 neutral
       action: 玩家必须做的可观察动作
       success: 推进本阶段的唯一成功条件
       effect: 成功后的变量、物品、关系、开放入口或下一阶段
@@ -51,11 +57,14 @@ task:
 - 时间暂不作为阶段时间轴。不要给每个阶段标注分钟、小时或动作耗时；阶段先后用 `requires`、`next` 和 `success` 表达。只有未来明确需要阶段独立限时或失效条件时，才扩展字段。
 - `trigger.place` 和每个阶段的 `place` 都必须出现；没有固定地点写 `none`，但阶段通常应给出可定位的场景、实体或区域。
 - `requires` 写必要条件，不把叙事顺序误写成前置；多个条件注明 `all` 或 `any`。
+- `background`、`reveal`、`dialogue.facts` 和 `dialogue.forbid` 是事实边界，不是让 Agent 自由补写世界设定的提示。
+- Agent 可以把已确认的事实改写成自然背景和台词，可以发挥句式、节奏和情绪；不能新增人物经历、关系、奖励、承诺或玩家未知信息。
+- `dialogue.purpose` 约束这段对白要让玩家知道或决定什么；`facts` 必须出现，`forbid` 不得出现。没有特殊要求写 `none`。
 - `action` 写玩家实际操作，`success` 写系统可以判定的成功结果；“理解”“感动”“答应”不能单独作为完成条件。
 - `effect` 只写确认过的变化。物品去向、变量名、入口和后续任务不确定时写 `TODO`，不让 Agent 猜。
 - `reveal` 只包含该阶段可知的信息，不能提前泄露后续人物关系、奖励或结局。
 - 独立目标拆成不同任务；有明确前后依赖的阶段才放在同一任务中。
-- 对白、素材、实体 ID、Story JSON 和工程验收不写进最小卡；审核通过后再由 Agent 拆成具体交付物。
+- 对白、素材、Story JSON 和工程验收不写进最小卡；审核通过后再由 Agent 拆成具体交付物。
 
 ## 压缩示例
 
@@ -65,6 +74,7 @@ task:
   title: 老板娘的招呼
   status: ready
   package: tavern
+  background: 客人离席后留下未清理的餐桌，绯月需要帮手。
   trigger:
     time: dining active
     place: tavern / dirty table exists
@@ -81,6 +91,11 @@ task:
     - id: accept
       place: tavern.hostess / counter
       reveal: 绯月需要帮手清理离席餐桌
+      dialogue:
+        purpose: 请求玩家确认是否帮忙
+        facts: [莉奈忙不过来, 清理一张离席餐桌]
+        forbid: [提前承诺谢礼内容]
+        tone: warm
       action: confirm help
       success: choice.accept_help confirmed
       effect: unlock clean; next clean
@@ -88,6 +103,11 @@ task:
     - id: clean
       place: tavern / dirty table
       reveal: 桌上留下餐具，需要玩家处理
+      dialogue:
+        purpose: 说明当前清理目标
+        facts: [玩家需要手动清理一张餐桌]
+        forbid: none
+        tone: practical
       action: complete one manual clean
       success: dining.cleaned(tavern) = 1
       effect: unlock reward; next reward
@@ -95,6 +115,11 @@ task:
     - id: reward
       place: tavern.hostess / counter
       reveal: 绯月答应提供一瓶汽水
+      dialogue:
+        purpose: 确认谢礼和后续安排
+        facts: [一瓶柚光汽水, 客房入口, 后续按桌帮工]
+        forbid: [把乐器或其他物品写成奖励]
+        tone: grateful
       action: confirm reward
       success: item transfer succeeds
       effect: citrus-soda +1; room access on; done
