@@ -21,8 +21,12 @@ task:
     place: 场景、anchor、实体或区域；无固定地点写 none
     requires: [必须先满足的变量、任务步骤或事实；无则 none]
 
-  actors: [实体或人物: 本任务中的职责；未知 ID 写 TODO]
-  objects: [物件: 初始持有者/位置/用途；无则 none]
+  actors:
+    - id: 实体或人物 ID；未知写 TODO
+      role: 本任务中的职责
+  objects:
+    - id: 物件 ID；无则 none
+      state: 初始持有者、位置或用途
 
   stages:
     - id: s1
@@ -65,8 +69,14 @@ task:
     time: dining active
     place: tavern / dirty table exists
     requires: none
-  actors: [tavern.hostess: requester, tavern.waiter: service owner]
-  objects: [dirty table: dining state / tavern]
+  actors:
+    - id: tavern.hostess
+      role: requester
+    - id: tavern.waiter
+      role: service owner
+  objects:
+    - id: dirty-table
+      state: dining / tavern
   stages:
     - id: accept
       place: tavern.hostess / counter
