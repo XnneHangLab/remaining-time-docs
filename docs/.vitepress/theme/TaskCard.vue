@@ -71,8 +71,10 @@ function moveStage(delta: number) {
         <p class="task-card__background">{{ currentStage.writer.background }}</p>
         <div class="task-card__script">
           <div v-for="(line, index) in currentStage.writer.script" :key="index" class="task-card__line">
-            <strong>{{ speakerNames.get(line.speaker) || '未定义角色' }}</strong>
-            <span v-if="line.choice" class="task-card__choice">玩家选项</span>
+            <div class="task-card__speaker">
+              <strong>{{ speakerNames.get(line.speaker) || '未定义角色' }}</strong>
+              <span v-if="line.choice" class="task-card__choice">玩家选项</span>
+            </div>
             <p>{{ line.text }}</p>
           </div>
         </div>
