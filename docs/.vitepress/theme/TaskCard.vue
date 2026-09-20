@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { parse } from 'yaml';
-import source from '../../story/task-card-example.yaml?raw';
 
-const card = parse(source).task;
+const props = defineProps<{ source: string }>();
+const card = parse(props.source).task;
 </script>
 
 <template>
