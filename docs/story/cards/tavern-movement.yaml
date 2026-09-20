@@ -1,0 +1,45 @@
+task:
+  id: tavern-movement
+  title: 熟悉移动
+  status: ready
+  package: tavern
+  background: 玩家刚从正门进入酒馆，需要先熟悉四向移动和接待区的基本布局。
+  trigger:
+    time: new timeline
+    place: tavern / entrance
+    requires: none
+  actors:
+    - id: player
+      name: 玩家
+      role: learner
+  objects:
+    - id: tavern-floor
+      state: tavern / walkable area
+  stages:
+    - id: move
+      place: tavern / main floor
+      reveal: 柜台在接待区，木楼梯在柜台右侧，花毯是演奏区域。
+      writer:
+        background: 你刚走进酒馆，需要先熟悉这里的方向和空间。
+        script:
+          - speaker: narrator
+            text: 柜台、楼梯和花毯分别位于接待区的不同位置。
+          - speaker: player
+            choice: move_four_directions
+            text: 我先走走看。
+      coder:
+        dialogue:
+          purpose: 引导玩家熟悉移动和酒馆布局
+          facts: [四向移动可用, 柜台在接待区, 木楼梯在柜台右侧, 花毯是演奏区域]
+          forbid: [承诺额外奖励]
+          tone: neutral
+        action: move successfully in four different directions
+        success: four distinct direction movement events recorded
+        effects: [keep movement tutorial summary]
+        next: done
+  result:
+    success: 四个不同方向各成功移动至少一次
+    cancel: 已记录的方向保留
+    reject: none
+    repeat: 不重复发放奖励
+    unresolved: none

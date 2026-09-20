@@ -1,0 +1,71 @@
+task:
+  id: tavern-lodging
+  title: 一个落脚点
+  status: ready
+  package: tavern
+  background: 绯月允许玩家免费暂住酒馆楼上的客房，玩家需要上楼确认这个落脚处。
+  trigger:
+    time: none
+    place: tavern / counter
+    requires: room_available=true
+  actors:
+    - id: tavern.hostess
+      name: 绯月
+      role: lodging provider
+    - id: player
+      name: 玩家
+      role: guest
+  objects:
+    - id: tavern-stairs
+      state: counter right / route to room
+    - id: tavern-room-bed
+      state: upstairs room / sleep interaction
+  stages:
+    - id: enter-room
+      place: tavern / stairs → upstairs room
+      reveal: 玩家已获得暂住许可，楼梯通往免费的客房。
+      writer:
+        background: 绯月邀请你暂住楼上。你沿着柜台右侧的木楼梯上去看看。
+        script:
+          - speaker: narrator
+            text: 木楼梯通向酒馆二楼，那里有一间可以暂住的客房。
+          - speaker: player
+            choice: enter_room
+            text: 我先上去看看房间。
+      coder:
+        dialogue:
+          purpose: 确认玩家知道客房入口和暂住许可
+          facts: [楼梯在柜台右侧, 暂住免费, 上楼不会自动睡觉]
+          forbid: [承诺不消耗余时, 自动开始睡眠]
+          tone: calm
+        action: enter upstairs room
+        success: scene transition to tavern room succeeds
+        effects: [unlock inspect-bed]
+        next: inspect-bed
+    - id: inspect-bed
+      place: tavern / upstairs room / bed
+      reveal: 玩家已经进入客房，可以查看床铺并了解睡眠规则。
+      writer:
+        background: 房间不大，但足够让你暂时安顿下来。床铺就在房间里。
+        script:
+          - speaker: narrator
+            text: 床铺已经整理好，房间暂时属于你的落脚处。
+          - speaker: player
+            choice: inspect_bed
+            text: 我记住这里了。
+      coder:
+        dialogue:
+          purpose: 说明客房和睡眠入口
+          facts: [客房免费, 睡眠仍消耗余时, 睡眠时长另行确认]
+          forbid: [承诺睡眠恢复额外能力]
+          tone: reassuring
+        action: inspect bed
+        success: bed interaction starts
+        effects: [keep lodging permission, expose sleep interaction]
+        next: done
+  result:
+    success: 进入客房并查看床铺，保留客房入口
+    cancel: 已进入客房则保留任务进度
+    reject: 尚未确认客房，不改变暂住许可
+    repeat: 可再次进入客房和查看床铺，不重复发放奖励
+    unresolved: none

@@ -1,0 +1,48 @@
+task:
+  id: tavern-relic-wager
+  title: 打听遗物交换条件
+  status: ready
+  package: tavern
+  background: 玩家向莉奈询问赌坊遗物，得知老鬼不愿出售，只肯用作赌注。
+  trigger:
+    time: none
+    place: tavern.waiter / service area
+    requires: tavern.waiter talkable
+  actors:
+    - id: tavern.waiter
+      name: 莉奈
+      role: clue source
+    - id: player
+      name: 玩家
+      role: questioner
+  objects:
+    - id: unknown-relic
+      state: exchange condition unknown
+  stages:
+    - id: ask
+      place: tavern.waiter / service area
+      reveal: 莉奈知道一条关于赌坊遗物交换方式的消息。
+      writer:
+        background: 你已经听说赌坊可能有遗物，继续向莉奈询问它的交换条件。
+        script:
+          - speaker: player
+            choice: ask_relic_wager
+            text: 那件遗物可以交换或买吗？
+          - speaker: tavern.waiter
+            text: 老鬼不愿出售，只肯把它当作赌注。
+      coder:
+        dialogue:
+          purpose: 提供遗物的交换条件线索
+          facts: [老鬼不愿出售遗物, 老鬼只肯用遗物作赌注]
+          forbid: [承诺玩家可以下注, 编造赌坊规则和老鬼关系]
+          tone: cautious
+        action: choice.ask_relic_wager
+        success: choice executes while waiter is talkable
+        effects: [heard_relic_wager=true, grant wager clue]
+        next: done
+  result:
+    success: 获得遗物交换条件线索，来源为莉奈
+    cancel: 不记录线索
+    reject: 可稍后再次询问
+    repeat: 不重复记录同一线索
+    unresolved: 赌坊、老鬼会面、下注规则和遗物取得方式

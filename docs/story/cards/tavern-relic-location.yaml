@@ -1,0 +1,48 @@
+task:
+  id: tavern-relic-location
+  title: 打听遗物所在地
+  status: ready
+  package: tavern
+  background: 玩家向绯月打听附近是否有人收藏遗物，获得一条关于赌坊常客的线索。
+  trigger:
+    time: none
+    place: tavern.hostess / counter
+    requires: tavern.hostess talkable
+  actors:
+    - id: tavern.hostess
+      name: 绯月
+      role: clue source
+    - id: player
+      name: 玩家
+      role: questioner
+  objects:
+    - id: unknown-relic
+      state: location unknown
+  stages:
+    - id: ask
+      place: tavern.hostess / counter
+      reveal: 绯月可以提供一条关于附近遗物收藏者的消息。
+      writer:
+        background: 你想知道附近是否有人收藏遗物，于是向绯月打听。
+        script:
+          - speaker: player
+            choice: ask_relic_location
+            text: 附近有人收藏遗物吗？
+          - speaker: tavern.hostess
+            text: 赌坊有位常客老鬼，听说他随身保管着一件遗物。
+      coder:
+        dialogue:
+          purpose: 提供遗物所在地线索
+          facts: [赌坊有常客老鬼, 老鬼随身保管一件遗物]
+          forbid: [承诺可以直接获得遗物, 编造老鬼的关系和交易条件]
+          tone: informative
+        action: choice.ask_relic_location
+        success: choice executes while hostess is talkable
+        effects: [heard_relic_location=true, grant location clue]
+        next: done
+  result:
+    success: 获得遗物所在地线索，来源为绯月
+    cancel: 不记录线索
+    reject: 可稍后再次询问
+    repeat: 不重复记录同一线索
+    unresolved: 赌坊、老鬼会面和遗物取得方式

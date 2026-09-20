@@ -1,0 +1,169 @@
+task:
+  id: remaining-time-s01-door-tag
+  title: S01 · 消磁门牌：入门调查
+  status: ready
+  package: remaining-time
+  track: mainline
+  background: 玩家来到Mira留下的404号舱，门外墙上挂着一块姓名被擦白的317旧门牌。调查它的来历，核对原住户，再将原件放入404暂存柜；这次入门调查不决定所有权或公开使用许可。
+  trigger:
+    time: new timeline start
+    place: unit-404 / start
+    requires: none
+  actors:
+    - id: player
+      name: 玩家
+      role: investigator
+    - id: ash
+      name: Ash
+      role: witness
+    - id: n07
+      name: N-07
+      role: verifier and temporary custodian
+    - id: eden
+      name: Eden
+      role: confirmed former resident; not an active actor
+  objects:
+    - id: low-deck.door-tag-317
+      state: low-deck corridor wall; later carried by player
+    - id: unit-404.old-record
+      state: unit-404 desk; remains in place
+    - id: unit-404.cabinet
+      state: unit-404 north cabinet; receives temporary storage
+  stages:
+    - id: observe
+      place: low-deck / door-tag-317
+      reveal: 317仍然清楚，姓名栏被擦白，下沿有模糊底码，右侧有不规则缺口。
+      writer:
+        background: 你刚来到404号舱，门外墙上的旧门牌只剩清楚的317，姓名已经无法辨认。
+        script:
+          - speaker: narrator
+            text: 墙上挂着一块旧门牌：317。姓名的位置被擦得发白，下沿留着模糊底码，右侧有一道缺口。
+          - speaker: player
+            choice: record_tag
+            text: 记下底码和缺口，去问Ash。
+      coder:
+        dialogue:
+          purpose: 让玩家记录门牌的可核对特征
+          facts: [房号317, 姓名栏被擦白, 下沿有模糊底码, 右侧有不规则缺口]
+          forbid: [提前揭露原住户姓名, 直接拿走门牌]
+          tone: investigative
+        action: choice.record_tag at low-deck.door-tag-317
+        success: choice confirmed and clue s01-tag-observation granted
+        effects: [s01_tag_observed=true]
+        next: ask-ash
+    - id: ask-ash
+      place: low-deck / ash
+      reveal: 玩家已经记下门牌底码和缺口，Ash可能知道痕迹的来历。
+      writer:
+        background: 你已经记下317门牌的模糊底码和右侧缺口。附近的Ash也许知道这些痕迹的来历。
+        script:
+          - speaker: player
+            choice: ask_door_tag
+            text: 门口那块317的牌子，你认得吗？
+          - speaker: ash
+            text: 认得。我从317拆下来的，右边那道缺口就是拆的时候留下的。想核对它原来属于谁？回404看看Mira留在书桌上的旧记录，再找N-07。
+          - speaker: player
+            choice: record_ash
+            text: 记下证词，回404查旧记录。
+      coder:
+        dialogue:
+          purpose: 取得Ash关于拆牌过程的有限证词
+          facts: [Ash从317拆下门牌, 右侧缺口在拆牌时留下, 需要回404查旧记录]
+          forbid: [补全其余经手过程, 提前揭露Eden, 把Ash证词写成所有权证明]
+          tone: guarded
+        action: choice.record_ash at ash
+        success: choice confirmed and clue s01-ash-testimony granted
+        effects: [s01_ash_testimony=true]
+        next: read-record
+    - id: read-record
+      place: unit-404 / old-record
+      reveal: Ash承认拆牌，并指向Mira留在404的公共房号记录。
+      writer:
+        background: Ash说明门牌由他从317拆下，缺口也是当时留下的。他指引你查阅Mira留在404的旧记录。
+        script:
+          - speaker: narrator
+            text: 书桌上放着一页旧房号记录，页角标着“Mira摘录／公共房号目录”。
+          - speaker: player
+            choice: record_index
+            text: 记下317的索引和底码，去找N-07。
+      coder:
+        dialogue:
+          purpose: 取得可与门牌和证词核对的公共记录
+          facts: [记录保留317住户索引和门牌底码, 记录没有抄录姓名, 可请N-07核对姓名索引]
+          forbid: [把公共摘抄写成私人日志, 提前写出姓名]
+          tone: precise
+        action: choice.record_index at unit-404.old-record
+        success: choice confirmed and clue s01-resident-record granted
+        effects: [s01_record_read=true]
+        next: verify
+    - id: verify
+      place: unit-404 / n07
+      reveal: 门牌特征、Ash证词和旧记录三份材料已经齐备，但原住户姓名尚未确认。
+      writer:
+        background: 你查看了门牌、取得Ash的拆牌证词，又从Mira的公共房号摘抄中记下317的住户索引。现在请N-07核对三份材料。
+        script:
+          - speaker: n07
+            text: 你带来了门牌底码和缺口、Ash的拆牌证词，以及Mira留下的317住户索引。材料齐了。现在要将它们与我保存的姓名索引核对吗？
+          - speaker: player
+            choice: verify_identity
+            text: 请核对这些记录。
+          - speaker: n07
+            text: 门牌底码与317的住户索引一致。对应的姓名是Eden，登记职业是清洁工。其他经手过程仍未查明。
+      coder:
+        dialogue:
+          purpose: 核对三份材料并只揭露其支持的身份事实
+          facts: [317关联的原住户为Eden, Eden登记职业为清洁工, 其他经手过程尚未查明]
+          forbid: [声称掌握完整转手过程, 把核对写成所有权转移, 提前完成暂存]
+          tone: careful
+        action: choice.verify_identity at n07
+        success: choice confirmed and clue s01-verified-identity granted
+        effects: [s01_verified=true]
+        next: pickup
+    - id: pickup
+      place: low-deck / door-tag-317
+      reveal: N-07确认原住户为Eden，并建议先将原件带回404妥善暂存。
+      writer:
+        background: N-07结合门牌特征、Ash证词和旧记录，确认原住户为Eden，登记职业为清洁工。其他经手过程仍未查明。
+        script:
+          - speaker: n07
+            text: 先把原件带回404妥善暂存。暂存不代表改变所有权或公开使用许可。
+          - speaker: player
+            choice: pickup_tag
+            text: 取下门牌，带回404暂存。
+      coder:
+        dialogue:
+          purpose: 让玩家取得已核对的实物
+          facts: [门牌应带回404暂存, 暂存不改变所有权或公开许可]
+          forbid: [复制门牌, 把拿取写成取得所有权]
+          tone: practical
+        action: choice.pickup_tag at low-deck.door-tag-317
+        success: item s01-door-tag added to player inventory
+        effects: [wall entity removed, s01-door-tag +1]
+        next: store
+    - id: store
+      place: unit-404 / cabinet
+      reveal: 门牌已经在玩家背包中，需要完成实物暂存才能结束入门调查。
+      writer:
+        background: 你已经将317门牌从墙上取下放入背包。现在需要把原件带回404北侧的暂存柜。
+        script:
+          - speaker: n07
+            text: 将背包里的317门牌放入北侧中央的柜子，登记为404暂存。
+          - speaker: player
+            choice: store_tag
+            text: 放入门牌，确认暂存。
+      coder:
+        dialogue:
+          purpose: 完成门牌的实物暂存
+          facts: [原件从背包移入404北侧柜中, 暂存后保留核对记录]
+          forbid: [把暂存写成所有权转移, 开放公开使用许可]
+          tone: conclusive
+        action: choice.store_tag at unit-404.cabinet
+        success: item s01-door-tag removed from inventory and storage recorded
+        effects: [s01-door-tag -1, s01_stored=true]
+        next: done
+  result:
+    success: S01入门调查完成；Eden身份线索已核对，317门牌由404暂存
+    cancel: 保留已完成的观察、证词、记录、核对和物件状态
+    reject: 当前阶段不推进，可稍后回到对应人物或物件继续
+    repeat: 不重复授予线索、拿取门牌或暂存；可回顾调查记录
+    unresolved: [完整S01后续情节, Eden的所有权决定, 公开使用许可, 门牌后续保管决定, 后续章节内容TBD]
