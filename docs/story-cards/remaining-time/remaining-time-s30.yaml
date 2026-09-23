@@ -1,0 +1,173 @@
+task:
+  id: remaining-time-s30
+  title: S30 · 透明合同盘
+  status: proposal
+  package: remaining-time / mainline
+  tier: core
+  case_cluster: F / 合同里的人
+  chapter_window: Ch3→Ch5
+  background: 透明合同盘不是必定完整或属于Mira的实物，而是一条需要接触NPC、核对有形痕迹、数据缓存和证词后在404重建的物件身份。
+  trigger:
+    time: Ch3→Ch5
+    place: F / 合同里的人
+    requires: none
+  actors:
+    - id: celeste
+      role: primary contact
+    - id: noel
+      role: evidence source
+    - id: iris
+      role: evidence source
+    - id: adrian
+      role: evidence source
+  objects:
+    - id: s30-physical-trace
+      state: 可旋转合同盘；取得方式为取走、扫描或获授权暂借，当前持有人需单独记录
+    - id: s30-data-cache
+      state: 摘要、隐藏层、版本历史、衍生权条款；共享来源允许只读引用
+  evidence:
+    physical_trace: 可旋转合同盘
+    data_cache: 摘要、隐藏层、版本历史、衍生权条款
+    testimony: Celeste辩护与早期签署/后来反对记录
+    shared_evidence: TODO；使用稳定 evidence_id，取得一次即可供相关任务引用
+    fallback: Mira早期签署记录
+  synthesis:
+    site: unit-404 / N-07
+    claim: 显示记忆出售扩张为训练权；交易抉择与合成分离
+    does_not_prove: 证词真伪、原物产权或未授权的私人正文
+  rights_claimants: TODO；登记实物保管、缓存访问、故事公开范围三项，不自动写入seed_signals
+  shared_scene_ids: TODO；共享场景只读，不复制原物
+  task_state: UNDISCOVERED → ACTIVE → MATERIALS_PARTIAL → READY_TO_SYNTHESIZE → RECONSTRUCTED → RIGHTS_REGISTERED
+  stages:
+    - id: contact
+      place: 与入口人物或场景接触
+      reveal: 玩家在F / 合同里的人的入口遇见相关人物，得知“透明合同盘”存在争议；不把物件默认写成Mira所有。
+      writer:
+        background: 说明任务入口、当前持有人和可接受的证据边界。
+        script:
+          - speaker: narrator
+            text: 玩家在F / 合同里的人的入口遇见相关人物，得知“透明合同盘”存在争议；不把物件默认写成Mira所有。
+          - speaker: player
+            choice: contact_confirm
+            text: 确认处理“透明合同盘”。
+      coder:
+        dialogue:
+          purpose: 让玩家确认调查目标并知道材料边界
+          facts: [玩家在F / 合同里的人的入口遇见相关人物，得知“透明合同盘”存在争议；不把物件默认写成Mira所有。]
+          forbid: [不能提前补写未解锁事实、产权或授权]
+          tone: neutral
+        action: 玩家确认调查透明合同盘，不要求先承诺公开或夺取原物。
+        success: task.active=true; material.contact=true
+        effects: [task.active=true; material.contact=true]
+        next: physical
+    - id: physical
+      place: 取得有形痕迹
+      reveal: 玩家可以扫描、取走或获授权暂借可旋转合同盘；取得方式和当前保管人必须记录。
+      writer:
+        background: 呈现物件的可观察痕迹，说明原物可能仍由NPC持有。
+        script:
+          - speaker: narrator
+            text: 玩家可以扫描、取走或获授权暂借可旋转合同盘；取得方式和当前保管人必须记录。
+          - speaker: player
+            choice: physical_confirm
+            text: 确认处理“透明合同盘”。
+      coder:
+        dialogue:
+          purpose: 推进透明合同盘的取得有形痕迹
+          facts: [玩家可以扫描、取走或获授权暂借可旋转合同盘；取得方式和当前保管人必须记录。]
+          forbid: [不能提前补写未解锁事实、产权或授权]
+          tone: neutral
+        action: 记录physical_trace及custodian，不把扫描件标成玩家拥有。
+        success: material.physical=true; evidence_id=s30-physical
+        effects: [material.physical=true; evidence_id=s30-physical]
+        next: cache
+    - id: cache
+      place: 取得数据缓存
+      reveal: 玩家在对应档案、终端或公共记录中找到摘要、隐藏层、版本历史、衍生权条款。
+      writer:
+        background: 缓存只提供时间、来源和操作记录，不自动解释动机或产权。
+        script:
+          - speaker: narrator
+            text: 玩家在对应档案、终端或公共记录中找到摘要、隐藏层、版本历史、衍生权条款。
+          - speaker: player
+            choice: cache_confirm
+            text: 确认处理“透明合同盘”。
+      coder:
+        dialogue:
+          purpose: 推进透明合同盘的取得数据缓存
+          facts: [玩家在对应档案、终端或公共记录中找到摘要、隐藏层、版本历史、衍生权条款。]
+          forbid: [不能提前补写未解锁事实、产权或授权]
+          tone: neutral
+        action: 写入data_cache，并与共享证据来源建立只读引用。
+        success: material.cache=true; evidence_id=s30-cache
+        effects: [material.cache=true; evidence_id=s30-cache]
+        next: testimony
+    - id: testimony
+      place: 核对证词
+      reveal: 玩家向Celeste / Noel / Iris / Adrian核对Celeste辩护与早期签署/后来反对记录；拒绝、离开或归零时使用Mira早期签署记录。
+      writer:
+        background: 证词来源必须标记为当前陈述、固定记录或公共替代，不伪造当下同意。
+        script:
+          - speaker: narrator
+            text: 玩家向Celeste / Noel / Iris / Adrian核对Celeste辩护与早期签署/后来反对记录；拒绝、离开或归零时使用Mira早期签署记录。
+          - speaker: player
+            choice: testimony_confirm
+            text: 确认处理“透明合同盘”。
+      coder:
+        dialogue:
+          purpose: 推进透明合同盘的核对证词
+          facts: [玩家向Celeste / Noel / Iris / Adrian核对Celeste辩护与早期签署/后来反对记录；拒绝、离开或归零时使用Mira早期签署记录。]
+          forbid: [不能提前补写未解锁事实、产权或授权]
+          tone: neutral
+        action: 记录testimony_source及缺席原因；三类材料齐备即可进入校准。
+        success: material.testimony=true; task_state=READY_TO_SYNTHESIZE
+        effects: [material.testimony=true; task_state=READY_TO_SYNTHESIZE]
+        next: synthesize
+    - id: synthesize
+      place: 404校准与三权登记
+      reveal: N-07将可旋转合同盘、摘要、隐藏层、版本历史、衍生权条款和证词叠合，恢复：显示记忆出售扩张为训练权；交易抉择与合成分离。
+      writer:
+        background: 校准只证明材料之间的对应关系，不替玩家判定谁说谎。
+        script:
+          - speaker: narrator
+            text: N-07将可旋转合同盘、摘要、隐藏层、版本历史、衍生权条款和证词叠合，恢复：显示记忆出售扩张为训练权；交易抉择与合成分离。
+          - speaker: player
+            choice: synthesize_confirm
+            text: 确认处理“透明合同盘”。
+      coder:
+        dialogue:
+          purpose: 让玩家确认证据对应关系并查看三权登记
+          facts: [N-07将可旋转合同盘、摘要、隐藏层、版本历史、衍生权条款和证词叠合，恢复：显示记忆出售扩张为训练权；交易抉择与合成分离。]
+          forbid: [不能提前补写未解锁事实、产权或授权]
+          tone: neutral
+        action: 玩家确认合成并分别登记实物保管、缓存访问、故事公开范围。
+        success: task_state=RECONSTRUCTED; synthesis=true
+        effects: [task_state=RECONSTRUCTED; synthesis=true]
+        next: register
+    - id: register
+      place: 确认登记
+      reveal: 玩家查看三权结果；未逐项决定时保留待登记状态，不由批量按钮补齐材料。
+      writer:
+        background: 区分实物保管、缓存访问和故事公开范围；原物损坏或仍在NPC手中均可完成。
+        script:
+          - speaker: narrator
+            text: 玩家查看三权结果；未逐项决定时保留待登记状态，不由批量按钮补齐材料。
+          - speaker: player
+            choice: register_confirm
+            text: 确认处理“透明合同盘”。
+      coder:
+        dialogue:
+          purpose: 推进透明合同盘的确认登记
+          facts: [玩家查看三权结果；未逐项决定时保留待登记状态，不由批量按钮补齐材料。]
+          forbid: [不能提前补写未解锁事实、产权或授权]
+          tone: neutral
+        action: 至少确认一项登记，其余可在午夜前继承柜复核。
+        success: task_state=RIGHTS_REGISTERED; rights_recorded=true
+        effects: [task_state=RIGHTS_REGISTERED; rights_recorded=true]
+        next: done
+  result:
+    success: 透明合同盘完成校准；证物槽点亮，即使原物未归玩家也保留来源与保管人。
+    cancel: 保留已经取得的材料和来源，不重置任务。
+    reject: 不推进当前阶段；玩家可从当前NPC、公共档案或兜底来源继续。
+    repeat: 已写入的材料和登记幂等复用，不重复取得原物或重复写入信号。
+    unresolved: rights_claimants、shared_scene_ids及具体运行时变量名待工程评审确认。
