@@ -28,6 +28,13 @@ const failure = ref('');
 let generation = 0;
 const activeLabel = (value: string) => value === 'box' ? '黑框版' : value === 'plain' ? '普通版' : '其他背景';
 const boxCount = data.rooms.filter((r) => r.active === 'box').length;
+const originalCount = data.rooms.filter((r) => r.original).length;
+const objectRoomCount = data.rooms.filter((r) => r.objectCount > 0).length;
+const objectCount = data.rooms.reduce((total, r) => total + r.objectCount, 0);
+const progressRows = computed(() => data.rooms.map((item) => ({
+  ...item,
+  furniture: item.objectCount > 0 ? '已接入' : '待接入',
+})));
 const panels = computed(() => [
   { title: '原始完整布局', image: room.value.original, active: false, missing: '此提交未找到原始完整 PNG。' },
   { title: '拆分后空背景 · 普通版', image: room.value.variants.plain, active: room.value.active === 'plain', missing: '此提交未收录普通空背景。' },
@@ -100,6 +107,35 @@ onUnmounted(() => { generation++; });
       {{ data.rooms.length }} 个房间：{{ boxCount }} 个使用黑框版，{{ data.rooms.filter(r => r.active === 'plain').length }} 个使用普通版。
       这是该提交的实际运行配置，不随游戏远端自动变化。
     </p>
+    <section class="quick-progress" aria-label="全部房间进度速览">
+      <div class="progress-heading">
+        <div>
+          <h2>总进度速览</h2>
+          <p class="metadata">先看这一栏即可掌握全部房间；点击房间名进入下面的四图对照。</p>
+        </div>
+        <span class="progress-total">{{ data.rooms.length }} 间房</span>
+      </div>
+      <div class="progress-cards">
+        <div><strong>{{ originalCount }}/{{ data.rooms.length }}</strong><span>原始 PNG</span></div>
+        <div><strong>{{ boxCount }}/{{ data.rooms.length }}</strong><span>当前使用黑框版</span></div>
+        <div><strong>{{ data.rooms.length - boxCount }}/{{ data.rooms.length }}</strong><span>当前使用普通版</span></div>
+        <div><strong>{{ objectRoomCount }}/{{ data.rooms.length }}</strong><span>已接入独立物件</span></div>
+        <div><strong>{{ objectCount }}</strong><span>独立物件总数</span></div>
+      </div>
+      <div class="progress-table-wrap">
+        <table class="progress-table">
+          <thead><tr><th>房间</th><th>当前背景</th><th>普通 / 黑框</th><th>独立物件</th><th>拼装状态</th></tr></thead>
+          <tbody><tr v-for="item in progressRows" :key="item.id">
+            <td><button type="button" @click="selected = item.id">{{ item.name }}</button></td>
+            <td><span :class="['status-pill', item.active]">{{ activeLabel(item.active) }}</span></td>
+            <td>{{ item.variants.plain ? '✓' : '—' }} / {{ item.variants.box ? '✓' : '—' }}</td>
+            <td>{{ item.objectCount }}</td>
+            <td><span :class="['status-pill', item.furniture === '已接入' ? 'done' : 'pending']">{{ item.furniture }}</span></td>
+          </tr></tbody>
+        </table>
+      </div>
+      <p class="metadata">“已接入独立物件”只表示当前运行配置已有可单独摆放的家具或物件，不等同于布局已验收完成；只有背景与门的房间仍明确显示为待接入。</p>
+    </section>
     <label class="room-picker">选择房间
       <select v-model="selected">
         <option v-for="item in data.rooms" :key="item.id" :value="item.id">
@@ -171,6 +207,24 @@ onUnmounted(() => { generation++; });
 
 <style scoped>
 .room-preview { margin: 24px 0; }
+.quick-progress { border: 1px solid var(--vp-c-divider); border-radius: 10px; padding: 16px; margin: 20px 0 28px; }
+.progress-heading { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+.progress-heading h2 { margin: 0; }
+.progress-total { font-size: 13px; color: var(--vp-c-text-2); white-space: nowrap; }
+.progress-cards { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 16px 0; }
+.progress-cards div { background: var(--vp-c-bg-soft); border-radius: 7px; padding: 10px; }
+.progress-cards strong, .progress-cards span { display: block; }
+.progress-cards strong { font-size: 20px; }
+.progress-cards span { color: var(--vp-c-text-2); font-size: 12px; line-height: 1.4; }
+.progress-table-wrap { overflow: auto; max-height: 560px; }
+.progress-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.progress-table th, .progress-table td { padding: 7px 8px; border-bottom: 1px solid var(--vp-c-divider); text-align: left; white-space: nowrap; }
+.status-pill { display: inline-block; border-radius: 999px; padding: 2px 7px; font-size: 12px; }
+.status-pill.box { background: var(--vp-c-brand-soft); color: var(--vp-c-brand-1); }
+.status-pill.plain { background: var(--vp-c-bg-soft); color: var(--vp-c-text-2); }
+.status-pill.done { color: var(--vp-c-green-1); background: var(--vp-c-green-soft); }
+.status-pill.pending { color: var(--vp-c-warning-1); background: var(--vp-c-warning-soft); }
+
 .snapshot, .metadata { color: var(--vp-c-text-2); font-size: 13px; line-height: 1.6; }
 .room-picker, .controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
 select { border: 1px solid var(--vp-c-divider); border-radius: 6px; padding: 6px 10px; background: var(--vp-c-bg); color: var(--vp-c-text-1); max-width: 100%; }
@@ -191,5 +245,5 @@ details { margin: 20px 0; }
 summary { cursor: pointer; font-weight: 600; }
 .table-scroll { overflow: auto; }
 td button { text-align: left; color: var(--vp-c-brand-1); text-decoration: underline; }
-@media (max-width: 800px) { .comparison { grid-template-columns: 1fr; } }
+@media (max-width: 800px) { .comparison { grid-template-columns: 1fr; } .progress-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 </style>
