@@ -9,10 +9,14 @@ task:
   background: 折叠餐垫不是必定完整或属于Mira的实物，而是一条需要接触NPC、核对有形痕迹、数据缓存和证词后在404重建的物件身份。
   trigger:
     time: Ch1→Ch4
-    place: B / 最后一份热餐
+    place: low-kitchen / rowan；可在S01交付回执后获得前往提示，也可自行到访
     requires: none
   actors:
+    - id: player
+      name: 玩家
+      role: 调查与登记
     - id: rowan
+      name: Rowan
       role: primary contact
   objects:
     - id: s02-physical-trace
@@ -34,24 +38,30 @@ task:
   task_state: UNDISCOVERED → ACTIVE → MATERIALS_PARTIAL → READY_TO_SYNTHESIZE → RECONSTRUCTED → RIGHTS_REGISTERED
   stages:
     - id: contact
-      place: 与入口人物或场景接触
-      reveal: 玩家在B / 最后一份热餐的入口遇见相关人物，得知“折叠餐垫”存在争议；不把物件默认写成Mira所有。
+      place: low-kitchen / rowan
+      reveal: 公共厨房有一张折叠餐垫需要核对；玩家尚不知道当晚谁在场，也未确认物件归属。
       writer:
-        background: 说明任务入口、当前持有人和可接受的证据边界。
+        background: 玩家可以沿S01结束后的提示来到公共厨房，也可以自行到访。前一项调查的证据和保管选择不限制本任务。
         script:
-          - speaker: narrator
-            text: 玩家在B / 最后一份热餐的入口遇见相关人物，得知“折叠餐垫”存在争议；不把物件默认写成Mira所有。
+          - speaker: player
+            choice: ask_about_placemat
+            text: 我想问问那张折叠餐垫。
+          - speaker: rowan
+            text: 先看餐垫上的折痕，再核对当晚的座位和扣时记录。听完我的说法，也问问居民。
           - speaker: player
             choice: contact_confirm
-            text: 确认处理“折叠餐垫”。
+            text: 我先查看餐垫，记录痕迹。
+          - speaker: player
+            choice: contact_later
+            text: 我稍后再来。
       coder:
         dialogue:
-          purpose: 让玩家确认调查目标并知道材料边界
-          facts: [玩家在B / 最后一份热餐的入口遇见相关人物，得知“折叠餐垫”存在争议；不把物件默认写成Mira所有。]
-          forbid: [不能提前补写未解锁事实、产权或授权]
-          tone: neutral
-        action: 玩家确认调查折叠餐垫，不要求先承诺公开或夺取原物。
-        success: task.active=true; material.contact=true
+          purpose: 从门牌调查自然转入独立的厨房调查，明确下一步目标
+          facts: [Rowan在公共厨房, 接受前可询问或离开, S01不是S02硬前置, 原件不因接受任务归玩家所有]
+          forbid: [提前说出缺席者被计入, 沿用S01材料代替厨房证据, 因S01保管人不同关闭入口]
+          tone: practical
+        action: approach rowan; ask_about_placemat opens topic; contact_confirm accepts; contact_later leaves without accepting
+        success: 玩家明确接受后激活S02；选项和地图引导指向餐垫交互点（实体待接入）
         effects: [task.active=true; material.contact=true]
         next: physical
     - id: physical
@@ -155,7 +165,7 @@ task:
           facts: [玩家查看三权结果；未逐项决定时保留待登记状态，不由批量按钮补齐材料。]
           forbid: [不能提前补写未解锁事实、产权或授权]
           tone: neutral
-        action: 至少确认一项登记，其余可在午夜前继承柜复核。
+        action: 实物保管、缓存访问、故事公开三栏均明确确认才完成登记；只确认一项时保持待登记，其余可在午夜前继承柜复核。
         success: task_state=RIGHTS_REGISTERED; rights_recorded=true
         effects: [task_state=RIGHTS_REGISTERED; rights_recorded=true]
         next: done
@@ -164,4 +174,4 @@ task:
     cancel: 保留已经取得的材料和来源，不重置任务。
     reject: 不推进当前阶段；玩家可从当前NPC、公共档案或兜底来源继续。
     repeat: 已写入的材料和登记幂等复用，不重复取得原物或重复写入信号。
-    unresolved: rights_claimants、shared_scene_ids及具体运行时变量名待工程评审确认。
+    unresolved: rights_claimants、shared_scene_ids及具体运行时变量名待工程评审确认；餐垫、座位扣时表和Mara四人账的交互实体尚未接入，独立材料目标应允许任意顺序取得，不能把本卡展示顺序直接变成强制前置。
