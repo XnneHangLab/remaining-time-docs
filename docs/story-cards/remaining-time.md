@@ -20,6 +20,7 @@ S01 是从 404 开始的入门调查；以下 S01–S31 是其后的正式主线
 <script setup>
 import TaskCard from '../.vitepress/theme/TaskCard.vue'
 import remaining_time_s01 from './remaining-time/remaining-time-s01.yaml?raw'
+import remaining_time_s01_expanded from './remaining-time/remaining-time-s01-expanded.yaml?raw'
 import remaining_time_s02 from './remaining-time/remaining-time-s02.yaml?raw'
 import remaining_time_s03 from './remaining-time/remaining-time-s03.yaml?raw'
 import remaining_time_s04 from './remaining-time/remaining-time-s04.yaml?raw'
@@ -56,6 +57,9 @@ import remaining_time_s31 from './remaining-time/remaining-time-s31.yaml?raw'
 
 ### S01 · 消磁门牌
 <TaskCard :source="remaining_time_s01" />
+
+### S01 · 消磁门牌（扩展版）
+<TaskCard :source="remaining_time_s01_expanded" />
 
 ### S02 · 折叠餐垫
 <TaskCard :source="remaining_time_s02" />
