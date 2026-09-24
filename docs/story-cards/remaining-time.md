@@ -5,7 +5,7 @@ description: 余时遗物 31 条可并行遗物主线任务卡，含共享证据
 
 # remaining-time · 新版主线
 
-S01 是从 404 开始的入门调查；以下 S01–S31 是其后的正式主线任务。31 条任务可在同一周目并行推进，章节只开放材料节点，不构成强制任务链。
+S01 之前是从404开始的入门序章；S01 是序章结束后的第一项遗物调查。以下 S01–S31 是其后的正式主线任务。31 条任务可在同一周目并行推进，章节只开放材料节点，不构成强制任务链。
 
 每张卡按 `standard.md` 的最小任务格式编写，并补充 `tier`、案件簇、材料、兜底、合成和三权登记字段。卡片中的 `TODO` 是工程评审项，不是允许 Agent 自行补写的剧情事实。
 
@@ -21,6 +21,7 @@ S01 是从 404 开始的入门调查；以下 S01–S31 是其后的正式主线
 import TaskCard from '../.vitepress/theme/TaskCard.vue'
 import remaining_time_s01 from './remaining-time/remaining-time-s01.yaml?raw'
 import remaining_time_s01_expanded from './remaining-time/remaining-time-s01-expanded.yaml?raw'
+import remaining_time_prologue from './remaining-time/remaining-time-prologue.yaml?raw'
 import remaining_time_s02 from './remaining-time/remaining-time-s02.yaml?raw'
 import remaining_time_s03 from './remaining-time/remaining-time-s03.yaml?raw'
 import remaining_time_s04 from './remaining-time/remaining-time-s04.yaml?raw'
@@ -54,6 +55,9 @@ import remaining_time_s31 from './remaining-time/remaining-time-s31.yaml?raw'
 </script>
 
 ## 任务卡
+
+### 序章 · 404号舱的第一晚
+<TaskCard :source="remaining_time_prologue" />
 
 ### S01 · 消磁门牌
 <TaskCard :source="remaining_time_s01" />
