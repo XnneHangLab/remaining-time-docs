@@ -1,5 +1,5 @@
 {
-  "commit": "92d516217f37671e3f8c3a4ed00ba639e1c179e0",
+  "commit": "9b96c9de21d337d3b97a86f80a816ee4d4ac2e25",
   "repository": "NevaMind-AI/remaining-time",
   "contentVersion": "room-world-8-plaza-cast",
   "rooms": [
@@ -627,6 +627,72 @@
           "depth": -1,
           "npc": false,
           "image": "public/assets/low-deck/background.png",
+          "crop": null
+        },
+        {
+          "visual": {
+            "image": "assets/low-deck/courtyard-tree.png",
+            "position": [
+              625,
+              395
+            ],
+            "size": [
+              250,
+              299
+            ],
+            "depth": 694
+          },
+          "position": [
+            625,
+            395
+          ],
+          "depth": 694,
+          "npc": false,
+          "image": "public/assets/low-deck/courtyard-tree.png",
+          "crop": null
+        },
+        {
+          "visual": {
+            "image": "assets/low-deck/market-stall.png",
+            "position": [
+              1215,
+              690
+            ],
+            "size": [
+              280,
+              268
+            ],
+            "depth": 958
+          },
+          "position": [
+            1215,
+            690
+          ],
+          "depth": 958,
+          "npc": false,
+          "image": "public/assets/low-deck/market-stall.png",
+          "crop": null
+        },
+        {
+          "visual": {
+            "image": "assets/low-deck/door-planter-group.png",
+            "position": [
+              75,
+              185
+            ],
+            "size": [
+              270,
+              183
+            ],
+            "depth": 368
+          },
+          "position": [
+            75,
+            185
+          ],
+          "depth": 368,
+          "npc": false,
+          "image": "public/assets/low-deck/door-planter-group.png",
           "crop": null
         },
         {
@@ -1378,7 +1444,7 @@
         }
       ],
       "npcCount": 14,
-      "objectCount": 1
+      "objectCount": 4
     },
     {
       "id": "low-kitchen",
@@ -6290,18 +6356,18 @@
       "original": "art/props/civic-consult/room-layout.png",
       "variants": {
         "plain": "public/assets/civic-consult/background.png",
-        "box": null
+        "box": "public/assets/civic-consult/background-box.png"
       },
-      "active": "plain",
-      "background": "public/assets/civic-consult/background.png",
-      "layoutSource": "public/assets/civic-consult/layout.json",
+      "active": "box",
+      "background": "public/assets/civic-consult/background-box.png",
+      "layoutSource": "public/assets/civic-consult/layout-box.json",
       "mapSource": "src/content/remaining-time/maps/civic-consult.json",
       "sceneSource": "public/content/remaining-time/scenes/civic-consult.json",
       "issues": [],
       "layers": [
         {
           "visual": {
-            "image": "assets/civic-consult/background.png",
+            "image": "assets/civic-consult/background-box.png",
             "position": [
               0,
               0
@@ -6314,12 +6380,12 @@
           ],
           "depth": -1,
           "npc": false,
-          "image": "public/assets/civic-consult/background.png",
+          "image": "public/assets/civic-consult/background-box.png",
           "crop": null
         },
         {
           "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
+            "image": "assets/civic-consult/portal-box.png",
             "size": [
               32,
               32
@@ -6331,7 +6397,7 @@
           ],
           "depth": 1,
           "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
+          "image": "public/assets/civic-consult/portal-box.png",
           "crop": null
         }
       ],
@@ -6346,18 +6412,18 @@
       "original": "art/props/civic-zeroing-lounge/room-layout.png",
       "variants": {
         "plain": "public/assets/civic-zeroing-lounge/background.png",
-        "box": null
+        "box": "public/assets/civic-zeroing-lounge/background-box.png"
       },
-      "active": "plain",
-      "background": "public/assets/civic-zeroing-lounge/background.png",
-      "layoutSource": "public/assets/civic-zeroing-lounge/layout.json",
+      "active": "box",
+      "background": "public/assets/civic-zeroing-lounge/background-box.png",
+      "layoutSource": "public/assets/civic-zeroing-lounge/layout-box.json",
       "mapSource": "src/content/remaining-time/maps/civic-zeroing-lounge.json",
       "sceneSource": "public/content/remaining-time/scenes/civic-zeroing-lounge.json",
       "issues": [],
       "layers": [
         {
           "visual": {
-            "image": "assets/civic-zeroing-lounge/background.png",
+            "image": "assets/civic-zeroing-lounge/background-box.png",
             "position": [
               0,
               0
@@ -6370,12 +6436,12 @@
           ],
           "depth": -1,
           "npc": false,
-          "image": "public/assets/civic-zeroing-lounge/background.png",
+          "image": "public/assets/civic-zeroing-lounge/background-box.png",
           "crop": null
         },
         {
           "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
+            "image": "assets/civic-zeroing-lounge/portal-box.png",
             "size": [
               32,
               32
@@ -6387,12 +6453,12 @@
           ],
           "depth": 1,
           "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
+          "image": "public/assets/civic-zeroing-lounge/portal-box.png",
           "crop": null
         },
         {
           "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
+            "image": "assets/civic-zeroing-lounge/portal-box.png",
             "size": [
               32,
               32
@@ -6404,7 +6470,7 @@
           ],
           "depth": 1,
           "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
+          "image": "public/assets/civic-zeroing-lounge/portal-box.png",
           "crop": null
         },
         {
@@ -7817,18 +7883,18 @@
       "original": "art/props/garden-vault/room-layout.png",
       "variants": {
         "plain": "public/assets/garden-vault/background.png",
-        "box": null
+        "box": "public/assets/garden-vault/background-box.png"
       },
-      "active": "plain",
-      "background": "public/assets/garden-vault/background.png",
-      "layoutSource": "public/assets/garden-vault/layout.json",
+      "active": "box",
+      "background": "public/assets/garden-vault/background-box.png",
+      "layoutSource": "public/assets/garden-vault/layout-box.json",
       "mapSource": "src/content/remaining-time/maps/garden-vault.json",
       "sceneSource": "public/content/remaining-time/scenes/garden-vault.json",
       "issues": [],
       "layers": [
         {
           "visual": {
-            "image": "assets/garden-vault/background.png",
+            "image": "assets/garden-vault/background-box.png",
             "position": [
               0,
               0
@@ -7841,12 +7907,12 @@
           ],
           "depth": -1,
           "npc": false,
-          "image": "public/assets/garden-vault/background.png",
+          "image": "public/assets/garden-vault/background-box.png",
           "crop": null
         },
         {
           "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
+            "image": "assets/garden-vault/portal-box.png",
             "size": [
               32,
               32
@@ -7858,12 +7924,12 @@
           ],
           "depth": 1,
           "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
+          "image": "public/assets/garden-vault/portal-box.png",
           "crop": null
         },
         {
           "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
+            "image": "assets/garden-vault/portal-box.png",
             "size": [
               32,
               32
@@ -7875,7 +7941,7 @@
           ],
           "depth": 1,
           "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
+          "image": "public/assets/garden-vault/portal-box.png",
           "crop": null
         }
       ],
@@ -8442,18 +8508,18 @@
       "original": "art/props/embers-back-office/room-layout.png",
       "variants": {
         "plain": "public/assets/embers-back-office/background.png",
-        "box": null
+        "box": "public/assets/embers-back-office/background-box.png"
       },
-      "active": "plain",
-      "background": "public/assets/embers-back-office/background.png",
-      "layoutSource": "public/assets/embers-back-office/layout.json",
+      "active": "box",
+      "background": "public/assets/embers-back-office/background-box.png",
+      "layoutSource": "public/assets/embers-back-office/layout-box.json",
       "mapSource": "src/content/remaining-time/maps/embers-back-office.json",
       "sceneSource": "public/content/remaining-time/scenes/embers-back-office.json",
       "issues": [],
       "layers": [
         {
           "visual": {
-            "image": "assets/embers-back-office/background.png",
+            "image": "assets/embers-back-office/background-box.png",
             "position": [
               0,
               0
@@ -8466,12 +8532,12 @@
           ],
           "depth": -1,
           "npc": false,
-          "image": "public/assets/embers-back-office/background.png",
+          "image": "public/assets/embers-back-office/background-box.png",
           "crop": null
         },
         {
           "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
+            "image": "assets/embers-back-office/portal-box.png",
             "size": [
               32,
               32
@@ -8483,12 +8549,12 @@
           ],
           "depth": 1,
           "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
+          "image": "public/assets/embers-back-office/portal-box.png",
           "crop": null
         },
         {
           "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
+            "image": "assets/embers-back-office/portal-box.png",
             "size": [
               32,
               32
@@ -8500,7 +8566,7 @@
           ],
           "depth": 1,
           "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
+          "image": "public/assets/embers-back-office/portal-box.png",
           "crop": null
         }
       ],
@@ -8510,1960 +8576,2026 @@
   ],
   "images": {
     "art/props/unit-404/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/unit-404/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/unit-404/room-layout.png",
       "width": 1254,
       "height": 1254,
       "sha256": "fab8debc2c8f545c723c0c2d3509d815baed3bb88f036d11fbb9c4bceba261c0"
     },
     "public/assets/unit-404/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/background.png",
       "width": 1254,
       "height": 1254,
       "sha256": "c824a6083bd2dfae2d01a64f27a84bde3aad93a54b7d661ade9b8d9cff8b659f"
     },
     "public/assets/unit-404/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/background-box.png",
       "width": 1280,
       "height": 1056,
       "sha256": "e2ffa4963e059dee75debfc1c49d0d4b9e74ef251b933d0424bcf3867c580e62"
     },
     "public/assets/unit-404/bed-rug.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/bed-rug.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/bed-rug.png",
       "width": 179,
       "height": 294,
       "sha256": "8929c7bc8d56809215ad30e11302aadf99c0932dcf14d3506f7f13e1edb3812c"
     },
     "public/assets/unit-404/doormat.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/doormat.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/doormat.png",
       "width": 250,
       "height": 95,
       "sha256": "40c8f302e9be459cf2938fc1bd59113ad75ac92b8865357b391adabd60ed7893"
     },
     "public/assets/unit-404/terminal.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/terminal.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/terminal.png",
       "width": 90,
       "height": 230,
       "sha256": "70e9e3a4de59956878678ff04582a6e0a8d273cc698b35973925c4c2a70de048"
     },
     "public/assets/unit-404/north-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/north-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/north-planter.png",
       "width": 78,
       "height": 140,
       "sha256": "f0e4cd7f1d8506fe758236632572db71aaef3fd259072ec6b7bdb863278553c6"
     },
     "public/assets/unit-404/bedside-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/bedside-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/bedside-planter.png",
       "width": 77,
       "height": 107,
       "sha256": "663ec4b59dcb0a427ed66b1be405efd368951af0f222f1685cae3119ba201a10"
     },
     "public/assets/unit-404/crystal-pedestal.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/crystal-pedestal.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/crystal-pedestal.png",
       "width": 85,
       "height": 157,
       "sha256": "bf01927a4417251898415877e1bd0a7c0b71c9c837ed190e8339a07b64088767"
     },
     "public/assets/unit-404/desk.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/desk.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/desk.png",
       "width": 218,
       "height": 161,
       "sha256": "586a475ac3370e69a53eb9ae63ff94229ac408d5c33a1563d30a026dac6f6b1b"
     },
     "public/assets/unit-404/chair.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/chair.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/chair.png",
       "width": 95,
       "height": 141,
       "sha256": "c9c96efe116dfcb06572965e89f9266759b99f79bfad65ef87cef5dce167af48"
     },
     "public/assets/unit-404/cabinet-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/cabinet-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/cabinet-planter.png",
       "width": 142,
       "height": 218,
       "sha256": "684100e9ede7acf8786ec736a8a8b538654c5fce201ae4bb3fe16dab9276544c"
     },
     "public/assets/unit-404/cabinet-books.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/cabinet-books.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/cabinet-books.png",
       "width": 52,
       "height": 37,
       "sha256": "f67d40179e66db649bc002b6920c36a215d7b5e78a6bc986d34ee9abc91f17c2"
     },
     "public/assets/unit-404/cabinet-chest.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/cabinet-chest.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/cabinet-chest.png",
       "width": 60,
       "height": 47,
       "sha256": "9af0a3e0a5d791da60f86e178c295bd7c8590c0a32bc9628d9a7414b1e883f56"
     },
     "public/assets/unit-404/desk-books.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/desk-books.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/desk-books.png",
       "width": 56,
       "height": 49,
       "sha256": "d554f5f0f8bb88dae4f4a1332831c38d893be8feeda89e9ae3a8d65d731fdfe4"
     },
     "public/assets/unit-404/inkwell-quill.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/inkwell-quill.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/inkwell-quill.png",
       "width": 35,
       "height": 63,
       "sha256": "b513c2489a4a71c804d9c7d80ce66422df64f30cf3c1b11ef8cc55423d051765"
     },
     "public/assets/unit-404/desk-clock.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/desk-clock.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/desk-clock.png",
       "width": 63,
       "height": 88,
       "sha256": "99ae433f93214c023df6729292d815fa63333853e66d3502f38ed4c445166589"
     },
     "public/assets/unit-404/south-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/south-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/south-planter.png",
       "width": 87,
       "height": 131,
       "sha256": "d19f80eb6f6de95468c1db95c538ef7dacf0c4d6bb8232cadc5bf375c1cf2581"
     },
     "public/assets/unit-404/entrance-left-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/entrance-left-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/entrance-left-planter.png",
       "width": 75,
       "height": 175,
       "sha256": "f46c209c4b233cde67aa41600824f46f0f45daae335f93a552d079a28113d53d"
     },
     "public/assets/unit-404/entrance-right-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/entrance-right-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/entrance-right-planter.png",
       "width": 77,
       "height": 175,
       "sha256": "2148bdbf252682b6daf1f883ef9734c7dcd8ebf0eba3909e14f374c571415587"
     },
     "public/assets/unit-404/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/unit-404/cabinet.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/cabinet.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/cabinet.png",
       "width": 430,
       "height": 227,
       "sha256": "55767d506dfcecc5369663756857cba1767f58f0907efd76caf051a94689927f"
     },
     "public/assets/unit-404/bed.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/bed.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/bed.png",
       "width": 129,
       "height": 277,
       "sha256": "574ef5deb42b0b36256032a690d6f1f0ab3b07d1fcb1fb83dfb8c3abf48cad40"
     },
     "public/assets/unit-404/desk-papers.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/unit-404/desk-papers.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/unit-404/desk-papers.png",
       "width": 61,
       "height": 39,
       "sha256": "743e0527dfe8425433d8192a6e8f48b7f10c3b0bf5bcf1941bdb27216d07164d"
     },
     "public/assets/room-npcs/n07-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/n07-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/n07-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "d8bd4e7a96aa5cc23bcba5071d06304a4f3faac8e349066dcc0afd1922595af9"
     },
     "public/assets/room-npcs/n07.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/n07.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/n07.png",
       "width": 256,
       "height": 256,
       "sha256": "9a4a767e11171a4309b82aad049857d8ebba022b117bedf457594f12dc393a63"
     },
     "art/props/low-deck/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/low-deck/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/low-deck/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "3da7549a5a14b309c800546f371919cd80ec387c02a44063f55a86e24dc11ea1"
     },
     "public/assets/low-deck/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-deck/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-deck/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "1b6535070cce39a4200a75ac7d3954cd2e50dde8f555c8771cac2700fff0bcef"
     },
+    "public/assets/low-deck/courtyard-tree.png": {
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-deck/courtyard-tree.png",
+      "width": 1148,
+      "height": 1370,
+      "sha256": "a568c1f682aa1ef6f706b54e9c27a8c4a22aee76e5beb97f32b591a0e158f35c"
+    },
+    "public/assets/low-deck/market-stall.png": {
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-deck/market-stall.png",
+      "width": 1282,
+      "height": 1227,
+      "sha256": "57323bb0cac4da810f11d3ad2769a0895cdee0fcb8858a925ae6f391f13f7b11"
+    },
+    "public/assets/low-deck/door-planter-group.png": {
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-deck/door-planter-group.png",
+      "width": 1524,
+      "height": 1032,
+      "sha256": "80b7e5d10283ffab5f8a2c83f684020a9ae46db719830eecc0fe2fc2ec72ecab"
+    },
     "public/assets/remaining-time/portal-shadow.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/remaining-time/portal-shadow.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/remaining-time/portal-shadow.png",
       "width": 32,
       "height": 32,
       "sha256": "1971e5eedb7a106035c57c0f6f8add502e85a5ac1c7d082eeba4bb778239130b"
     },
     "public/assets/low-deck/door-tag-317.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-deck/door-tag-317.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-deck/door-tag-317.png",
       "width": 64,
       "height": 24,
       "sha256": "0ace8b3d0c661e3b072c369f61848ba2dade2fbdac094bb0cd1986946ff4d431"
     },
     "public/assets/room-npcs/alex-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/alex-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/alex-idle.png",
       "width": 80,
       "height": 128,
       "sha256": "b260c2845576611dadbbcedb1d1ddea6249665c65b7fae84e2fa8b31f7ebf6b7"
     },
     "public/assets/room-npcs/alex.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/alex.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/alex.png",
       "width": 320,
       "height": 1024,
       "sha256": "8ee5fec930eb811a3a44b93451fa8d8da6bce5f060545b7f7bf5b706d11832df"
     },
     "public/assets/room-npcs/bob-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/bob-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/bob-idle.png",
       "width": 80,
       "height": 128,
       "sha256": "dcc54b8b22f8a6fd2036a0af4fc3ef7172cd7d82239847d02aee1c60ef6a4a56"
     },
     "public/assets/room-npcs/bob.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/bob.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/bob.png",
       "width": 320,
       "height": 1024,
       "sha256": "82b36938c01497745fd6f6ec9d6dd780ec5a4293cb1900b7cf8cf38433a8c4e4"
     },
     "public/assets/room-npcs/lucky-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/lucky-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/lucky-idle.png",
       "width": 80,
       "height": 128,
       "sha256": "cfaa303f02ea66af88101aba9cbcf707e18bf02421d5bee7f7faf9b82238db47"
     },
     "public/assets/room-npcs/lucky.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/lucky.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/lucky.png",
       "width": 320,
       "height": 1024,
       "sha256": "143de4d0b85f768f64bf4ab58c7f19f072a4589d0ccf3cd51206f32bba40e63f"
     },
     "public/assets/room-npcs/pete-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/pete-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/pete-idle.png",
       "width": 80,
       "height": 128,
       "sha256": "19e290a9ce7f237efb14fb4e1942718528b641ec2bbd9ddd9d3d59bade5b673c"
     },
     "public/assets/room-npcs/pete.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/pete.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/pete.png",
       "width": 320,
       "height": 1024,
       "sha256": "51cc4a9437626ec0e5bf2349f873e09077df44d10ab361db4fae5906a806ca52"
     },
     "public/assets/room-npcs/kurt-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/kurt-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/kurt-idle.png",
       "width": 80,
       "height": 128,
       "sha256": "3be79b934225a16d84ecffeba5499a27a1b4711033bb8c0b30ba715136e5113e"
     },
     "public/assets/room-npcs/kurt.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/kurt.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/kurt.png",
       "width": 320,
       "height": 1024,
       "sha256": "3ccbe2ac76bb0d9cc64b9797e7bcbb1a2f5ddb049c037ca958163a4ed43ec9a9"
     },
     "public/assets/room-npcs/rinai-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/rinai-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/rinai-idle.png",
       "width": 80,
       "height": 128,
       "sha256": "29a1728185171263bc4abe3023a7f8270960c973adf5965a47254e62836e65a8"
     },
     "public/assets/room-npcs/rinai.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/rinai.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/rinai.png",
       "width": 320,
       "height": 1024,
       "sha256": "0828873177a3a648a19f235924b05c4832f17ec7ae978124bc2d95876a1cf358"
     },
     "public/assets/room-npcs/hostess-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/hostess-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/hostess-idle.png",
       "width": 80,
       "height": 128,
       "sha256": "3372f5c2ca4003dff5310e370969f1ba9cd6ea74346ed46ff5e72fee927edbac"
     },
     "public/assets/room-npcs/hostess.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/hostess.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/hostess.png",
       "width": 320,
       "height": 1024,
       "sha256": "9a860b772c72401412806d61309315bb80f6762b777cb2b9c3ed6510c2d2f9c7"
     },
     "public/assets/room-npcs/player-preview-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/player-preview-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/player-preview-idle.png",
       "width": 80,
       "height": 128,
       "sha256": "4e1f5520d5fa8460f0339cf288786f425aa93a22736d7c1ebade1035978c3318"
     },
     "public/assets/room-npcs/player-preview.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/player-preview.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/player-preview.png",
       "width": 320,
       "height": 1024,
       "sha256": "4230ef00f14457daa68ed1e8b6bf0b360b892b4a74eafca117013350d9ff2acc"
     },
     "public/assets/room-npcs/ash-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/ash-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/ash-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "06dabb08fbc036d8585a37f27a8fcf1371306f6d3e59197399de2e72070ffcac"
     },
     "public/assets/room-npcs/ash.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/ash.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/ash.png",
       "width": 256,
       "height": 256,
       "sha256": "3f720bb2abbea99a6200dbf5d352e530398ef87e68e7e1bf21668c7f3017003d"
     },
     "public/assets/room-npcs/alice-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/alice-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/alice-idle.png",
       "width": 80,
       "height": 128,
       "sha256": "4da72c080b53825fc496bf136fd097683d9c29dd9157517d1814dd35a1b8664b"
     },
     "public/assets/room-npcs/alice.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/alice.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/alice.png",
       "width": 320,
       "height": 1024,
       "sha256": "c0503ec8983fe541f5fbe1ae559a331512dee9dc6ba50b768c39514a82b440e3"
     },
     "public/assets/room-npcs/milo-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/milo-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/milo-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "e7ce54b92ce7d617676028dfca04c6eb650b4d88e54c427a2e89f08d4db74c75"
     },
     "public/assets/room-npcs/milo.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/milo.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/milo.png",
       "width": 256,
       "height": 256,
       "sha256": "2cae60ec8656b168bd0d985a7a1a16e2926cc1750a5104c0b70754eace055654"
     },
     "public/assets/room-npcs/mara-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/mara-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/mara-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "88488019f0c61dfbb127a4c451ef03e19c004ee733b31386ae65044a0ea2a4ae"
     },
     "public/assets/room-npcs/mara.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/mara.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/mara.png",
       "width": 256,
       "height": 256,
       "sha256": "8f0ca18d8dfed3d3d5e15d5ac51974cc9d99edf22b92acd20ec2edbd175dc8fe"
     },
     "public/assets/room-npcs/bio-swift-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/bio-swift-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/bio-swift-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "8a8f3c867d54101f1b5814f90a29a6f8b3525c8bc5c5c2100cdb78ee1cfd6c45"
     },
     "public/assets/room-npcs/bio-swift.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/bio-swift.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/bio-swift.png",
       "width": 256,
       "height": 256,
       "sha256": "07ba10615b138a602f7afacc8a7772100bb97c09c657144d36267a59b98e44b9"
     },
     "public/assets/room-npcs/resident-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/resident-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/resident-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "b822d94433b79bbe52cdc3edaabdb14b1cd269a1b5c4db395e75ec06359f09f2"
     },
     "public/assets/room-npcs/resident.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/resident.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/resident.png",
       "width": 256,
       "height": 256,
       "sha256": "14136c3fa3e7c74b3f666393d2510d456abbcacb3a0dd8fb55990627737a861a"
     },
     "art/props/low-kitchen/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/low-kitchen/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/low-kitchen/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "20fb37f88d6394aabd42a6ddd60f99055ad95e4fac59a2b607bc937c3d6ac4d8"
     },
     "public/assets/low-kitchen/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "efdfd9f0bbc4a8a9070bf4321a65d297c2800a55d80890b29d7005cff9488f6f"
     },
     "public/assets/low-kitchen/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/background-box.png",
       "width": 1536,
       "height": 992,
       "sha256": "2726dfa18a3546a4a1d801c14ffc56625fe75277aa4453e42cc8dc6caa7e4079"
     },
     "public/assets/low-kitchen/pantry-left.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/pantry-left.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/pantry-left.png",
       "width": 165,
       "height": 202,
       "sha256": "adf267dd42ca7195aefeae89d060e6d6adbbced01e3d8ab7256ca8f842d49d21"
     },
     "public/assets/low-kitchen/pantry-left-chest.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/pantry-left-chest.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/pantry-left-chest.png",
       "width": 66,
       "height": 53,
       "sha256": "c2af2301257f962527229e4ff0436b6357a98c69ee9332fc1f395a4afefeb9ab"
     },
     "public/assets/low-kitchen/pantry-left-vine.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/pantry-left-vine.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/pantry-left-vine.png",
       "width": 70,
       "height": 179,
       "sha256": "e08f765340774b898119e3aa6fefb4efd3bca8ab93de72250969f610eeaf4762"
     },
     "public/assets/low-kitchen/pantry-floor-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/pantry-floor-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/pantry-floor-planter.png",
       "width": 59,
       "height": 100,
       "sha256": "2d2a2ae6cba51908b7726afa570afe8aecd7674e86ba67d94fd52190772630fd"
     },
     "public/assets/low-kitchen/stove.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/stove.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/stove.png",
       "width": 193,
       "height": 111,
       "sha256": "a0eba1d9153a71f86394d503aef3ae8355a2c4ea296cafff08e13e5de8b7ef53"
     },
     "public/assets/low-kitchen/stove-pot.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/stove-pot.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/stove-pot.png",
       "width": 58,
       "height": 44,
       "sha256": "f11bd4b9b2f830effcc9d2ae9d1d4f08f0dbb17f65185fd170fefee3d484a8ea"
     },
     "public/assets/low-kitchen/stove-pan.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/stove-pan.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/stove-pan.png",
       "width": 69,
       "height": 43,
       "sha256": "4baaa0513f5460411c5eac483896cbf62acba2cc3ecdf03a8e18d916d8ea09fd"
     },
     "public/assets/low-kitchen/sink-counter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/sink-counter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/sink-counter.png",
       "width": 465,
       "height": 129,
       "sha256": "fe91a2c8679b7f9f8d0eafe7b15b4d8c8407d7f3e129a8179a249a9d90f07b56"
     },
     "public/assets/low-kitchen/wall-shelf.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/wall-shelf.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/wall-shelf.png",
       "width": 315,
       "height": 65,
       "sha256": "b71460b4ace43884c73ed9f90aeb511d83b477974d60e5163832426904ae81c7"
     },
     "public/assets/low-kitchen/shelf-plates-left.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/shelf-plates-left.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/shelf-plates-left.png",
       "width": 34,
       "height": 29,
       "sha256": "106be51ea9e70c882fa69cc87d8f4c31dac3b5b487ec1365acfbaf28b2122c60"
     },
     "public/assets/low-kitchen/shelf-plates-right.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/shelf-plates-right.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/shelf-plates-right.png",
       "width": 36,
       "height": 35,
       "sha256": "c13054be833d759a17cdc4b2fe62204e88a4b0d66002e27ef574767c2146e9d0"
     },
     "public/assets/low-kitchen/shelf-mug.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/shelf-mug.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/shelf-mug.png",
       "width": 25,
       "height": 23,
       "sha256": "140bed65af24eeb88f015a3e9eb9e411503c3b57813b295a5d7bbd1f4446ad76"
     },
     "public/assets/low-kitchen/shelf-cups.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/shelf-cups.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/shelf-cups.png",
       "width": 32,
       "height": 36,
       "sha256": "348a3f395887b8c87fef2552e413181e293c0cef23ec75280d47c92f34704963"
     },
     "public/assets/low-kitchen/shelf-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/shelf-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/shelf-planter.png",
       "width": 112,
       "height": 103,
       "sha256": "d399a399642e166e0879819c91e273e91c6e5f729defade7c2640bd63db7f943"
     },
     "public/assets/low-kitchen/counter-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/counter-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/counter-planter.png",
       "width": 50,
       "height": 66,
       "sha256": "ec976719c109f35605849bcafdb9b3a865b8478da808eecb6b6149f7335bcffb"
     },
     "public/assets/low-kitchen/cutting-board.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/cutting-board.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/cutting-board.png",
       "width": 60,
       "height": 38,
       "sha256": "8f9ead3e6a6daef733eeff93f7bd0d4f4d5d3a5224cf3c33e038f5e7ddf7b909"
     },
     "public/assets/low-kitchen/recipe-note.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/recipe-note.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/recipe-note.png",
       "width": 42,
       "height": 36,
       "sha256": "f7df928f9751100d419275cc9231bd17f291348e67f35d96ac3861602cad2516"
     },
     "public/assets/low-kitchen/knife-block.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/knife-block.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/knife-block.png",
       "width": 67,
       "height": 63,
       "sha256": "de941fbd6b9827a0b5adffa9fcb596c8c03100bad42e39a76efac4fabb0c1cdd"
     },
     "public/assets/low-kitchen/utensil-holder.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/utensil-holder.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/utensil-holder.png",
       "width": 46,
       "height": 58,
       "sha256": "5eb35e3485462e8ffa8b167a051485b00dcc91a098e7a40b84ebb09b00e0f0fd"
     },
     "public/assets/low-kitchen/pantry-right.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/pantry-right.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/pantry-right.png",
       "width": 218,
       "height": 206,
       "sha256": "f6dd0047d8bec770266383e751ba336f4a91f6d61ec29f3c84c1485148a5c05f"
     },
     "public/assets/low-kitchen/pantry-tray.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/pantry-tray.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/pantry-tray.png",
       "width": 64,
       "height": 40,
       "sha256": "5b995294ebdf8634ee847c27bcf28653b21d511cbcc8ad6a82a2bf0cb2a3ca98"
     },
     "public/assets/low-kitchen/pantry-pot.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/pantry-pot.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/pantry-pot.png",
       "width": 59,
       "height": 45,
       "sha256": "16ed8990b64cfd63936023abdfc1200cae26ac7061c0698b03f030e1dfcc7128"
     },
     "public/assets/low-kitchen/table-north.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/table-north.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/table-north.png",
       "width": 151,
       "height": 157,
       "sha256": "c53321beccddbed9c423186da2bb77c58d552ab2955fbd2c0b3142f7d20c3b04"
     },
     "public/assets/low-kitchen/chair-north-back.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/chair-north-back.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/chair-north-back.png",
       "width": 62,
       "height": 114,
       "sha256": "440d08a4d8be334b5bc466de69b96c447d02884787e3d893a218b96e0279aacc"
     },
     "public/assets/low-kitchen/chair-north-left.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/chair-north-left.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/chair-north-left.png",
       "width": 55,
       "height": 124,
       "sha256": "7c708761a173e32b519c253d10c39168bddef8a3630bdad8fea1773707ac6531"
     },
     "public/assets/low-kitchen/chair-north-right.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/chair-north-right.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/chair-north-right.png",
       "width": 71,
       "height": 143,
       "sha256": "fbe512933236858cbbbb5447e4455c8af777265600f8665d7acffe862e380e02"
     },
     "public/assets/low-kitchen/chair-north-front.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/chair-north-front.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/chair-north-front.png",
       "width": 71,
       "height": 86,
       "sha256": "07ae6630fb293cea8a0abfd08f1a45b779f7d4ba62a7d9f9194abef06afde56e"
     },
     "public/assets/low-kitchen/table-north-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/table-north-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/table-north-planter.png",
       "width": 55,
       "height": 57,
       "sha256": "042354e91e775f48f5f1f2d6488caa894af8d4f386618241db406b5fbf2be389"
     },
     "public/assets/low-kitchen/table-north-mug.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/table-north-mug.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/table-north-mug.png",
       "width": 32,
       "height": 34,
       "sha256": "9c86ab411e2bd6110871135433579b4751b073d5d5eca510a29a58597e5b9293"
     },
     "public/assets/low-kitchen/table-north-cloth.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/table-north-cloth.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/table-north-cloth.png",
       "width": 57,
       "height": 49,
       "sha256": "dcc740e44e108358c167115e0fad040bdd2374a8b67428c22cd64e0fb1a3bef3"
     },
     "public/assets/low-kitchen/table-south.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/table-south.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/table-south.png",
       "width": 150,
       "height": 172,
       "sha256": "28cf950aaecf12dab5baee5d5a9b0cb2e6a39b0803564e72dc2ac99b78482c3c"
     },
     "public/assets/low-kitchen/chair-south-back.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/chair-south-back.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/chair-south-back.png",
       "width": 64,
       "height": 112,
       "sha256": "0aa045360599e00f58903d68deb954a68b28f192c1f850d63c67afb00553ee0b"
     },
     "public/assets/low-kitchen/chair-south-left.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/chair-south-left.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/chair-south-left.png",
       "width": 64,
       "height": 132,
       "sha256": "19687685377601b3f371a2410683fbbad052861543d69339cf8efca24eed5eb7"
     },
     "public/assets/low-kitchen/chair-south-right.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/chair-south-right.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/chair-south-right.png",
       "width": 79,
       "height": 145,
       "sha256": "241e2274d9c2a27998f6946acbfb23160f088e116b6fbb8f002bae4d76d6711b"
     },
     "public/assets/low-kitchen/chair-south-front.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/chair-south-front.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/chair-south-front.png",
       "width": 69,
       "height": 89,
       "sha256": "728d0dd66d41f1f16149be56604e736581555fc75890cda018016134f4d26d4a"
     },
     "public/assets/low-kitchen/table-south-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/table-south-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/table-south-planter.png",
       "width": 53,
       "height": 65,
       "sha256": "8cebf47b4522bfd2f87ba4c7fbab5ee79514323209d8c1ce04b9ac5886148973"
     },
     "public/assets/low-kitchen/table-south-mug.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/table-south-mug.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/table-south-mug.png",
       "width": 34,
       "height": 38,
       "sha256": "f65b3cc963e3baa99e40c8ef869c85f5d51cf05840cff6be8cfa9c4cafccbf89"
     },
     "public/assets/low-kitchen/table-south-bowl.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/table-south-bowl.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/table-south-bowl.png",
       "width": 47,
       "height": 40,
       "sha256": "1878d70b514d77d9513e9bed3f614f4de15ee19b3c345c81368a6cd37c0b7fc8"
     },
     "public/assets/low-kitchen/fridge.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/fridge.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/fridge.png",
       "width": 111,
       "height": 265,
       "sha256": "af1daaafcc5dfea01e02df0b27770f0963ddeb1d3c0040b724a430ef09e3187b"
     },
     "public/assets/low-kitchen/fridge-top-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/fridge-top-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/fridge-top-planter.png",
       "width": 85,
       "height": 184,
       "sha256": "a30ddf7a7726252e3b2f5053213a517dbc70ba760976feb1e8a3c796779ae390"
     },
     "public/assets/low-kitchen/terminal.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/terminal.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/terminal.png",
       "width": 83,
       "height": 206,
       "sha256": "b3d41b6d428c3c5ebacaf3477f8783c82a7fd1c5a0c9d96a77081f3a9a7b2d91"
     },
     "public/assets/low-kitchen/terminal-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/terminal-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/terminal-planter.png",
       "width": 65,
       "height": 96,
       "sha256": "e7c7f2acd9120fbc62db3bdf5c9ade85a707dfca9c6af7aa5e460394b708190c"
     },
     "public/assets/low-kitchen/southwest-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/southwest-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/southwest-planter.png",
       "width": 88,
       "height": 106,
       "sha256": "369d1076fdb17720c8ae48d66a8d2d64b6ad61c340900bc530c3c7b2007f3500"
     },
     "public/assets/low-kitchen/southeast-crate.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/southeast-crate.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/southeast-crate.png",
       "width": 70,
       "height": 77,
       "sha256": "90f8f06f3cc1cd0b24f11fe71a053c8f313713df94f8c42607956fafa2b2428d"
     },
     "public/assets/low-kitchen/southeast-tall-crate.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/southeast-tall-crate.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/southeast-tall-crate.png",
       "width": 44,
       "height": 115,
       "sha256": "edd0b86297d7d5579f3fc01688857e7991ca120639ae7e9952686cb5b06a3401"
     },
     "public/assets/low-kitchen/southeast-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/southeast-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/southeast-planter.png",
       "width": 68,
       "height": 87,
       "sha256": "2dea688788540a23f9107ee9670fb512b081c4e50e712ccff78ec9fc71cf1c6f"
     },
     "public/assets/low-kitchen/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-kitchen/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-kitchen/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/rowan-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/rowan-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/rowan-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "591b66259b555385d5d02a7f103f2fafd7545f24fe9706add6b26d325ccde933"
     },
     "public/assets/room-npcs/rowan.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/rowan.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/rowan.png",
       "width": 256,
       "height": 256,
       "sha256": "7509c3eec585d181f52dba2f2a2147d10bbc85a11a73798f2c4fd3e2e4515d78"
     },
     "art/props/low-clinic/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/low-clinic/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/low-clinic/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "ce4c3bfab7535205507339fa6758f4557c8342c04db8cebf13407ba18eea6764"
     },
     "public/assets/low-clinic/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "c6e5607e008423aae4c7f766f50a3cbb2b94e9ddd27871ea74d3ccb62f4d107c"
     },
     "public/assets/low-clinic/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/background-box.png",
       "width": 1536,
       "height": 960,
       "sha256": "537250c8dfd8ebcb5f8bf6771931055be8e14618859a0bbc57d02cba6108efd0"
     },
     "public/assets/low-clinic/northwest-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/northwest-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/northwest-planter.png",
       "width": 79,
       "height": 145,
       "sha256": "2a429294f745d9eb18a606f34d49401e6b2e08b5e4f76310319a0159d2cdc679"
     },
     "public/assets/low-clinic/bin.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/bin.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/bin.png",
       "width": 46,
       "height": 89,
       "sha256": "fb1c5770069031a31315eaa97c4280eb1cdeb528dd07c8581bfbc7ce835a53ea"
     },
     "public/assets/low-clinic/medical-rack.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/medical-rack.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/medical-rack.png",
       "width": 126,
       "height": 158,
       "sha256": "cde073fc5b6cb30cba59954f087041059a456ac9a65195db2158a9b2ca606bf3"
     },
     "public/assets/low-clinic/rack-bottle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/rack-bottle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/rack-bottle.png",
       "width": 28,
       "height": 50,
       "sha256": "3bbe7520ed93dc8f761528f942ea3d05bd764fad37454df6dade45bb1db61283"
     },
     "public/assets/low-clinic/rack-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/rack-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/rack-planter.png",
       "width": 86,
       "height": 125,
       "sha256": "32f4df5d01337376a53fa4ae814b7211730f8ac94bfcc1cf87258ae00cc6f912"
     },
     "public/assets/low-clinic/exam-bed.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/exam-bed.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/exam-bed.png",
       "width": 322,
       "height": 156,
       "sha256": "ddbbc88411f744ce752ce3121c1d9265ff99bf76011e076b9ebc2917866d5c9b"
     },
     "public/assets/low-clinic/medicine-cabinet.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/medicine-cabinet.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/medicine-cabinet.png",
       "width": 154,
       "height": 232,
       "sha256": "2daf1c17a7f0465d5def005cf9450904c8d702bfb58bc0c66054aaa80e166989"
     },
     "public/assets/low-clinic/sink-cabinet.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/sink-cabinet.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/sink-cabinet.png",
       "width": 134,
       "height": 157,
       "sha256": "79c2272eb3560b5adf2ab8702858f834851dc0f7ce53ef70dab424b106d89572"
     },
     "public/assets/low-clinic/soap-bottle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/soap-bottle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/soap-bottle.png",
       "width": 27,
       "height": 58,
       "sha256": "9f30ced829eb99618c656eebdcbe8eba0a09d6be3a2a2757cc74621724fa10c7"
     },
     "public/assets/low-clinic/bed-step.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/bed-step.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/bed-step.png",
       "width": 81,
       "height": 57,
       "sha256": "faf567ecade70abf4870d098367d875474dc2b69e3575efa7d5631805e1a0de7"
     },
     "public/assets/low-clinic/chair-wait-upper.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/chair-wait-upper.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/chair-wait-upper.png",
       "width": 98,
       "height": 153,
       "sha256": "4ef521ed430c96145bfe3f62893cedfd3bc4e94658704d16c045f119eefdf737"
     },
     "public/assets/low-clinic/medical-pedestal.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/medical-pedestal.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/medical-pedestal.png",
       "width": 123,
       "height": 148,
       "sha256": "e4ad863f97c2661de93a1b8b9c82c815fb7b6aea9e2ed09b4787efb6f09b351a"
     },
     "public/assets/low-clinic/desk.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/desk.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/desk.png",
       "width": 288,
       "height": 176,
       "sha256": "1cb30441bb85948968e29268cd4ad0387531538c56fc51f64ae218adb015f5a2"
     },
     "public/assets/low-clinic/desk-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/desk-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/desk-planter.png",
       "width": 59,
       "height": 59,
       "sha256": "d5b717f5d9f39db990640965f18e48abf53cb12e0d2d4bd8e7c7b1258a31d659"
     },
     "public/assets/low-clinic/desk-lamp.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/desk-lamp.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/desk-lamp.png",
       "width": 60,
       "height": 72,
       "sha256": "ef95f4e6b66ea904e4fc689f0f4c73174bd498a0ee1d8dfe575a29a447afd8b1"
     },
     "public/assets/low-clinic/desk-monitor.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/desk-monitor.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/desk-monitor.png",
       "width": 80,
       "height": 112,
       "sha256": "268bb471dc41a998dc88fbe500884d2193ef8e29f88bcbad23688fb5a9af1a59"
     },
     "public/assets/low-clinic/desk-pens.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/desk-pens.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/desk-pens.png",
       "width": 38,
       "height": 58,
       "sha256": "b8519dd9fa433c700be50ce22be4dde78b22ef29bb4380af6c9b424df0750b53"
     },
     "public/assets/low-clinic/desk-keyboard.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/desk-keyboard.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/desk-keyboard.png",
       "width": 72,
       "height": 40,
       "sha256": "83969c72b94ad9c1865f4ffb44c1719f9fc7897f4bd22f0b00adc6d8637f3d6c"
     },
     "public/assets/low-clinic/desk-books.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/desk-books.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/desk-books.png",
       "width": 49,
       "height": 44,
       "sha256": "6d7463b462c93b6691aabbbe8cffed26e5beb68fc8b97bd40a32d459c597bf86"
     },
     "public/assets/low-clinic/desk-paper.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/desk-paper.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/desk-paper.png",
       "width": 43,
       "height": 50,
       "sha256": "6d8dc58b5e39cbc207ba088541689bf00e51e6bedb6cf4abfa8f4a81de1c6225"
     },
     "public/assets/low-clinic/chair-wait-lower.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/chair-wait-lower.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/chair-wait-lower.png",
       "width": 98,
       "height": 158,
       "sha256": "ec3b3ceed1a5798ac90a259f890d35952bdcf1e463cfd7e93e01d5a5edfc1c5e"
     },
     "public/assets/low-clinic/chair-desk.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/chair-desk.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/chair-desk.png",
       "width": 117,
       "height": 153,
       "sha256": "2143665e9694116efe8f942b5a236985e26724fe0c0f434f4102c17a36df77a3"
     },
     "public/assets/low-clinic/southeast-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/southeast-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/southeast-planter.png",
       "width": 78,
       "height": 109,
       "sha256": "3997b248a8a1383c04ffb5987a7887d1c866b57c8193cba989c748285c59d846"
     },
     "public/assets/low-clinic/southwest-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/southwest-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/southwest-planter.png",
       "width": 93,
       "height": 153,
       "sha256": "8e2123717b1df89f58905a089fdc87cd343a96893f2d404594fe569aacf06591"
     },
     "public/assets/low-clinic/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-clinic/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-clinic/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/nurse-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/nurse-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/nurse-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "97e872bd3d17b502d6f84f7efada51607905fe55d95b6703a18505f96b2a3b8e"
     },
     "public/assets/room-npcs/nurse.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/nurse.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/nurse.png",
       "width": 256,
       "height": 256,
       "sha256": "85bfcdcd40a9583a1cf0b7e4ef59709a12234997137187b2e061bec4a3d10250"
     },
     "art/props/rhea-den/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/rhea-den/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/rhea-den/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "37dea8b357cb93efcd0f82ad62fb5bb46e8d65eed6df1bcabb47646c3b6f4ae8"
     },
     "public/assets/rhea-den/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "278ca4fc52bba02648df7d3a61992779ec913b8313fb97a19667df2c1c134572"
     },
     "public/assets/rhea-den/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/background-box.png",
       "width": 1536,
       "height": 992,
       "sha256": "ff41c5323dc8547fddf34bff1b3e46a496a74f58b615875637e4c1101b9a5d11"
     },
     "public/assets/rhea-den/bed-rug.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bed-rug.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bed-rug.png",
       "width": 269,
       "height": 144,
       "sha256": "cd0bde4150cc9fecede949da2658dcf88a27c283d579261b47627199632a0aec"
     },
     "public/assets/rhea-den/entrance-rug.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/entrance-rug.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/entrance-rug.png",
       "width": 215,
       "height": 111,
       "sha256": "7560dd1fd0289f5dcddf3039a0e266dea6790232609209c881f4a83e9c7f59fc"
     },
     "public/assets/rhea-den/bedside-cabinet.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bedside-cabinet.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bedside-cabinet.png",
       "width": 45,
       "height": 93,
       "sha256": "d698d4463df7b7cf199bd4d5695ec2606f89b937355493a1b1c0216c8ebe7872"
     },
     "public/assets/rhea-den/bedside-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bedside-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bedside-planter.png",
       "width": 45,
       "height": 71,
       "sha256": "80b806521bd785e32e8037aa2fef103bfa2ffd47440fea2f204e7574236231c8"
     },
     "public/assets/rhea-den/bookshelf-right.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bookshelf-right.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bookshelf-right.png",
       "width": 207,
       "height": 157,
       "sha256": "b5cfad60537d82945087b72526f55f9ecc5aebdfb602d14345331322e4fa2ab1"
     },
     "public/assets/rhea-den/bookshelf-right-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bookshelf-right-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bookshelf-right-planter.png",
       "width": 45,
       "height": 50,
       "sha256": "735de28437902c1abb54416ed3f489b273c1070406cf4752bb051e5b3d166428"
     },
     "public/assets/rhea-den/bookshelf-right-chest.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bookshelf-right-chest.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bookshelf-right-chest.png",
       "width": 55,
       "height": 46,
       "sha256": "ef068050272319bb110f0882ac7d36c13e6bc484da101dfe52b87d952408cdd8"
     },
     "public/assets/rhea-den/bookshelf-right-vine.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bookshelf-right-vine.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bookshelf-right-vine.png",
       "width": 67,
       "height": 193,
       "sha256": "b9c94fa17fe7a73efca6f7e4621d5bd2d14d031d344bc4f9eb832157b1c1318b"
     },
     "public/assets/rhea-den/nightstand.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/nightstand.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/nightstand.png",
       "width": 78,
       "height": 75,
       "sha256": "a4b25619b1b5d34e22ab6f26d9ffb9847b7cebb23ba442761973685b162c8a55"
     },
     "public/assets/rhea-den/bookshelf-floor-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bookshelf-floor-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bookshelf-floor-box.png",
       "width": 65,
       "height": 59,
       "sha256": "439c6bbff4917fe1b859e34d7a2bd9192a0eb0fb102a97f0911cb7eeae5ee6a4"
     },
     "public/assets/rhea-den/nightstand-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/nightstand-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/nightstand-planter.png",
       "width": 41,
       "height": 48,
       "sha256": "9999a8b95eb7021f9d84bcd37edb07a2a6111ab7af2ee001d059ebdb917997d5"
     },
     "public/assets/rhea-den/nightstand-crystal.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/nightstand-crystal.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/nightstand-crystal.png",
       "width": 36,
       "height": 42,
       "sha256": "81bedefb18875c6c40a8415926780f8337a28d92dd5542efb49050c7aeffed80"
     },
     "public/assets/rhea-den/large-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/large-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/large-planter.png",
       "width": 122,
       "height": 168,
       "sha256": "5f0764b2b63cc004dac4bdcc82faf37656f1b2abd814ca2516e2e84ac29eae7f"
     },
     "public/assets/rhea-den/bookshelf-left.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bookshelf-left.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bookshelf-left.png",
       "width": 146,
       "height": 178,
       "sha256": "f5b58a28fb76149b4399555a71331abb075f289c0cc245566b186600d7474f85"
     },
     "public/assets/rhea-den/bookshelf-left-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bookshelf-left-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bookshelf-left-planter.png",
       "width": 113,
       "height": 188,
       "sha256": "5208bb9c1c0dd5f56754d0b6ce408a9f875f4fb70719e1f79ac0933801be33cd"
     },
     "public/assets/rhea-den/bookshelf-left-chest.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bookshelf-left-chest.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bookshelf-left-chest.png",
       "width": 45,
       "height": 42,
       "sha256": "5ecec19d27a4619aaa1c5c1d6d7a6edf8690ce7964c4dd4c977f7737e7e74060"
     },
     "public/assets/rhea-den/locker.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/locker.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/locker.png",
       "width": 120,
       "height": 203,
       "sha256": "bfeeb109f2cb86cb97d231cb4db9e6b8a46dfe553e7ccdef09080aa7aa27f7f2"
     },
     "public/assets/rhea-den/locker-chest.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/locker-chest.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/locker-chest.png",
       "width": 50,
       "height": 50,
       "sha256": "2cd9dfd21a445595bbb443add8c319dc6246f561ba7bd290534aa37312828812"
     },
     "public/assets/rhea-den/bed.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bed.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bed.png",
       "width": 165,
       "height": 197,
       "sha256": "65024cdd2675fde2fab844820422abe5f13394ba07d6c7f6bc3bf41761bfa8dd"
     },
     "public/assets/rhea-den/bench-cabinet.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bench-cabinet.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bench-cabinet.png",
       "width": 76,
       "height": 91,
       "sha256": "70735740ef4e14543b5699081d99715e0f28334535bf7f37d796bf0fd6cb2795"
     },
     "public/assets/rhea-den/bench-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bench-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bench-planter.png",
       "width": 52,
       "height": 54,
       "sha256": "558fcc80edcfe88dd161ecc04b841c52c9c3a2f3478784cc35a03262712b6e68"
     },
     "public/assets/rhea-den/desk-terminal.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/desk-terminal.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/desk-terminal.png",
       "width": 80,
       "height": 210,
       "sha256": "9766bf2dca6a2b9b868efe6ba562d7d34a07761c891891ebeef4e23544b596c8"
     },
     "public/assets/rhea-den/stool.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/stool.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/stool.png",
       "width": 61,
       "height": 89,
       "sha256": "84b7bd49256476c1d542d9e9d6113199378739e40e6a87b7181178b1e203be31"
     },
     "public/assets/rhea-den/bench-toolbox.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bench-toolbox.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bench-toolbox.png",
       "width": 84,
       "height": 40,
       "sha256": "b105822a4d57a62333cab7bb718e2b837470713a0024016e5aa74642f5927376"
     },
     "public/assets/rhea-den/workbench.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/workbench.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/workbench.png",
       "width": 172,
       "height": 288,
       "sha256": "685ecd3c108b0011536b4c16644bbe6aed32c2e4dd543ee2fcf3f3f5f05ff007"
     },
     "public/assets/rhea-den/bench-picture.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bench-picture.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bench-picture.png",
       "width": 73,
       "height": 45,
       "sha256": "7cd84bb28d8e48f5e810b3215699d2636e6e88da43dd8321bd42884a62e96ef2"
     },
     "public/assets/rhea-den/tool-gold-left.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-gold-left.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-gold-left.png",
       "width": 22,
       "height": 20,
       "sha256": "bc2b309eb9cae5a1f51862f7b9f54fc79be64b6ea88e4b2b60a3d55dc916e3eb"
     },
     "public/assets/rhea-den/tool-gold-right.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-gold-right.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-gold-right.png",
       "width": 16,
       "height": 22,
       "sha256": "3ade4893bdf6ad9fdd1cb48e3fa319d0b345fd773cc29aa20f89b86f6ec5bd6e"
     },
     "public/assets/rhea-den/tool-wrench-silver.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-wrench-silver.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-wrench-silver.png",
       "width": 17,
       "height": 59,
       "sha256": "dbc6589909898f77d80faee37cda10d9c9ba5d7a6e9042cad46cda895d26228a"
     },
     "public/assets/rhea-den/tool-driver-left.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-driver-left.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-driver-left.png",
       "width": 10,
       "height": 46,
       "sha256": "2857ad043e35b2ee9c762532dd6bdc8391613c08f3910a0d39c4f731a2b3234f"
     },
     "public/assets/rhea-den/tool-driver-right.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-driver-right.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-driver-right.png",
       "width": 12,
       "height": 46,
       "sha256": "572576be4b81a5518785db7ae6c57caa2f1344552bec12c713f5d5513755c807"
     },
     "public/assets/rhea-den/tool-gold-small.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-gold-small.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-gold-small.png",
       "width": 18,
       "height": 19,
       "sha256": "196539d60ca63682f48009a67dcd452374205f229f722448865e83bad7af0526"
     },
     "public/assets/rhea-den/tool-wrench-dark.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-wrench-dark.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-wrench-dark.png",
       "width": 16,
       "height": 65,
       "sha256": "f62a976df14821b837181e974904dea5ada0f48616b42ff005cc248d71e389b2"
     },
     "public/assets/rhea-den/tool-chip.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-chip.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-chip.png",
       "width": 26,
       "height": 25,
       "sha256": "5021995d03cf2f5504206eb3fb8b91dedb7baaea8a0ec0020ea257737f3ba30f"
     },
     "public/assets/rhea-den/tool-vial-light.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-vial-light.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-vial-light.png",
       "width": 5,
       "height": 32,
       "sha256": "5d6ee1dd96e68ab91d74c9d6213f8d13ed9be8cd95610dc7c6a81a5d0a450f6d"
     },
     "public/assets/rhea-den/tool-vial-dark.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-vial-dark.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-vial-dark.png",
       "width": 9,
       "height": 34,
       "sha256": "cb7bb331b3f8259479219c430ee353f688bad6557cd302515cc3f3e8d0f25c3d"
     },
     "public/assets/rhea-den/bench-device.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bench-device.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bench-device.png",
       "width": 41,
       "height": 67,
       "sha256": "e5119ab62a818e20af3717d02c1569f0b58bd7f269bdce9398ad85bfcad1f07e"
     },
     "public/assets/rhea-den/tool-wrench-right.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-wrench-right.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-wrench-right.png",
       "width": 15,
       "height": 59,
       "sha256": "4ce7b97445a69cf919d5f7f30b33282cdc132d08849ba758909ea14379270ac9"
     },
     "public/assets/rhea-den/tool-gear-right.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-gear-right.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-gear-right.png",
       "width": 21,
       "height": 30,
       "sha256": "84ead4cd1fdf9bc22e9cb558bd6c9a2b26cfaf2a01496145147f9c675a92fc3b"
     },
     "public/assets/rhea-den/tool-pliers.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-pliers.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-pliers.png",
       "width": 12,
       "height": 50,
       "sha256": "e4eff5dbef08564247014201de074a8d6e153ec1d6c348de87a09e439152d666"
     },
     "public/assets/rhea-den/bench-mat.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bench-mat.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bench-mat.png",
       "width": 60,
       "height": 90,
       "sha256": "1f4849e8d3f5a8a1cfc089d402aeb2a6e805f4466916dcfabf250da7516e1aca"
     },
     "public/assets/rhea-den/tool-wrench-lower.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-wrench-lower.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-wrench-lower.png",
       "width": 17,
       "height": 45,
       "sha256": "a89041ab4c0fd6c963a3060b0c2070c1e8c70321b3b3c9fb565e4476485b9287"
     },
     "public/assets/rhea-den/tool-gear-bottom.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-gear-bottom.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-gear-bottom.png",
       "width": 31,
       "height": 19,
       "sha256": "fbe46291ea0cbaeb398726926796682efae662a8287d35aceef8d2bcf51a495d"
     },
     "public/assets/rhea-den/tool-copper.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-copper.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-copper.png",
       "width": 19,
       "height": 17,
       "sha256": "13888877f1144ed229ecfa2ed3bc833b504c6a5b30bfe1ec55dd3c21ce26460e"
     },
     "public/assets/rhea-den/tool-cylinder.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/tool-cylinder.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/tool-cylinder.png",
       "width": 30,
       "height": 14,
       "sha256": "68d835c80261984a32971ce04b3158232d3820580271538d0db5559586c4c7da"
     },
     "public/assets/rhea-den/bench-case.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bench-case.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bench-case.png",
       "width": 31,
       "height": 59,
       "sha256": "73965f881145c0a89a52ec6a2eb7613d3031abe0fe88dac466e84d71db4b4549"
     },
     "public/assets/rhea-den/bench-lamp.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bench-lamp.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bench-lamp.png",
       "width": 45,
       "height": 103,
       "sha256": "0d565189f72ff91b5e851aae217e8d2742e2ad02d465f771979fc8bab702ca1b"
     },
     "public/assets/rhea-den/chair-desk.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/chair-desk.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/chair-desk.png",
       "width": 78,
       "height": 148,
       "sha256": "d9b23f2aae75899d70b87f866bca43729a284fa1ae2cb3197fe5dbf0c5ea18cf"
     },
     "public/assets/rhea-den/desk.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/desk.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/desk.png",
       "width": 141,
       "height": 215,
       "sha256": "2c7d57baf75ba4815a23dba9c0ec6a70e42ff47f73ee40284a395735b2b2b0d8"
     },
     "public/assets/rhea-den/desk-picture.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/desk-picture.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/desk-picture.png",
       "width": 60,
       "height": 38,
       "sha256": "2c18cb437cb67b73a971842403ee3deeb548f310a26f8cfdb3e4b293cf36f5b1"
     },
     "public/assets/rhea-den/desk-lamp.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/desk-lamp.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/desk-lamp.png",
       "width": 41,
       "height": 56,
       "sha256": "dad814b7b04156844beda3830856db82dec91fffcd5ba0c2c273fb9ee4d075f4"
     },
     "public/assets/rhea-den/desk-ink.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/desk-ink.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/desk-ink.png",
       "width": 32,
       "height": 57,
       "sha256": "dea2d8a51b534b88bb9770ced031648de1dbc5ff4273acffd0e3e645866dc098"
     },
     "public/assets/rhea-den/desk-book.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/desk-book.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/desk-book.png",
       "width": 58,
       "height": 55,
       "sha256": "7b866253dcef9d60413adaa686e7065b74417a93cae471fc7a9c54c0e7b9687c"
     },
     "public/assets/rhea-den/desk-books.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/desk-books.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/desk-books.png",
       "width": 49,
       "height": 55,
       "sha256": "7ab3f77f7a03a1cbc5aac49fbfff48d7b835f266b4590b5e9a94dc258f74991f"
     },
     "public/assets/rhea-den/desk-shelf.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/desk-shelf.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/desk-shelf.png",
       "width": 43,
       "height": 189,
       "sha256": "6edd35c21fe8e25b36f980be8f6c623d61f6630e8ff0c2ee1051b179d2c1b4e7"
     },
     "public/assets/rhea-den/desk-shelf-books.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/desk-shelf-books.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/desk-shelf-books.png",
       "width": 40,
       "height": 55,
       "sha256": "8e29461ae4eadc9beef69c82549e7bcefa4e37c0f37f19039eb32376184f12b3"
     },
     "public/assets/rhea-den/desk-vine.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/desk-vine.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/desk-vine.png",
       "width": 66,
       "height": 147,
       "sha256": "148adf8f625d19492f8cf4a4e617fa601ab80f0e146f438cbfb6a96c8f9dd944"
     },
     "public/assets/rhea-den/bench-side-case.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/bench-side-case.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/bench-side-case.png",
       "width": 40,
       "height": 135,
       "sha256": "e992e39c77ed49b5d43b79d2c0dde61cf3af359d7c2aeaef89416841cfd85252"
     },
     "public/assets/rhea-den/southwest-panel.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/southwest-panel.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/southwest-panel.png",
       "width": 53,
       "height": 119,
       "sha256": "6854abc00253e802846f76ee29283e882372ad31cb8ca5f52cdd6608c2c82f29"
     },
     "public/assets/rhea-den/southwest-device.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/southwest-device.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/southwest-device.png",
       "width": 88,
       "height": 71,
       "sha256": "c0288dc9ef68f600ce08107dd8d8c4763754b7a6b2f24c2ffeedd3d26ab9bf94"
     },
     "public/assets/rhea-den/southwest-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/southwest-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/southwest-planter.png",
       "width": 84,
       "height": 95,
       "sha256": "e4f84bc7f60e9f41dae0f839bab8ed86b2e25ee7502ce8a5277dada521befb19"
     },
     "public/assets/rhea-den/southeast-chest.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/southeast-chest.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/southeast-chest.png",
       "width": 124,
       "height": 86,
       "sha256": "6236f4556c47c8a8008be5dd121f2d0fc45342775d776c3e7c3fa6e3c84f5e16"
     },
     "public/assets/rhea-den/southeast-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/southeast-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/southeast-planter.png",
       "width": 89,
       "height": 122,
       "sha256": "928f8d6eaf17b78b9c70568815e6587ab08b8b2f8f9618dc0bdd8b5c391532ab"
     },
     "public/assets/rhea-den/southeast-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/southeast-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/southeast-box.png",
       "width": 42,
       "height": 48,
       "sha256": "ed6f94ff01c22f78a46b6de2ce6690306678e8dfb23a507edb368aaf42fd8fed"
     },
     "public/assets/rhea-den/entrance-planter-right.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/entrance-planter-right.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/entrance-planter-right.png",
       "width": 62,
       "height": 112,
       "sha256": "f2de43a08c614ab9f9e574e968bd85bd284f2a84b9b461d4dd0186d6795dff9e"
     },
     "public/assets/rhea-den/entrance-planter-left.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/entrance-planter-left.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/entrance-planter-left.png",
       "width": 60,
       "height": 117,
       "sha256": "6df88814779f1aa6bad58f9623438a43b01510ec5baa29df70661a07e99c9547"
     },
     "public/assets/rhea-den/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/rhea-den/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/rhea-den/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/rhea-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/rhea-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/rhea-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "7c1f34a9a9196744e7d86fa639471d56b2d2c93aaaa672cc548cdd22c9ca4c49"
     },
     "public/assets/room-npcs/rhea.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/rhea.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/rhea.png",
       "width": 256,
       "height": 256,
       "sha256": "1b575c642cd340249e6e460317c615648dbe2643296eeec94908c0545dfcab6a"
     },
     "art/props/low-service-duct/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/low-service-duct/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/low-service-duct/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "9c3de50ad9ab42d0f6774ca8f23d22e95f09acf33769f26da31c9e24dff13cfd"
     },
     "public/assets/low-service-duct/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-service-duct/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-service-duct/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "b04b68b63979c0567c26a91a3aea370dce0d57bbaf6dd0cdf6169a1baf712609"
     },
     "art/props/low-laundry-duct/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/low-laundry-duct/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/low-laundry-duct/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "ab2a78bfd71e287d892c05ec46cd20c6ced487e811d332e866b964e2a3178dcf"
     },
     "public/assets/low-laundry-duct/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-laundry-duct/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-laundry-duct/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "4627c01d7bf51a0190761ea040fbbaf2a01807e85d18651e4106d2284d52113f"
     },
     "art/props/low-cooling-room/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/low-cooling-room/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/low-cooling-room/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "86babdcf5ebca9976e5b95acd9ebb954543b0d096b2af759bd2a1a4e6700f9a7"
     },
     "public/assets/low-cooling-room/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "e980ddbb8ab25665aaeb5910842ed0b765863e970ec2ed1202c21a7bcb6baedb"
     },
     "public/assets/low-cooling-room/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/background-box.png",
       "width": 1536,
       "height": 928,
       "sha256": "387274e5e1f38a56e0cd06dbd7164d71f4e5d027655b76edb74a891dfd360e15"
     },
     "public/assets/low-cooling-room/control-terminal.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/control-terminal.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/control-terminal.png",
       "width": 84,
       "height": 168,
       "sha256": "1dbe5c952eebcf054d46cedf80ed3207c2d399e8b940a424b853a6a581826535"
     },
     "public/assets/low-cooling-room/cooler-left.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/cooler-left.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/cooler-left.png",
       "width": 211,
       "height": 260,
       "sha256": "cacb500c35fe8d8a4bb95fba6372d0e23b8e3225075ca339f099a4f5ee5d03ae"
     },
     "public/assets/low-cooling-room/cooler-right.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/cooler-right.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/cooler-right.png",
       "width": 237,
       "height": 264,
       "sha256": "785830b8b1f9bc7394e21393e86a3b3b226d19cdeb6292295a587b24777a857f"
     },
     "public/assets/low-cooling-room/tool-board.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/tool-board.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/tool-board.png",
       "width": 120,
       "height": 68,
       "sha256": "ca45558bb7cf646c3dba64932050997f16496ff3e326b4f33be2ff82675f9d78"
     },
     "public/assets/low-cooling-room/tool-board-driver.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/tool-board-driver.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/tool-board-driver.png",
       "width": 15,
       "height": 48,
       "sha256": "f7bed636fa893ba65120cb9734022b77be83f9fc5fefb416bdb6b77aae0ab186"
     },
     "public/assets/low-cooling-room/tool-board-pliers.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/tool-board-pliers.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/tool-board-pliers.png",
       "width": 26,
       "height": 55,
       "sha256": "c4611f912ef08e2c729028ac247ec3c8c6b44b1ba97647c3176b36ff7d64a445"
     },
     "public/assets/low-cooling-room/tool-board-wrench.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/tool-board-wrench.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/tool-board-wrench.png",
       "width": 19,
       "height": 57,
       "sha256": "7d4ba1119968f74d85c36f5b825638d9866e9fc3422297088ceede0b16d7a31d"
     },
     "public/assets/low-cooling-room/supply-rack.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/supply-rack.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/supply-rack.png",
       "width": 68,
       "height": 209,
       "sha256": "d2f10e8e56605c0a56ba40d607bb712f0f64296a087f81fa3fc26cd59d25dae7"
     },
     "public/assets/low-cooling-room/rack-planter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/rack-planter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/rack-planter.png",
       "width": 71,
       "height": 255,
       "sha256": "6b3560f7dcbd451cf3256001e5d499352bff1d9acca1431a0db412d2cea4c65f"
     },
     "public/assets/low-cooling-room/rack-bottle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/rack-bottle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/rack-bottle.png",
       "width": 19,
       "height": 37,
       "sha256": "7e6e51eaf8f5894bed65f795fb445a98257b0b0dd4d79e784af306df202c22a4"
     },
     "public/assets/low-cooling-room/rack-gray-case.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/rack-gray-case.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/rack-gray-case.png",
       "width": 48,
       "height": 40,
       "sha256": "9764faa0350ddea2bdcfdb0890781443f3991111935a051de0ae9c38bb31b3c0"
     },
     "public/assets/low-cooling-room/rack-olive-case.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/rack-olive-case.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/rack-olive-case.png",
       "width": 51,
       "height": 49,
       "sha256": "50d8842c9446560b9059389d8faf280b5d38c4f0b44f79db1ec34c278673949a"
     },
     "public/assets/low-cooling-room/floor-gray-chest.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/floor-gray-chest.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/floor-gray-chest.png",
       "width": 73,
       "height": 49,
       "sha256": "a3d10458b49f1196286570928785a98754a35132e98d7dc8f29f146cec419190"
     },
     "public/assets/low-cooling-room/floor-brown-case.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/floor-brown-case.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/floor-brown-case.png",
       "width": 45,
       "height": 58,
       "sha256": "b96ed1b393d9008b18795bf4fa2968d42093f10fdc637965da8213e8dbfdd7b3"
     },
     "public/assets/low-cooling-room/workbench.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/workbench.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/workbench.png",
       "width": 164,
       "height": 124,
       "sha256": "2d81c440e5666e36a2ef99755d0c0c40b0c120f05264cad9ce4fcc16049e1e95"
     },
     "public/assets/low-cooling-room/bench-toolbox.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/bench-toolbox.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/bench-toolbox.png",
       "width": 54,
       "height": 45,
       "sha256": "41762e4d77e50227b2fd7c17daedc6a0a250be229fafb3ae3f67deedc2593792"
     },
     "public/assets/low-cooling-room/bench-wrench.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/bench-wrench.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/bench-wrench.png",
       "width": 54,
       "height": 54,
       "sha256": "b41b72ae96bdfdc52b6e8d7282d6873508856d5bee68c32392bdb9bc7085f7af"
     },
     "public/assets/low-cooling-room/bench-note.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/bench-note.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/bench-note.png",
       "width": 40,
       "height": 36,
       "sha256": "a28b400d2b5d6286aa09127a1817aeadcf5a5ee088a5647bad88d14f0ca4e9e2"
     },
     "public/assets/low-cooling-room/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/low-cooling-room/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/low-cooling-room/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "art/props/transit-hall/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/transit-hall/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/transit-hall/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "0d22ecb19c8d4e239772d8f17f498be12844bf4cf808abfdcb4e1c41dc4812f2"
     },
     "public/assets/transit-hall/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/transit-hall/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/transit-hall/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "3eab0786ca95f0e3c07f11934cc30b7ab0cadcba5f8452c6cef9c6f59a2fed50"
     },
     "public/assets/room-npcs/silas-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/silas-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/silas-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "12c51ee8e6d26c5112302137769e3d01ddd915b149564287a0de32feec5fc46f"
     },
     "public/assets/room-npcs/silas.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/silas.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/silas.png",
       "width": 256,
       "height": 256,
       "sha256": "944d9983c7f44949f2f364c7e22445e3e2f978681d1fdd4b43bde506aef57da1"
     },
     "art/props/civic-office/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/civic-office/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/civic-office/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "6203356606789fae0cfa05700946b0c6834d3deada9ed89e5a228b1ec8ab95a4"
     },
     "public/assets/civic-office/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/civic-office/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/civic-office/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "50f4e353865a730d3f91c29c6e7cc1c18c020a865d704ee1b2357b96d8abd490"
     },
     "public/assets/room-npcs/adrian-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/adrian-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/adrian-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "3f4c973efecdd1c27f4ffaa0e40db934cfaa8522619111ff0800b45baf77310e"
     },
     "public/assets/room-npcs/adrian.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/adrian.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/adrian.png",
       "width": 256,
       "height": 256,
       "sha256": "ee07060b6c5d36cd1881066fe5dffdff9a02c0e322620653307107ea6a6cc365"
     },
     "public/assets/room-npcs/meridian-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/meridian-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/meridian-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "12a51540108c37a33d311a6b443f876a301d2cce59802fc93d7f2cfc7777d64d"
     },
     "public/assets/room-npcs/meridian.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/meridian.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/meridian.png",
       "width": 256,
       "height": 256,
       "sha256": "c4eed67597c64f39d8e9e8fc401abd66325703f772b2971d773a6aac66371dba"
     },
     "public/assets/room-npcs/elder-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/elder-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/elder-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "fbc41bd42c21b0932ef43587a68dfc782a7f8e749156ab8039759f1d1e57c597"
     },
     "public/assets/room-npcs/elder.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/elder.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/elder.png",
       "width": 256,
       "height": 256,
       "sha256": "0bd767a7034e2c58fe704c7a305ecf32dc9c30396094578d95942bc2ef53b178"
     },
     "public/assets/room-npcs/clerk-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/clerk-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/clerk-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "fa1bc555f391a55b0d20343de47ce1d74a6be5ec909fff3e89f58eadf26c9632"
     },
     "public/assets/room-npcs/clerk.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/clerk.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/clerk.png",
       "width": 256,
       "height": 256,
       "sha256": "3815135ea6350a9d8772259f8e40da03a7a0776436409b87818dfefb615f8dee"
     },
     "public/assets/room-npcs/guard-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/guard-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/guard-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "26362c9d86a948170579a1db9a598271dc35ab503246548c8ecbd81dc0577a77"
     },
     "public/assets/room-npcs/guard.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/guard.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/guard.png",
       "width": 256,
       "height": 256,
       "sha256": "f75c126f95143a02d6ff939257ba7245a9b3ff43f6ca2029cd79897f719d06b8"
     },
     "art/props/civic-mediation/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/civic-mediation/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/civic-mediation/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "c7d54c1dacb52e691531e1c1f334fa89fe187fcc50a8fbb6154f26b2478fe9d4"
     },
     "public/assets/civic-mediation/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/civic-mediation/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/civic-mediation/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "726c45d654b3f1a1cc7e61ec88f61fb27c513ca2d8cb773a95af681838764b02"
     },
     "art/props/civic-consult/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/civic-consult/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/civic-consult/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "793e409c767f7aa8141d058808040d3c9fb9ef5d8c94770fd5b335f25cba4769"
     },
     "public/assets/civic-consult/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/civic-consult/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/civic-consult/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "b6c8c0e87b164bc05c4d3fa0daf318cb9663124de87e46613a932f9487d3e468"
     },
+    "public/assets/civic-consult/background-box.png": {
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/civic-consult/background-box.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "dc021d8a2ede65613167811891fb88d0508041da5c665e1f7b0ac66efe10109d"
+    },
+    "public/assets/civic-consult/portal-box.png": {
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/civic-consult/portal-box.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
+    },
     "art/props/civic-zeroing-lounge/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/civic-zeroing-lounge/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/civic-zeroing-lounge/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "5edd10d72909b9e0986ce16b6ce02229a04faa612966f62c84e8d2fdbe6dfa5d"
     },
     "public/assets/civic-zeroing-lounge/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/civic-zeroing-lounge/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/civic-zeroing-lounge/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "23b5d11a3f48ffdb86de84ebbc3a867a834a5d19de65c5aff4d4ef1dc9f78339"
     },
+    "public/assets/civic-zeroing-lounge/background-box.png": {
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/civic-zeroing-lounge/background-box.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "77551cfcc9eff2d4d5dca92ec72e0e1f1e31681c0b24bba57227c1d15df2f913"
+    },
+    "public/assets/civic-zeroing-lounge/portal-box.png": {
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/civic-zeroing-lounge/portal-box.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
+    },
     "public/assets/room-npcs/volunteer-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/volunteer-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/volunteer-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "c467df101a725c99812a0cfec2dfc66aa3f85906a55343bd226ce57a060b987b"
     },
     "public/assets/room-npcs/volunteer.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/volunteer.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/volunteer.png",
       "width": 256,
       "height": 256,
       "sha256": "f07750dc2a1e5039668dd950c14deb7ee25acee2a043b187804e3e378127cb75"
     },
     "art/props/civic-archive/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/civic-archive/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/civic-archive/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "5f8b10741910c057c7e3f38501bcbb4c4420d83c0cee2a77b9c2500912c4cc8f"
     },
     "public/assets/civic-archive/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/civic-archive/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/civic-archive/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "61f4f7c500dc7d484a6ae46cf335186ed7a71de9bd9f1b9be2c6101b2bd8d38f"
     },
     "public/assets/civic-archive/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/civic-archive/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/civic-archive/background-box.png",
       "width": 1536,
       "height": 992,
       "sha256": "25434d1e2f262974265c28c23f39b9cdfc58caa63373ccadceed40acb85fcedb"
     },
     "public/assets/civic-archive/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/civic-archive/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/civic-archive/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "art/props/solarium/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/solarium/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/solarium/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "2e73cd7272ecf0b49ea8829b31b78f2030329cd0d65fb495d5992254d1624286"
     },
     "public/assets/solarium/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/solarium/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/solarium/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "151b62b3c776f32d3f2447ee96aae40b815b5286d8db5a1286df1c42278f5a85"
     },
     "art/props/sky-lobby/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/sky-lobby/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/sky-lobby/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "ce7ff96d445eca1513655f33cfd31b589a4c891f5a5c10ee7c5be28db23413bc"
     },
     "public/assets/sky-lobby/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/sky-lobby/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/sky-lobby/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "014ac800d24d2cec76c86362b2a7bb84ba7208814ce1ac96858f98cb82e8da4e"
     },
     "public/assets/sky-lobby/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/sky-lobby/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/sky-lobby/background-box.png",
       "width": 1536,
       "height": 992,
       "sha256": "d1d9cfdb881ebc0a0783924f6d29161ecb562d97317ec27665483ceb84c979a9"
     },
     "public/assets/sky-lobby/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/sky-lobby/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/sky-lobby/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/receptionist-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/receptionist-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/receptionist-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "50fa8e694bf5af0b47485e6ce9a0c822b08df161e60a65df6a74283f5c5bfdeb"
     },
     "public/assets/room-npcs/receptionist.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/receptionist.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/receptionist.png",
       "width": 256,
       "height": 256,
       "sha256": "7b42bc59d6c19cda843a6d9d4d5b9e02f29fcbfa9d998c5913ab92280867380d"
     },
     "art/props/celeste-reception/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/celeste-reception/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/celeste-reception/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "14eac3e9eb1aa7da0365831d374cd3502a763daa209aa3692580b7f04814c40e"
     },
     "public/assets/celeste-reception/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/celeste-reception/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/celeste-reception/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "b7866c4ed74f3c0f6c0e4c362c168e7151344ec4c850198ac9792e03e6d911d7"
     },
     "public/assets/celeste-reception/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/celeste-reception/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/celeste-reception/background-box.png",
       "width": 1536,
       "height": 992,
       "sha256": "2b766a5ccd2c89abe5fa0b9db3ea1dd495810468f978af33353962025fb90380"
     },
     "public/assets/celeste-reception/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/celeste-reception/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/celeste-reception/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/celeste-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/celeste-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/celeste-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "4d9f158aa88c2945e305c57f0d1bb664bf2353963132a91a8256e17abecd9944"
     },
     "public/assets/room-npcs/celeste.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/celeste.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/celeste.png",
       "width": 256,
       "height": 256,
       "sha256": "c4d7b7fc3f62861f70bd8c6d1c966c31923c1bfc09bfab5ace38417b817d70a8"
     },
     "public/assets/room-npcs/waiter-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/waiter-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/waiter-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "6612a2fcec68646f5b902c912d01a60dc9d3a3d188145b6025c63411ffcae334"
     },
     "public/assets/room-npcs/waiter.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/waiter.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/waiter.png",
       "width": 256,
       "height": 256,
       "sha256": "942ea1af150735ebd635444a34901210913d0634b2c1602f489d3485728d4ffc"
     },
     "public/assets/room-npcs/collector-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/collector-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/collector-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "9119ffb7990e146079012e70001207f13a8c47cdc10db601665c6b28ddb13eab"
     },
     "public/assets/room-npcs/collector.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/collector.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/collector.png",
       "width": 256,
       "height": 256,
       "sha256": "29e8d74eaf22066bf64206d32ce8b953626b53f1450d72bb4c122e9ab1a8e6a9"
     },
     "art/props/celeste-gallery/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/celeste-gallery/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/celeste-gallery/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "5959c08b70bcd25bca211f6bb8193840dff4e67eb56bd3b3ef07e00e8a446435"
     },
     "public/assets/celeste-gallery/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/celeste-gallery/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/celeste-gallery/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "daa826a400bc056b03f5ff453b7d51f14c58575233aa56488cc29bd848cf075f"
     },
     "public/assets/celeste-gallery/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/celeste-gallery/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/celeste-gallery/background-box.png",
       "width": 1536,
       "height": 992,
       "sha256": "40257fbd24e75e380fc7536c32dcbec188f6a91ad4ec6e089276f5fdc67ffcf9"
     },
     "public/assets/celeste-gallery/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/celeste-gallery/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/celeste-gallery/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/appraiser-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/appraiser-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/appraiser-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "cc9de3906143f2ee8ab7632fdbb3fcadc73bbebb7478560caa5eaccf3bd4753a"
     },
     "public/assets/room-npcs/appraiser.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/appraiser.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/appraiser.png",
       "width": 256,
       "height": 256,
       "sha256": "bcfb129784cecd75a31801fee83105a067278108db5292891afefb622d1d7a67"
     },
     "art/props/celeste-archive/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/celeste-archive/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/celeste-archive/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "b76b4231e74dffeb7ddd98efcaba5b6de68b9c4d7a84b7f43171ee81bf2b0201"
     },
     "public/assets/celeste-archive/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/celeste-archive/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/celeste-archive/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "7df876a47185f46b9099014b2a70888db12e11ad1b40721121208231d2e18f6a"
     },
     "public/assets/celeste-archive/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/celeste-archive/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/celeste-archive/background-box.png",
       "width": 1536,
       "height": 992,
       "sha256": "89cb8da64357dcd2b5e9a742f5be74f2b859dadd5e8e59ea8d145c17adae604d"
     },
     "public/assets/celeste-archive/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/celeste-archive/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/celeste-archive/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "art/props/noel-suite/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/noel-suite/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/noel-suite/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "3063cd178b0d0a3cd21a38e17ba6ce8998c9c326b0af5b3d82b366fa3a8c1772"
     },
     "public/assets/noel-suite/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/noel-suite/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/noel-suite/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "38d1e2aea88e288bc87f38280133132a7ed6189a6fef887622aba00fe298b110"
     },
     "public/assets/noel-suite/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/noel-suite/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/noel-suite/background-box.png",
       "width": 1536,
       "height": 960,
       "sha256": "ac18c2bd1964e258bcd4f48ea1a7d75b7d22c2a90c3334fd9262c5ff67ba1ccc"
     },
     "public/assets/noel-suite/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/noel-suite/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/noel-suite/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/noel-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/noel-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/noel-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "b8d13a741c4881edd1260f92ea49ea28c554e630ca00ae37be9be89d5d7752e9"
     },
     "public/assets/room-npcs/noel.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/noel.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/noel.png",
       "width": 256,
       "height": 256,
       "sha256": "02ee3fbc8ffd6c1569c1b70204a1f7fc9e51b9ac7bb6a3bca7d24fbaab8fd7f0"
     },
     "art/props/one-day-garden/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/one-day-garden/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/one-day-garden/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "fbbcdbd98ea08b176c6fc57904c626916b54c0e51be6d8e66fb2f0c21e0674a2"
     },
     "public/assets/one-day-garden/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/one-day-garden/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/one-day-garden/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "ecd0fe9de07947ab7e334304b3b9d22c8c8bd57a9758978d4f6d1c840bf2b9be"
     },
     "public/assets/room-npcs/iris-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/iris-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/iris-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "05adef99c242d759a15c34b29b3b0cad9f0047c075e7af05b1b743666b78c3a3"
     },
     "public/assets/room-npcs/iris.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/iris.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/iris.png",
       "width": 256,
       "height": 256,
       "sha256": "2831ed455b0b19941e247e9bdfb4da0594745f32b5cef9caf0d6a5228124eb1f"
     },
     "art/props/garden-vault/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/garden-vault/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/garden-vault/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "97b9b7e48fde5d948de6fd542beba75d0b238c5aba613a3811b12a9d8be60e8b"
     },
     "public/assets/garden-vault/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/garden-vault/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/garden-vault/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "1a5f91fc386fc04ce7ba86dbcbaf332d4619b5b2d0f39ed32ebef769320d1099"
     },
+    "public/assets/garden-vault/background-box.png": {
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/garden-vault/background-box.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "aa787d5fa051878d9c3065972d76e3016f987d8b9088816653c3a077267a1f52"
+    },
+    "public/assets/garden-vault/portal-box.png": {
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/garden-vault/portal-box.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
+    },
     "art/props/embers-floor/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/embers-floor/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/embers-floor/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "ddef046fa608881892ba9d6a4dc57cb47f326677ed5f66720ad85204a590632b"
     },
     "public/assets/embers-floor/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/embers-floor/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/embers-floor/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "3cf87da177e5e7f8e04bee7887a5eb795c47db555c67a29f3ffd27f8c1a64305"
     },
     "public/assets/room-npcs/rook-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/rook-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/rook-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "cc60c79cbf672c43ecc42fbd5fd3835033ada917f0faeac1922dd7d400d7c840"
     },
     "public/assets/room-npcs/rook.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/rook.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/rook.png",
       "width": 256,
       "height": 256,
       "sha256": "3a3af519dad40e6726d23e3617064f49042f4b4c35788cfa88d19d24810cdf8c"
     },
     "public/assets/room-npcs/lyra-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/lyra-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/lyra-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "9109f77055db2a1df39b305c39653145202500c890ed4bd1107ea4de75cc7609"
     },
     "public/assets/room-npcs/lyra.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/lyra.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/lyra.png",
       "width": 256,
       "height": 256,
       "sha256": "c6df685fcaa549c1909c44454d55b6bb57435af95bf9201728804a45ec369631"
     },
     "public/assets/room-npcs/flint-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/flint-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/flint-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "0c44adc5b4fca8987461c3b79a938b49c195e33e33403d081f49d5648a3f49b4"
     },
     "public/assets/room-npcs/flint.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/flint.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/flint.png",
       "width": 256,
       "height": 256,
       "sha256": "535fc9040ff10fc0fbd0418f09ef6c81906ee7a7690c5ad4a040ee9d260902fa"
     },
     "public/assets/room-npcs/gambler-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/gambler-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/gambler-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "4b7fc778299c25c4790cc54b9f13389dfe9a4d03fc8a940f2cfb0c34b6478dd1"
     },
     "public/assets/room-npcs/gambler.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/gambler.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/gambler.png",
       "width": 256,
       "height": 256,
       "sha256": "cfea3f3c9012411aa0dca48e70cd1801ccc3dfd1355813209f4b00693513b4d1"
     },
     "public/assets/room-npcs/cashier-idle.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/cashier-idle.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/cashier-idle.png",
       "width": 64,
       "height": 64,
       "sha256": "26b9e45f498522d5a93ca9341726f845ae5516b51fa9c2939952732c61c54e1b"
     },
     "public/assets/room-npcs/cashier.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/room-npcs/cashier.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/room-npcs/cashier.png",
       "width": 256,
       "height": 256,
       "sha256": "95051691bef2bbbc73be35369024d23ec4baa1bc28dfbc22ed39b8717caf67e8"
     },
     "art/props/embers-lounge/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/embers-lounge/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/embers-lounge/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "836cd6a67fc40684dacd8879f2dfc3612e7b067c6482c66ecc1b6ceffbf54fc0"
     },
     "public/assets/embers-lounge/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/embers-lounge/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/embers-lounge/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "87ef8b253c74f42b61c9c13fefcd1321b015b38a2f678660d7f1accf6c662a3d"
     },
     "art/props/embers-backstage/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/embers-backstage/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/embers-backstage/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "b841c58fc60dac9725d5dccf3ef7bfd64dfbcf27d8ed7862e642176dafbc3d10"
     },
     "public/assets/embers-backstage/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/embers-backstage/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/embers-backstage/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "4f8e303a5149fad2b9d11a0b550357a0c53d02c7e51296d2eff293d1f62b8ba1"
     },
     "public/assets/embers-backstage/background-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/embers-backstage/background-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/embers-backstage/background-box.png",
       "width": 1536,
       "height": 960,
       "sha256": "a71e11dddcd686721c66c70b19d85e76443cf680f197f494400483b348cffe27"
     },
     "public/assets/embers-backstage/portal-box.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/embers-backstage/portal-box.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/embers-backstage/portal-box.png",
       "width": 32,
       "height": 32,
       "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "art/props/embers-back-office/room-layout.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/art/props/embers-back-office/room-layout.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/art/props/embers-back-office/room-layout.png",
       "width": 1536,
       "height": 1024,
       "sha256": "3fb5ef0885223697728f78bbff88d9c0456131729819f0bae70cc158d93e7316"
     },
     "public/assets/embers-back-office/background.png": {
-      "url": "/room-preview/92d516217f37671e3f8c3a4ed00ba639e1c179e0/public/assets/embers-back-office/background.png",
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/embers-back-office/background.png",
       "width": 1536,
       "height": 1024,
       "sha256": "b120245e33c5fcb67344f760eadc0c0248f9dfdd4eca4a68c2b3b1f24d785ea2"
+    },
+    "public/assets/embers-back-office/background-box.png": {
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/embers-back-office/background-box.png",
+      "width": 1536,
+      "height": 1024,
+      "sha256": "57b1ae168cbe21374b597d5cbe70932755ac6b6f9c306c7203d727d5b1da6078"
+    },
+    "public/assets/embers-back-office/portal-box.png": {
+      "url": "/room-preview/9b96c9de21d337d3b97a86f80a816ee4d4ac2e25/public/assets/embers-back-office/portal-box.png",
+      "width": 32,
+      "height": 32,
+      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     }
   }
 }
