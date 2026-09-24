@@ -14,7 +14,7 @@ task:
   actors:
     - id: player
       name: 玩家
-      role: 404临时遗嘱执行人；调查、核验并登记门牌
+      role: 404遗留物临时联系人；调查、核验并登记门牌
     - id: n07
       name: N-07
       role: 证物校准、事实边界提示与404继承柜管理
@@ -370,16 +370,18 @@ task:
             text: 将门牌原件放入公共证物柜，取得机构入库回执。
           - speaker: n07
             text: 实物交付与权利草稿一致。S01登记完成，证物来源和仍待核的流转段落已经写入回顾。
+          - speaker: n07
+            text: 如果想继续登记其他物件，可以去公共厨房找Rowan，问问那张折叠餐垫。那是另一项调查，门牌的记录不能替它作证。
       coder:
         dialogue:
           purpose: 让实物交付真正发生，并以回执作为任务完成门槛
-          facts: [原件不会随权利选择自动移动, 目标保管人必须实际接收, 回执只证明保管交付, 三权在回执后才正式登记]
+          facts: [原件不会随权利选择自动移动, 目标保管人必须实际接收, 回执只证明保管交付, 三权在回执后才正式登记, 回执确认后可提示前往公共厨房找Rowan但不自动接受S02]
           forbid: [没有原件时生成回执, 门牌仍在走廊时显示任务完成, 把保管回执写成所有权证明, 补写未取得的流转证据]
           tone: practical and final
         action: retrieve original if needed; deliver low-deck.door-tag-317 to selected holder; confirm receipt
         success: physical handover acknowledged
         effects: [door_tag_custody=404|ash|public_evidence, physical_handover_ack=true, s01_task_complete=true]
-        next: done
+        next: done; optional lead to remaining-time-s02 / contact at low-kitchen / rowan
   result:
     success: S01完成；Eden与317门牌的关联已由三类来源校准，三项权利已登记，门牌原件已交付并取得回执。
     cancel: 保留已确认的行为信号、材料、权利草稿和实物当前位置；返回时按状态优先级继续。

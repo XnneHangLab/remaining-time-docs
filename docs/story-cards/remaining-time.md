@@ -9,6 +9,8 @@ S01 之前是从404开始的入门序章；S01 是序章结束后的第一项遗
 
 每张卡按 `standard.md` 的最小任务格式编写，并补充 `tier`、案件簇、材料、兜底、合成和三权登记字段。卡片中的 `TODO` 是工程评审项，不是允许 Agent 自行补写的剧情事实。
 
+本轮推进以**序章 + 扩展版 S01 + S02–S31**为准；旧版 S01 仅保留作对照。实际游戏尚未完整实现这些卡片，见[推进卡点记录：美术、NPC能力与任务引导](./remaining-time-walkthrough.md)。扩展版S01结尾提供前往厨房的提示，S02仍可独立接受，不新增强制任务链。
+
 ## 运行约束
 
 - 三类材料分别记录为独立 flag，可按任意顺序取得；取得方式必须区分取走、扫描和获授权暂借。
@@ -59,7 +61,7 @@ import remaining_time_s31 from './remaining-time/remaining-time-s31.yaml?raw'
 ### 序章 · 404号舱的第一晚
 <TaskCard :source="remaining_time_prologue" />
 
-### S01 · 消磁门牌
+### S01 · 消磁门牌（旧版对照）
 <TaskCard :source="remaining_time_s01" />
 
 ### S01 · 消磁门牌（扩展版）
