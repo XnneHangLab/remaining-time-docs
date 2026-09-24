@@ -1,11 +1,11 @@
 task:
   id: remaining-time-prologue
-  title: 序章 · 404号舱的第一晚
+  title: 序章 · 404号舱
   status: proposal
   package: remaining-time / mainline
   tier: standard
   chapter_window: Prologue → Ch1
-  background: 玩家第一次进入404号舱。这里不是一间等待入住的空房，而是一间刚刚结束上一段居住、还没有来得及把痕迹清干净的房间。玩家需要先学会在舱内行动、理解余时世界的基本规则，并确认自己为什么有资格处理404留下的东西；序章结束时，门外传来一声不属于这间房的金属碰撞。
+  background: 玩家入住404号舱。序章只完成入住确认、基础操作和遗留物处理规则；门外出现异常后进入S01。
   trigger:
     time: game start
     place: P_404 / unit-404.start
@@ -13,193 +13,120 @@ task:
   actors:
     - id: player
       name: 玩家
-      role: 刚入住404号舱的人；逐步确认自己的临时执行人身份
+      role: 404号舱新住户；确认临时执行人身份
     - id: n07
       name: N-07
-      role: 404内置校准单元；负责说明边界，但不会替玩家解释所有谜团
+      role: 404内置校准单元；说明入住和遗留物规则
     - id: recovery-system
       name: 回收系统
-      role: 播放入住通知、隐私边界和遗留物处理规则
+      role: 播放入住与遗留物通知
   objects:
     - id: unit-404.bed
-      state: 玩家在此醒来；用于自然引出起身和移动
+      state: 玩家出生点；用于开始移动教学
     - id: unit-404.old-record
-      state: 书桌上留下的旧住户记录；只显示有记录存在，不在序章解开身份
-    - id: unit-404.return
-      state: 404通往下层回廊的出口；序章末开放为下一任务入口
+      state: 404内的旧记录；序章只提示存在，不读取正文
     - id: unit-404.cabinet
-      state: 空的遗留物暂存柜；序章只说明用途，不要求玩家存放物件
+      state: 遗留物暂存柜；序章只提示用途
+    - id: unit-404.return
+      state: 通往下层回廊的出口；完成序章后进入S01
   handoff:
-    writes:
-      - prologue_privacy_notice_done=true
-      - executor_credential_404=true
-      - recovery_notice_played=true
+    writes: [prologue_privacy_notice_done=true, executor_credential_404=true, recovery_notice_played=true]
     opens: relic-s01-erased-door-tag
     clock: PROLOGUE_END=18:00
   stages:
-    - id: wake
+    - id: wake-and-move
       place: P_404 / unit-404.bed
-      reveal: 玩家刚醒来，知道自己已经被分配到404号舱，但还不知道房间上一位住户是谁，也不知道自己为什么被安排在这里。
+      reveal: 玩家已被分配到404号舱，需要先确认可以自行行动。
       writer:
-        background: 先让玩家听见房间，再让玩家看见房间。通风系统间歇性地低鸣，床边的灯没有完全熄灭，门缝下透进一条冷色的走廊光。
+        background: 玩家在404号舱醒来。N-07提示完成一次移动确认。
         script:
-          - speaker: narrator
-            text: 你先听见了房间。风从墙后经过，像有人在很远的地方翻动一叠纸。
-          - speaker: narrator
-            text: 你睁开眼。床边的灯显示：404。门外的走廊灯还亮着，门内没有欢迎你的东西。
           - speaker: n07
-            text: 生命余时校准完成。房间分配完成。请先站起来，确认你能自行行动。
+            text: 404号舱已分配。请离开床边，确认移动正常。
           - speaker: player
             choice: stand_and_move
-            text: 坐起身，离开床边，在404里走一圈。
+            text: 起身，在404号舱内走到床边以外的位置。
       coder:
         dialogue:
-          purpose: 用环境和一个明确动作开始游戏，不用长段设定说明开场
-          facts: [玩家在404号舱醒来, 当前房间已分配给玩家, 玩家需要自行移动确认状态]
-          forbid: [提前说明Eden, 提前说明317门牌, 把404写成玩家永久住所, 直接解释整个世界背景]
-          tone: quiet and unsettled
+          purpose: 完成第一次移动教学
+          facts: [玩家在404号舱醒来, 玩家需要自行移动]
+          forbid: [提前说明前住户, 提前说明317或Eden, 讲解完整世界背景]
+          tone: direct
         action: leave unit-404.bed and walk to a reachable room position
         success: player movement confirmed in unit-404
         effects: [prologue_woke=true]
-        next: room
-    - id: room
-      place: P_404 / unit-404
-      reveal: 玩家看见房间里有床、书桌、暂存柜和一台正在等待确认的N-07；书桌上有前住户留下的纸张，但尚不能读取其隐私内容。
+        next: inspect-and-contact
+    - id: inspect-and-contact
+      place: P_404 / unit-404.old-record OR unit-404.cabinet OR n07
+      reveal: 404内有旧记录和遗留物暂存柜；玩家可以查看公共物件并向N-07询问房间状态。
       writer:
-        background: 不把房间做成教学菜单。让玩家为了找出口而经过书桌和柜子，让物件先以生活痕迹出现，再由N-07解释它们的边界。
+        background: 玩家经过房间里的旧记录和暂存柜，随后与N-07交谈。
         script:
-          - speaker: narrator
-            text: 房间比分配通知里写的更旧。书桌上压着几页没有带走的纸，北侧柜子留着一格空位，像有人在离开前特意给某种东西留了位置。
           - speaker: n07
-            text: 你可以查看房间里的公共物件。私人记录不会因为你站得更近就自动打开。
+            text: 404仍有未完成的遗留物登记。你可以查看公共物件，但私人记录不会自动开放。
           - speaker: player
-            choice: inspect_room
-            text: 走到书桌和暂存柜附近，看看404留下了什么。
-          - speaker: player
-            choice: ask_n07_now
-            text: 先问N-07：我为什么会被分到这里？
+            choice: inspect_404
+            text: 查看旧记录或暂存柜，再询问N-07。
       coder:
         dialogue:
-          purpose: 教玩家靠近物件、按交互键和开始对话，同时建立“发现不等于拥有”的规则
-          facts: [404存在前住户留下的公共痕迹, 书桌记录和暂存柜用途不同, 私人记录不会自动开放]
-          forbid: [读取旧记录正文, 暗示前住户姓名, 让玩家自动获得任何遗物, 把N-07写成全知旁白]
-          tone: practical and restrained
+          purpose: 教授靠近、交互和开始NPC对话
+          facts: [404有前住户留下的公共痕迹, 私人记录不会自动开放, 暂存柜用于遗留物登记]
+          forbid: [读取旧记录正文, 暗示前住户姓名, 自动获得遗物]
+          tone: practical
         action: interact with unit-404.old-record or unit-404.cabinet, then start dialogue with n07
-        success: player has inspected at least one 404 object and opened n07 interaction
+        success: player has inspected a 404 object and opened n07 interaction
         effects: [room_familiarity=true]
-        next: notice
-    - id: notice
+        next: confirm-rules
+    - id: confirm-rules
       place: P_404 / n07
-      reveal: 玩家被安排为404的临时遗嘱执行人；这个身份提供的是处理权限，不是前住户遗物或资料的所有权。
+      reveal: 玩家可以成为404的临时遗嘱执行人，但权限只用于核对、暂借和登记，不代表拥有遗物或公开资料的权利。
       writer:
-        background: N-07不把身份说成奖励。它像一台不太愿意替人做决定的旧设备，只说明玩家接下来能做什么，以及哪些事情不能由权限代替。
+        background: N-07一次说明身份和三条处理边界，玩家确认后继续。
         script:
           - speaker: n07
-            text: 你的入住记录附带一项临时职责：404遗嘱执行。期限从现在开始，到遗留物完成登记或职责被撤回为止。
+            text: 你的入住记录附带404临时遗嘱执行职责。你可以核对、暂借和登记遗留物，但这不等于取得所有权。
           - speaker: n07
-            text: 这项职责允许你核对、暂借和登记与404有关的遗留物。它不授予你自动所有权，也不替任何人同意公开资料。
+            text: 处理遗留物时，核验、保管和公开使用必须分开决定。
           - speaker: player
-            choice: accept_executor_role
-            text: 我接受临时执行职责。先告诉我需要遵守什么。
-          - speaker: player
-            choice: ask_scope
-            text: 这项职责能让我打开所有留下的记录吗？
-          - speaker: n07
-            text: 不能。权限决定你可以申请什么，不决定记录应该向你展示多少。
+            choice: accept_executor_and_rules
+            text: 接受临时职责，并确认这三项边界。
       coder:
         dialogue:
-          purpose: 让玩家理解自己的身份和权限边界，并写入404执行人凭证
-          facts: [玩家是404临时遗嘱执行人, 权限包含核对暂借登记, 权限不等于所有权或公开许可]
-          forbid: [承诺玩家会继承404, 承诺所有记录都会解封, 提前提到317或Eden, 把接受职责写成人格评分]
-          tone: procedural with a human cost
-        action: choice.accept_executor_role or choice.ask_scope; confirm semantic acceptance
-        success: executor credential acknowledged
-        effects: [executor_credential_404=true]
-        next: privacy
-    - id: privacy
-      place: P_404 / n07
-      reveal: 404的遗留物可能包含住户身份、生活痕迹和限制公开的偏好；玩家必须先确认隐私边界。
+          purpose: 写入执行人身份和隐私边界
+          facts: [玩家是404临时遗嘱执行人, 权限不等于所有权, 核验保管公开使用分别处理]
+          forbid: [承诺继承404, 承诺所有记录解封, 提前透露具体前住户]
+          tone: procedural
+        action: choice.accept_executor_and_rules
+        success: executor role and privacy notice acknowledged
+        effects: [executor_credential_404=true, prologue_privacy_notice_done=true]
+        next: recovery-and-threshold
+    - id: recovery-and-threshold
+      place: P_404 / unit-404.return
+      reveal: 404仍在遗留物回收流程中；门外出现的物件不自动属于租约或玩家。
       writer:
-        background: 这不是一页弹窗协议。N-07拿出三条最小规则，每条都对应玩家之后会做的实际动作：看见、保存、讲述。
-        script:
-          - speaker: n07
-            text: 404的遗留物可能仍然带着别人的姓名、习惯和未完成的生活。开始处理前，请确认三条边界。
-          - speaker: n07
-            text: 第一，看到不等于读取全部内容；第二，保存不等于取得所有权；第三，证明一个人存在不等于获得公开讲述的许可。
-          - speaker: player
-            choice: acknowledge_privacy_rules
-            text: 我明白。核验、保管和公开使用要分开处理。
-          - speaker: player
-            choice: ask_about_emergency
-            text: 如果门外出现需要处理的遗留物呢？
-          - speaker: n07
-            text: 先保存可验证的事实，再决定物件和资料由谁保管。不要用一个决定代替三个决定。
-      coder:
-        dialogue:
-          purpose: 教玩家后续遗物调查的核心权利分离规则
-          facts: [核验不等于读取全部内容, 保管不等于所有权, 证明存在不等于公开许可]
-          forbid: [提前透露任何具体前住户, 把隐私边界写成拒绝所有调查, 要求玩家现在决定未来所有遗物的公开方式]
-          tone: clear and protective
-        action: choice.acknowledge_privacy_rules or choice.ask_about_emergency; confirm privacy boundary
-        success: privacy notice acknowledged
-        effects: [prologue_privacy_notice_done=true]
-        next: recovery
-    - id: recovery
-      place: P_404 / unit-404
-      reveal: 404仍在遗留物回收流程中；房间外出现的物件不自动属于租约、玩家或前住户的任何一方。
-      writer:
-        background: 通知在玩家已经看过房间之后才播放。它不是为了讲世界观，而是把刚才看见的空柜、旧纸和走廊接成一件实际会发生的事。
+        background: 回收系统播放通知。玩家走到出口时，门外传来金属落地声。
         script:
           - speaker: recovery-system
             text: 404入住恢复通知：本单元仍有未完成的遗留物登记。门外及公共回廊发现的物件不自动计入租约清单。
-          - speaker: recovery-system
-            text: 发现遗留物时，请记录位置和状态；需要移动、扫描或交付时，使用临时执行人权限申请。
           - speaker: n07
-            text: 通知已经播放。现在你可以把404当作一间需要照料的房间，而不是一只自动属于你的箱子。
-          - speaker: player
-            choice: acknowledge_recovery_notice
-            text: 记下了。先看看门外的回廊。
-      coder:
-        dialogue:
-          purpose: 把教学规则绑定到即将发生的门外事件，并开放基础出门动作
-          facts: [404存在未完成遗留物登记, 门外物件不自动属于玩家, 发现物件需记录位置和状态]
-          forbid: [提前说出门外是317门牌, 暗示物件属于某个具体人物, 提前给出物件的身份和处理结果]
-          tone: institutional and faintly ominous
-        action: play recovery notice and choice.acknowledge_recovery_notice
-        success: recovery notice acknowledged
-        effects: [recovery_notice_played=true]
-        next: threshold
-    - id: threshold
-      place: P_404 / unit-404.return
-      reveal: 三项入住前置已经完成；玩家可以自由离开404，序章不要求玩家立刻接受任何遗物调查结论。
-      writer:
-        background: 让玩家自己走到门边。不要用传送或任务箭头替玩家完成第一次出门；门外的声音先出现，目标再出现。
-        script:
+            text: 发现遗留物时，请记录位置和状态；需要移动、扫描或交付时，使用临时执行人权限。
           - speaker: narrator
-            text: 你走到门边。门上的编号被磨掉了一角，剩下的404在冷光里像一道没有擦干净的旧记录。
-          - speaker: n07
-            text: 你可以现在出去，也可以先留在404熟悉房间。临时职责不会因为你多停留一会儿而失效。
-          - speaker: narrator
-            text: 门外传来一声轻响，像一块薄金属先撞上墙，又滑落到地面。
+            text: 门外传来一声金属落地声。
           - speaker: player
             choice: leave_404_to_check
             text: 打开门，去看看是什么掉在了外面。
-          - speaker: player
-            choice: stay_in_404
-            text: 先留在404，再确认一次房间里的东西。
       coder:
         dialogue:
-          purpose: 完成基础移动和出门教学，把玩家自然交给S01，而不是用任务说明硬推
-          facts: [玩家可以自由离开404, 三项前置已完成, 门外出现未登记的金属物件]
-          forbid: [直接揭示317, 直接揭示Eden, 把留在房间写成失败或超时, 在玩家未出门前完成S01]
-          tone: quiet invitation
-        action: cross unit-404.return after hearing metal; staying leaves the stage active
-        success: unit-404.threshold.crossed(first=true)
-        effects: [prologue_complete=true, chapter=max(chapter,1), clock=18:00]
+          purpose: 说明遗留物处理规则，并把玩家交给S01
+          facts: [404有未完成遗留物登记, 门外物件不自动属于玩家, 发现物件需记录位置和状态]
+          forbid: [提前说出317, 提前说出Eden, 提前说明门牌来源]
+          tone: direct and restrained
+        action: play recovery notice; choice.leave_404_to_check; cross unit-404.return
+        success: recovery notice played and unit-404 threshold crossed
+        effects: [recovery_notice_played=true, prologue_complete=true, chapter=max(chapter,1), clock=18:00]
         next: relic-s01-erased-door-tag / s01-00-hear-metal
   result:
-    success: 玩家完成404入住、基础移动和交互教学，理解临时执行人及遗留物权利边界；出门后自然进入S01的门外金属声。
-    cancel: 保留已完成的教学与前置状态；玩家可以在404继续熟悉房间，再从门口开始S01。
-    reject: 玩家可以拒绝或暂缓临时职责，但在没有executor_credential_404=true时不能进入需要执行人权限的S01调查路径。
-    repeat: 已完成的告知不重复写入；N-07只回顾规则，回收通知只显示已播放状态。
-    unresolved: [序章具体开始存档点, privacy notice和recovery notice的最终呈现方式, executor credential的发放机构, 18:00与初始余时的正式配置]
+    success: 玩家完成基础移动和交互教学，确认404执行人身份与遗留物边界；出门后进入S01。
+    cancel: 保留已完成状态；玩家可以在404继续查看公共物件，再从出口继续。
+    reject: 拒绝确认时不写入对应状态；重新与N-07交谈后可继续。
+    repeat: 已完成的告知不重复写入；N-07只回顾规则。
+    unresolved: [序章具体开始存档点, 三项状态的正式写入接口, 18:00与初始余时配置]
