@@ -6,7 +6,7 @@ task:
   tier: standard
   case_cluster: B / 最后一份热餐
   chapter_window: Ch1→Ch4
-  background: 折叠餐垫不是必定完整或属于Mira的实物，而是一条需要接触NPC、核对有形痕迹、数据缓存和证词后在404重建的物件身份。
+  background: 公共厨房的折叠餐垫留下四人折痕，玩家需要记录物理痕迹、核对同一桌位的公共账表，再由N-07校准对应关系。
   trigger:
     time: Ch1→Ch4
     place: B / 最后一份热餐
@@ -16,152 +16,112 @@ task:
       role: primary contact
   objects:
     - id: s02-physical-trace
-      state: 厨房餐垫与四人折痕；取得方式为取走、扫描或获授权暂借，当前持有人需单独记录
+      state: 厨房餐垫与四人折痕；只扫描，不移动原件
     - id: s02-data-cache
-      state: 当晚座位与扣时表；共享来源允许只读引用
+      state: 当晚座位与扣时表；记录同一桌位标识
   evidence:
     physical_trace: 厨房餐垫与四人折痕
     data_cache: 当晚座位与扣时表
-    testimony: Rowan的救急说法与居民反证
-    shared_evidence: TODO；使用稳定 evidence_id，取得一次即可供相关任务引用
-    fallback: Mara留存的四人账
+    synthesis: N-07将两份材料按桌位标识校准
   synthesis:
     site: unit-404 / N-07
-    claim: 确认缺席者被计入；登记餐垫、账本访问、故事公开
-    does_not_prove: 证词真伪、原物产权或未授权的私人正文
-  rights_claimants: TODO；登记实物保管、缓存访问、故事公开范围三项，不自动写入seed_signals
-  shared_scene_ids: TODO；共享场景只读，不复制原物
-  task_state: UNDISCOVERED → ACTIVE → MATERIALS_PARTIAL → READY_TO_SYNTHESIZE → RECONSTRUCTED → RIGHTS_REGISTERED
+    claim: 确认公共记录中计入了缺席者
+    does_not_prove: 证词真伪、原物产权、私人正文或额外授权
+  task_state: UNDISCOVERED → ACTIVE → MATERIALS_PARTIAL → RECONSTRUCTED
+  flow: linear
+  branch_policy:
+    progression: only_current_step
+    side_choices: non_progressing
+    leave_and_return: no_progress
   stages:
     - id: contact
-      place: 与入口人物或场景接触
-      reveal: 玩家在B / 最后一份热餐的入口遇见相关人物，得知“折叠餐垫”存在争议；不把物件默认写成Mira所有。
+      place: 公共厨房 / Rowan
+      reveal: Rowan说明厨房餐垫需要先记录，再核对对应的公共账表。
       writer:
-        background: 说明任务入口、当前持有人和可接受的证据边界。
+        background: 只说明调查对象、原件位置和两类固定材料，不提前解释缺席原因。
         script:
           - speaker: narrator
-            text: 玩家在B / 最后一份热餐的入口遇见相关人物，得知“折叠餐垫”存在争议；不把物件默认写成Mira所有。
+            text: Rowan请你先记录厨房餐垫，再核对当晚座位与扣时表。
           - speaker: player
             choice: contact_confirm
-            text: 确认处理“折叠餐垫”。
+            text: 接受折叠餐垫调查。
       coder:
         dialogue:
-          purpose: 让玩家确认调查目标并知道材料边界
-          facts: [玩家在B / 最后一份热餐的入口遇见相关人物，得知“折叠餐垫”存在争议；不把物件默认写成Mira所有。]
-          forbid: [不能提前补写未解锁事实、产权或授权]
+          purpose: 激活折叠餐垫调查
+          facts: [餐垫原件留在厨房，后续只记录餐垫和公共账表]
+          forbid: [不能提前判断缺席原因、产权或授权]
           tone: neutral
-        action: 玩家确认调查折叠餐垫，不要求先承诺公开或夺取原物。
-        success: task.active=true; material.contact=true
-        effects: [task.active=true; material.contact=true]
+        action: 玩家接受调查，不移动餐垫。
+        success: task.active=true
+        effects: [s02_accepted=true]
         next: physical
     - id: physical
-      place: 取得有形痕迹
-      reveal: 玩家可以扫描、取走或获授权暂借厨房餐垫与四人折痕；取得方式和当前保管人必须记录。
+      place: 公共厨房 / 餐垫
+      reveal: 玩家扫描餐垫上的四人折痕和桌位标识，原件继续留在厨房。
       writer:
-        background: 呈现物件的可观察痕迹，说明原物可能仍由NPC持有。
+        background: 呈现可观察痕迹，不把折痕解释成四人都曾到场。
         script:
           - speaker: narrator
-            text: 玩家可以扫描、取走或获授权暂借厨房餐垫与四人折痕；取得方式和当前保管人必须记录。
+            text: 餐垫保留四人折痕和桌位标识；原件仍留在厨房。
           - speaker: player
             choice: physical_confirm
-            text: 确认处理“折叠餐垫”。
+            text: 扫描餐垫痕迹。
       coder:
         dialogue:
-          purpose: 推进折叠餐垫的取得有形痕迹
-          facts: [玩家可以扫描、取走或获授权暂借厨房餐垫与四人折痕；取得方式和当前保管人必须记录。]
-          forbid: [不能提前补写未解锁事实、产权或授权]
+          purpose: 记录固定物理证据
+          facts: [四人折痕、桌位标识]
+          forbid: [不能移动、取走或暂借餐垫]
           tone: neutral
-        action: 记录physical_trace及custodian，不把扫描件标成玩家拥有。
+        action: 扫描餐垫并记录桌位标识。
         success: material.physical=true; evidence_id=s02-physical
-        effects: [material.physical=true; evidence_id=s02-physical]
+        effects: [s02_trace=true; s02_trace_table=kitchen-four-seat-v1]
         next: cache
     - id: cache
-      place: 取得数据缓存
-      reveal: 玩家在对应档案、终端或公共记录中找到当晚座位与扣时表。
+      place: 公共厨房 / 座位与扣时表
+      reveal: 玩家记录与餐垫相同桌位标识的当晚座位与扣时表。
       writer:
-        background: 缓存只提供时间、来源和操作记录，不自动解释动机或产权。
+        background: 公共账表只提供记录和桌位对应关系，不自动解释动机。
         script:
           - speaker: narrator
-            text: 玩家在对应档案、终端或公共记录中找到当晚座位与扣时表。
+            text: 座位与扣时表保留当晚记录；先核对它的桌位标识。
           - speaker: player
             choice: cache_confirm
-            text: 确认处理“折叠餐垫”。
+            text: 记录座位与扣时表。
       coder:
         dialogue:
-          purpose: 推进折叠餐垫的取得数据缓存
-          facts: [玩家在对应档案、终端或公共记录中找到当晚座位与扣时表。]
-          forbid: [不能提前补写未解锁事实、产权或授权]
+          purpose: 取得固定公共记录
+          facts: [当晚座位、扣时、桌位标识]
+          forbid: [不能把账表直接写成完整事实或产权证明]
           tone: neutral
-        action: 写入data_cache，并与共享证据来源建立只读引用。
+        action: 记录账表并保存桌位标识。
         success: material.cache=true; evidence_id=s02-cache
-        effects: [material.cache=true; evidence_id=s02-cache]
-        next: testimony
-    - id: testimony
-      place: 核对证词
-      reveal: 玩家向Rowan核对Rowan的救急说法与居民反证；拒绝、离开或归零时使用Mara留存的四人账。
-      writer:
-        background: 证词来源必须标记为当前陈述、固定记录或公共替代，不伪造当下同意。
-        script:
-          - speaker: narrator
-            text: 玩家向Rowan核对Rowan的救急说法与居民反证；拒绝、离开或归零时使用Mara留存的四人账。
-          - speaker: player
-            choice: testimony_confirm
-            text: 确认处理“折叠餐垫”。
-      coder:
-        dialogue:
-          purpose: 推进折叠餐垫的核对证词
-          facts: [玩家向Rowan核对Rowan的救急说法与居民反证；拒绝、离开或归零时使用Mara留存的四人账。]
-          forbid: [不能提前补写未解锁事实、产权或授权]
-          tone: neutral
-        action: 记录testimony_source及缺席原因；三类材料齐备即可进入校准。
-        success: material.testimony=true; task_state=READY_TO_SYNTHESIZE
-        effects: [material.testimony=true; task_state=READY_TO_SYNTHESIZE]
+        effects: [s02_cache_found=true; s02_cache_table=kitchen-four-seat-v1]
         next: synthesize
     - id: synthesize
-      place: 404校准与三权登记
-      reveal: N-07将厨房餐垫与四人折痕、当晚座位与扣时表和证词叠合，恢复：确认缺席者被计入；登记餐垫、账本访问、故事公开。
+      place: 404 / N-07
+      reveal: N-07将餐垫和账表按同一桌位标识校准，确认公共记录中计入了缺席者。
       writer:
-        background: 校准只证明材料之间的对应关系，不替玩家判定谁说谎。
+        background: 校准只确认两份材料的对应关系，不替任何人判断动机。
         script:
           - speaker: narrator
-            text: N-07将厨房餐垫与四人折痕、当晚座位与扣时表和证词叠合，恢复：确认缺席者被计入；登记餐垫、账本访问、故事公开。
+            text: 两份记录的桌位标识一致。N-07可以校准它们的对应关系。
           - speaker: player
             choice: synthesize_confirm
-            text: 确认处理“折叠餐垫”。
+            text: 让N-07校准餐垫与账表。
       coder:
         dialogue:
-          purpose: 让玩家确认证据对应关系并查看三权登记
-          facts: [N-07将厨房餐垫与四人折痕、当晚座位与扣时表和证词叠合，恢复：确认缺席者被计入；登记餐垫、账本访问、故事公开。]
-          forbid: [不能提前补写未解锁事实、产权或授权]
+          purpose: 完成固定证据的对应校准
+          facts: [餐垫折痕、座位扣时表、相同桌位标识]
+          forbid: [不能追加证词路线、替代账、原物保管选择或公开授权]
           tone: neutral
-        action: 玩家确认合成并分别登记实物保管、缓存访问、故事公开范围。
+        action: 玩家在404确认校准。
         success: task_state=RECONSTRUCTED; synthesis=true
-        effects: [task_state=RECONSTRUCTED; synthesis=true]
-        next: register
-    - id: register
-      place: 确认登记
-      reveal: 玩家查看三权结果；未逐项决定时保留待登记状态，不由批量按钮补齐材料。
-      writer:
-        background: 区分实物保管、缓存访问和故事公开范围；原物损坏或仍在NPC手中均可完成。
-        script:
-          - speaker: narrator
-            text: 玩家查看三权结果；未逐项决定时保留待登记状态，不由批量按钮补齐材料。
-          - speaker: player
-            choice: register_confirm
-            text: 确认处理“折叠餐垫”。
-      coder:
-        dialogue:
-          purpose: 推进折叠餐垫的确认登记
-          facts: [玩家查看三权结果；未逐项决定时保留待登记状态，不由批量按钮补齐材料。]
-          forbid: [不能提前补写未解锁事实、产权或授权]
-          tone: neutral
-        action: 至少确认一项登记，其余可在午夜前继承柜复核。
-        success: task_state=RIGHTS_REGISTERED; rights_recorded=true
-        effects: [task_state=RIGHTS_REGISTERED; rights_recorded=true]
+        effects: [s02_reconstructed=true; s02_complete=true]
         next: done
   result:
-    success: 折叠餐垫完成校准；证物槽点亮，即使原物未归玩家也保留来源与保管人。
-    cancel: 保留已经取得的材料和来源，不重置任务。
-    reject: 不推进当前阶段；玩家可从当前NPC、公共档案或兜底来源继续。
-    repeat: 已写入的材料和登记幂等复用，不重复取得原物或重复写入信号。
-    unresolved: rights_claimants、shared_scene_ids及具体运行时变量名待工程评审确认。
+    success: 折叠餐垫完成校准；原件继续留在厨房，物理痕迹和公共账表已保留。
+    cancel: 保留已取得的扫描记录和账表来源，不重置任务。
+    reject: 不推进当前阶段；回到当前目标后继续。
+    repeat: 已写入的扫描、账表和校准结果幂等复用，不重复移动或取得原件。
+  unresolved:
+    - shared_evidence: 是否在后续任务中以只读方式引用s02-physical和s02-cache。
