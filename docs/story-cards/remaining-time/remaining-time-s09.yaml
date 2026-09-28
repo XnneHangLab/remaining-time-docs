@@ -3,6 +3,8 @@ task:
   title: S09 · 反相肖像膜
   status: proposal
   package: remaining-time / mainline
+  flow: linear
+  branch_policy: 每个阶段只有一个推进动作；旁观、离开或返回不改变任务状态；替代来源另立任务，不在本卡分叉。
   tier: standard
   case_cluster: D / 被出售的十分钟
   chapter_window: Ch2→Ch5
@@ -16,7 +18,7 @@ task:
       role: primary contact
   objects:
     - id: s09-physical-trace
-      state: 黑色肖像膜；取得方式为取走、扫描或获授权暂借，当前持有人需单独记录
+      state: 黑色肖像膜；取得方式为按默认流程原地扫描，原件留在当前保管位置，当前持有人需单独记录
     - id: s09-data-cache
       state: 成像失败分类与Mira背注；共享来源允许只读引用
   evidence:
@@ -56,19 +58,19 @@ task:
         next: physical
     - id: physical
       place: 取得有形痕迹
-      reveal: 玩家可以扫描、取走或获授权暂借黑色肖像膜；取得方式和当前保管人必须记录。
+      reveal: 玩家可以按默认流程原地扫描，原件留在当前保管位置黑色肖像膜；取得方式和当前保管人必须记录。
       writer:
         background: 呈现物件的可观察痕迹，说明原物可能仍由NPC持有。
         script:
           - speaker: narrator
-            text: 玩家可以扫描、取走或获授权暂借黑色肖像膜；取得方式和当前保管人必须记录。
+            text: 玩家可以按默认流程原地扫描，原件留在当前保管位置黑色肖像膜；取得方式和当前保管人必须记录。
           - speaker: player
             choice: physical_confirm
             text: 确认处理“反相肖像膜”。
       coder:
         dialogue:
           purpose: 推进反相肖像膜的取得有形痕迹
-          facts: [玩家可以扫描、取走或获授权暂借黑色肖像膜；取得方式和当前保管人必须记录。]
+          facts: [玩家可以按默认流程原地扫描，原件留在当前保管位置黑色肖像膜；取得方式和当前保管人必须记录。]
           forbid: [不能提前补写未解锁事实、产权或授权]
           tone: neutral
         action: 记录physical_trace及custodian，不把扫描件标成玩家拥有。
@@ -98,19 +100,19 @@ task:
         next: testimony
     - id: testimony
       place: 核对证词
-      reveal: 玩家向Lyra核对Cora书面评价与Lyra拍摄说明；拒绝、离开或归零时使用体验公司技术日志。
+      reveal: 玩家向Lyra核对Cora书面评价与Lyra拍摄说明；来源缺失时停留当前阶段，不自动切换替代来源。原记录保留为背景资料；体验公司技术日志。
       writer:
         background: 证词来源必须标记为当前陈述、固定记录或公共替代，不伪造当下同意。
         script:
           - speaker: narrator
-            text: 玩家向Lyra核对Cora书面评价与Lyra拍摄说明；拒绝、离开或归零时使用体验公司技术日志。
+            text: 玩家向Lyra核对Cora书面评价与Lyra拍摄说明；来源缺失时停留当前阶段，不自动切换替代来源。原记录保留为背景资料；体验公司技术日志。
           - speaker: player
             choice: testimony_confirm
             text: 确认处理“反相肖像膜”。
       coder:
         dialogue:
           purpose: 推进反相肖像膜的核对证词
-          facts: [玩家向Lyra核对Cora书面评价与Lyra拍摄说明；拒绝、离开或归零时使用体验公司技术日志。]
+          facts: [玩家向Lyra核对Cora书面评价与Lyra拍摄说明；来源缺失时停留当前阶段，不自动切换替代来源。原记录保留为背景资料；体验公司技术日志。]
           forbid: [不能提前补写未解锁事实、产权或授权]
           tone: neutral
         action: 记录testimony_source及缺席原因；三类材料齐备即可进入校准。
@@ -162,6 +164,6 @@ task:
   result:
     success: 反相肖像膜完成校准；证物槽点亮，即使原物未归玩家也保留来源与保管人。
     cancel: 保留已经取得的材料和来源，不重置任务。
-    reject: 不推进当前阶段；玩家可从当前NPC、公共档案或兜底来源继续。
+    reject: 不推进当前阶段；玩家返回当前目标重新执行。
     repeat: 已写入的材料和登记幂等复用，不重复取得原物或重复写入信号。
     unresolved: rights_claimants、shared_scene_ids及具体运行时变量名待工程评审确认。

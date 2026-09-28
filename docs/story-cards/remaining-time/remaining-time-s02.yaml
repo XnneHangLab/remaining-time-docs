@@ -3,10 +3,12 @@ task:
   title: S02 · 折叠餐垫
   status: proposal
   package: remaining-time / mainline
+  flow: linear
+  branch_policy: 每个阶段只有一个推进动作；旁观、离开或返回不改变任务状态；替代来源另立任务，不在本卡分叉。
   tier: standard
   case_cluster: B / 最后一份热餐
   chapter_window: Ch1→Ch4
-  background: 折叠餐垫不是必定完整或属于Mira的实物，而是一条需要接触NPC、核对有形痕迹、数据缓存和证词后在404重建的物件身份。
+  background: 折叠餐垫按固定顺序核对餐垫、座位账和四人账后，在404重建物件身份。
   trigger:
     time: Ch1→Ch4
     place: B / 最后一份热餐
@@ -16,7 +18,7 @@ task:
       role: primary contact
   objects:
     - id: s02-physical-trace
-      state: 厨房餐垫与四人折痕；取得方式为取走、扫描或获授权暂借，当前持有人需单独记录
+      state: 厨房餐垫与四人折痕；取得方式为按默认流程原地扫描，原件留在当前保管位置，原件保持厨房保管并单独记录
     - id: s02-data-cache
       state: 当晚座位与扣时表；共享来源允许只读引用
   evidence:
@@ -24,7 +26,7 @@ task:
     data_cache: 当晚座位与扣时表
     testimony: Rowan的救急说法与居民反证
     shared_evidence: TODO；使用稳定 evidence_id，取得一次即可供相关任务引用
-    fallback: Mara留存的四人账
+    fallback: none；固定来源缺失时停留当前阶段
   synthesis:
     site: unit-404 / N-07
     claim: 确认缺席者被计入；登记餐垫、账本访问、故事公开
@@ -56,19 +58,19 @@ task:
         next: physical
     - id: physical
       place: 取得有形痕迹
-      reveal: 玩家可以扫描、取走或获授权暂借厨房餐垫与四人折痕；取得方式和当前保管人必须记录。
+      reveal: 玩家可以按默认流程原地扫描，原件留在当前保管位置厨房餐垫与四人折痕；取得方式和当前保管人必须记录。
       writer:
         background: 呈现物件的可观察痕迹，说明原物可能仍由NPC持有。
         script:
           - speaker: narrator
-            text: 玩家可以扫描、取走或获授权暂借厨房餐垫与四人折痕；取得方式和当前保管人必须记录。
+            text: 玩家可以按默认流程原地扫描，原件留在当前保管位置厨房餐垫与四人折痕；取得方式和当前保管人必须记录。
           - speaker: player
             choice: physical_confirm
             text: 确认处理“折叠餐垫”。
       coder:
         dialogue:
           purpose: 推进折叠餐垫的取得有形痕迹
-          facts: [玩家可以扫描、取走或获授权暂借厨房餐垫与四人折痕；取得方式和当前保管人必须记录。]
+          facts: [玩家可以按默认流程原地扫描，原件留在当前保管位置厨房餐垫与四人折痕；取得方式和当前保管人必须记录。]
           forbid: [不能提前补写未解锁事实、产权或授权]
           tone: neutral
         action: 记录physical_trace及custodian，不把扫描件标成玩家拥有。
@@ -98,19 +100,19 @@ task:
         next: testimony
     - id: testimony
       place: 核对证词
-      reveal: 玩家向Rowan核对Rowan的救急说法与居民反证；拒绝、离开或归零时使用Mara留存的四人账。
+      reveal: 玩家读取Mara留存的四人账，固定记录缺席者被计入。
       writer:
-        background: 证词来源必须标记为当前陈述、固定记录或公共替代，不伪造当下同意。
+        background: 证词来源必须标记为固定记录，不伪造当下同意。
         script:
           - speaker: narrator
-            text: 玩家向Rowan核对Rowan的救急说法与居民反证；拒绝、离开或归零时使用Mara留存的四人账。
+            text: 玩家读取Mara留存的四人账，固定记录缺席者被计入。
           - speaker: player
             choice: testimony_confirm
             text: 确认处理“折叠餐垫”。
       coder:
         dialogue:
           purpose: 推进折叠餐垫的核对证词
-          facts: [玩家向Rowan核对Rowan的救急说法与居民反证；拒绝、离开或归零时使用Mara留存的四人账。]
+          facts: [玩家读取Mara留存的四人账，固定记录缺席者被计入。]
           forbid: [不能提前补写未解锁事实、产权或授权]
           tone: neutral
         action: 记录testimony_source及缺席原因；三类材料齐备即可进入校准。
@@ -142,7 +144,7 @@ task:
       place: 确认登记
       reveal: 玩家查看三权结果；未逐项决定时保留待登记状态，不由批量按钮补齐材料。
       writer:
-        background: 区分实物保管、缓存访问和故事公开范围；原物损坏或仍在NPC手中均可完成。
+        background: 区分实物保管、缓存访问和故事公开范围；原物留在厨房时仍可完成。
         script:
           - speaker: narrator
             text: 玩家查看三权结果；未逐项决定时保留待登记状态，不由批量按钮补齐材料。
@@ -162,6 +164,6 @@ task:
   result:
     success: 折叠餐垫完成校准；证物槽点亮，即使原物未归玩家也保留来源与保管人。
     cancel: 保留已经取得的材料和来源，不重置任务。
-    reject: 不推进当前阶段；玩家可从当前NPC、公共档案或兜底来源继续。
+    reject: 不推进当前阶段；玩家返回当前目标重新执行。
     repeat: 已写入的材料和登记幂等复用，不重复取得原物或重复写入信号。
     unresolved: rights_claimants、shared_scene_ids及具体运行时变量名待工程评审确认。

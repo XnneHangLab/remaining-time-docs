@@ -7,6 +7,8 @@ description: 面向编剧 Agent 的高度压缩剧情任务交付格式。
 
 这不是面向玩家或普通读者的剧情说明，而是交给编剧 Agent 继续加工的**最小任务规格**。一张卡只描述一个任务；所有字段都必须填写，确实不存在时写 `none`，未知内容写 `TODO`，禁止留空或让 Agent 猜测。
 
+任务卡默认采用**线性流程**：每个阶段只允许一个推进动作，`next` 只能指向一个后续阶段。玩家可以离开、返回或查看说明，但这些行为不改变任务状态。替代来源、不同交付地点、不同回应性格和“任一即可完成”属于另一条路线，暂时不要写入同一张主线卡；需要保留设计时写入 `unresolved`，不要放进 `writer.script` 或 `coder.action`。
+
 <script setup>
 import TaskCard from '../.vitepress/theme/TaskCard.vue'
 import taskCardYaml from '../story/task-card-example.yaml?raw'
@@ -26,6 +28,8 @@ task:
   title: 玩家看到的任务名
   status: proposal | reviewed | ready
   package: 内容包 / 章节
+  flow: linear
+  branch_policy: 每个阶段只有一个推进动作；旁观、离开或返回不改变任务状态；替代来源另立任务，不在本卡分叉。
   background: 任务起因和世界事实；写事实摘要，不要求成稿
 
   trigger:
