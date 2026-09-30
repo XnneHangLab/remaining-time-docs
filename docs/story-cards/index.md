@@ -9,8 +9,8 @@ description: 独立于世界背景和架构快照的 Agent 剧本任务卡文档
 
 | 文档 | 用途 |
 | --- | --- |
-| [标准格式](./standard) | 任务卡的最小字段、事实边界和 Writer / Coder 结构。 |
-| [tavern · 旧版](./tavern) | 从旧版酒馆剧本时间线迁移的任务卡，内容包为 `tavern`。 |
-| [remaining-time · 新版主线](./remaining-time) | 当前 `remaining-time` 内容包的 S01 主线卡及后续待敲定范围。 |
+| [标准格式](./standard) | 任务、阶段、交流意图、过程结果与信息边界的统一标准。 |
+| [tavern · 旧版](./tavern) | 酒馆历史提案，尚未迁移为统一任务卡。 |
+| [remaining-time · S01](./remaining-time) | 当前唯一按统一标准展示的主线任务提案；其他 YAML 暂存待审。 |
 
-任务卡中的 YAML 是 Agent 和工程使用的结构化输入，页面卡片是编剧成员的阅读界面。未知内容写 `TBD`，不让 Agent 自行补造事实、人物关系、奖励或承诺。
+任务卡中的 YAML 是编剧与 Agent 共用的单份内容输入，页面卡片是阅览形式。未知内容写 `TODO`，不让 Agent 自行补造事实、人物关系、奖励或承诺。旧版提案尚未迁移，不应作为新标准的范例。
