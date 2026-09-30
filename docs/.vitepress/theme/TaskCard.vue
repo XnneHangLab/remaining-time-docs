@@ -7,17 +7,21 @@ const props = defineProps<{ source: string }>();
 const card = parse(props.source).task;
 const stageIndex = ref(0);
 const currentStage = computed<Stage>(() => card.stages[stageIndex.value]);
-const participants = computed(() => card.participants ?? card.actors ?? []);
 
-function list(value: unknown) {
-  if (Array.isArray(value)) return value.join('、');
-  return value === undefined || value === null || value === '' ? '无' : String(value);
-}
 function legacy(stage: Stage, key: string) {
   return key.split('.').reduce((value, part) => value?.[part], stage);
 }
-function field(stage: Stage, key: string, oldKey?: string) {
-  return stage[key] ?? (oldKey ? legacy(stage, oldKey) : undefined);
+const currentEvent = computed(() => currentStage.value.event ?? {
+  purpose: legacy(currentStage.value, 'coder.dialogue.purpose') ?? '未设定',
+  must: legacy(currentStage.value, 'coder.dialogue.facts') ?? [],
+  avoid: legacy(currentStage.value, 'coder.dialogue.forbid') ?? [],
+  done: legacy(currentStage.value, 'coder.success') ?? '未设定',
+  next: legacy(currentStage.value, 'coder.next') ?? '未设定',
+});
+const currentBackground = computed(() => currentStage.value.background ?? legacy(currentStage.value, 'writer.background') ?? currentStage.value.reveal ?? '');
+function list(value: unknown) {
+  if (Array.isArray(value)) return value.join('、');
+  return value === undefined || value === null || value === '' ? '无' : String(value);
 }
 function moveStage(delta: number) {
   stageIndex.value = Math.max(0, Math.min(card.stages.length - 1, stageIndex.value + delta));
@@ -30,7 +34,7 @@ function moveStage(delta: number) {
       <div>
         <p class="task-card__eyebrow">{{ card.id }} · {{ card.package }}</p>
         <h3>{{ card.title }}</h3>
-        <p>{{ card.summary?.background ?? card.background }}</p>
+        <p>{{ card.background }}</p>
       </div>
       <span class="task-card__status">{{ card.status }}</span>
     </header>
@@ -39,24 +43,24 @@ function moveStage(delta: number) {
       <div><strong>触发</strong><span>{{ card.trigger?.time ?? '无' }}</span></div>
       <div><strong>地点</strong><span>{{ card.trigger?.place ?? '无' }}</span></div>
       <div><strong>前置</strong><span>{{ list(card.trigger?.requires) }}</span></div>
-      <div><strong>参与者</strong><span>{{ list(participants.map((actor: any) => actor.name || actor.id)) }}</span></div>
-      <div><strong>预计规模</strong><span>{{ typeof (card.summary?.scale ?? card.scale) === 'object' ? `${(card.summary?.scale ?? card.scale).stage_count} 个阶段；每阶段 ${(card.summary?.scale ?? card.scale).interaction_range} 轮交互` : (card.summary?.scale ?? card.scale ?? '未设定') }}</span></div>
+      <div><strong>参与者</strong><span>{{ list((card.cast ?? []).map((actor: any) => actor.name)) }}</span></div>
+      <div><strong>预计规模</strong><span>{{ card.scale ?? '未设定' }}</span></div>
     </section>
 
-    <section v-if="participants.length || card.objects?.length" class="task-card__participants">
-      <div v-if="participants.length">
+    <section v-if="card.cast?.length || card.objects?.length" class="task-card__participants">
+      <div v-if="card.cast?.length">
         <h4>参与 NPC</h4>
-        <ul><li v-for="actor in participants" :key="actor.id"><strong>{{ actor.name || actor.id }}</strong> · {{ actor.role }}<span v-if="actor.context"> · {{ actor.context }}</span></li></ul>
+        <ul><li v-for="actor in card.cast" :key="actor.name"><strong>{{ actor.name }}</strong> · {{ actor.role }}<span v-if="actor.context"> · {{ actor.context }}</span></li></ul>
       </div>
       <div v-if="card.objects?.length">
         <h4>关键物件</h4>
-        <ul><li v-for="object in card.objects" :key="object.id"><strong>{{ object.name || object.id }}</strong> · {{ object.initial_state ?? object.state }}<span v-if="object.result"> · {{ object.result }}</span></li></ul>
+        <ul><li v-for="object in card.objects" :key="object.name"><strong>{{ object.name }}</strong> · {{ object.context }}</li></ul>
       </div>
     </section>
 
     <nav class="task-card__navigation" aria-label="任务阶段">
       <button v-for="(stage, index) in card.stages" :key="stage.id" :class="{ active: index === stageIndex }" type="button" @click="stageIndex = index">
-        {{ index + 1 }} · {{ stage.title ?? stage.id }}
+        {{ index + 1 }} · {{ stage.title }}
       </button>
     </nav>
 
@@ -65,10 +69,9 @@ function moveStage(delta: number) {
     <section class="task-card__stage">
       <div class="task-card__stage-marker">{{ stageIndex + 1 }}</div>
       <div class="task-card__stage-body">
-        <h4 class="task-card__stage-title">{{ currentStage.title ?? currentStage.id }}</h4>
+        <h4 class="task-card__stage-title">{{ currentStage.title }}</h4>
         <div class="task-card__location">{{ currentStage.place }}</div>
-        <p class="task-card__reveal">{{ currentStage.reveal }}</p>
-        <p class="task-card__background">{{ currentStage.background ?? legacy(currentStage, 'writer.background') ?? currentStage.reveal }}</p>
+        <p class="task-card__background">{{ currentBackground }}</p>
 
         <section v-if="currentStage.script?.length" class="task-card__script">
           <h4>参考演出稿</h4>
@@ -79,24 +82,12 @@ function moveStage(delta: number) {
         </section>
 
         <dl class="task-card__facts">
-          <div><dt>玩家目标</dt><dd>{{ currentStage.goal ?? field(currentStage, 'action', 'coder.action') ?? '未设定' }}</dd></div>
-          <div><dt>事件意图</dt><dd>{{ currentStage.event?.intent ?? field(currentStage, 'intent', 'coder.dialogue.purpose') ?? '未设定' }}</dd></div>
-          <div><dt>必须确认</dt><dd>{{ list(currentStage.event?.must_establish ?? field(currentStage, 'facts', 'coder.dialogue.facts')) }}</dd></div>
-          <div><dt>不能提前确认</dt><dd>{{ list(currentStage.event?.must_not_establish ?? field(currentStage, 'forbid', 'coder.dialogue.forbid')) }}</dd></div>
-          <div><dt>可行行动</dt><dd>{{ list(currentStage.event?.acceptable_actions ?? field(currentStage, 'action', 'coder.action')) }}</dd></div>
-          <div><dt>成功结果</dt><dd>{{ currentStage.outcome?.success ?? field(currentStage, 'success', 'coder.success') ?? '未设定' }}</dd></div>
-          <div><dt>下一阶段</dt><dd>{{ currentStage.outcome?.next_stage ?? currentStage.next ?? legacy(currentStage, 'coder.next') ?? '未设定' }}</dd></div>
+          <div><dt>事件意图</dt><dd>{{ currentEvent.purpose }}</dd></div>
+          <div><dt>必须确认</dt><dd>{{ list(currentEvent.must) }}</dd></div>
+          <div><dt>避免确认</dt><dd>{{ list(currentEvent.avoid) }}</dd></div>
+          <div><dt>完成结果</dt><dd>{{ currentEvent.done }}</dd></div>
+          <div><dt>下一阶段</dt><dd>{{ currentEvent.next }}</dd></div>
         </dl>
-
-        <div v-if="currentStage.process?.length" class="task-card__process">
-          <h4>过程步骤</h4>
-          <ol><li v-for="(step, index) in currentStage.process" :key="step.id || index"><strong>{{ step.id || `步骤 ${index + 1}` }}</strong><span>{{ step.action }}</span><span v-if="step.observed">结果：{{ step.observed }}</span><span v-if="step.change">变化：{{ step.change }}</span></li></ol>
-        </div>
-
-        <section v-if="currentStage.interruptions" class="task-card__interruptions">
-          <h4>中断与重复</h4>
-          <dl><div v-for="(text, kind) in currentStage.interruptions" :key="kind"><dt>{{ kind }}</dt><dd>{{ text }}</dd></div></dl>
-        </section>
       </div>
     </section>
 
@@ -108,9 +99,9 @@ function moveStage(delta: number) {
 
     <footer class="task-card__result">
       <strong>任务完成结果</strong>
-      <span>{{ card.result?.success ?? card.result ?? '未设定' }}</span>
-      <small v-if="card.result?.reward">奖励：{{ card.result.reward }}</small>
-      <small v-if="card.result?.boundary">边界：{{ card.result.boundary }}</small>
+      <span>{{ card.result.success }}</span>
+      <small>奖励：{{ card.result.reward }}</small>
+      <small>未解决：{{ list(card.result.unresolved) }}</small>
     </footer>
   </article>
 </template>

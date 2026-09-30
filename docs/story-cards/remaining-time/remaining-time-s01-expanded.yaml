@@ -1,393 +1,386 @@
 task:
   id: relic-s01-erased-door-tag
   title: S01 · 消磁门牌
-  status: proposal
+  status: ready
   package: remaining-time / mainline
+  background: 玩家住进404号舱后，门外的金属声和一块姓名被消磁的317旧门牌开启调查。玩家需要确认物件痕迹、核对制度记录、重建原住户Eden的身份，并分别登记实物、缓存与故事的权利。
+  goal: 恢复Eden身份元数据和公开展示边界；不恢复未发送私人日志正文
+  boundary: 完整流转链、原物所有权、训练授权或公共纪念许可
+  scale: 10个事件阶段
   trigger:
-    time: 序章结束后
-    place: 404号舱门外
+    time: PROLOGUE_END / 18:00 后
+    place: P_404 / unit-404.door
     requires:
-    - 玩家已获404遗留物临时联系人资格
+    - prologue_privacy_notice_done=true
+    - executor_credential_404=true
+    - recovery_notice_played=true
+  cast:
+  - name: 玩家
+    role: 404临时遗嘱执行人；调查、核验并登记门牌
+  - name: N-07
+    role: 证物校准、事实边界提示与404继承柜管理
+  - name: 陌生住户
+    role: 让玩家第一次看见门牌；承载seed_01_a
+  - name: Ash
+    role: 门牌拆取过程的潜在证人；可成为实物保管人
+  - name: Mara
+    role: 门牌交易记录的替代来源
+  - name: 排队居民
+    role: 提供317查询入口；承载seed_01_b
+  - name: Adrian
+    role: 查询号与人工打印件的法定兜底来源
+  - name: Meridian
+    role: 读取公开房号记录及访问限制
+  - name: Noel
+    role: 接待会前厅引见；为seed_01_c提供合法中性路径
+  - name: 陌生宾客
+    role: 说明展厅的身份数据使用主张；承载seed_01_c
+  - name: Celeste
+    role: 提出展览与训练数据的商业使用主张
   objects:
-  - id: door-tag-317
-    result: 扫描留存痕迹但不转移原件；暂借与最终交付必须记录保管人
-    initial_state: 先在317门框旁出现；玩家可现场扫描或按权限暂借原件
-    possible_actions:
-    - 观察
-    - 扫描
-    - 暂借
-    - 交付
-  - id: registry-317
-    result: 提供覆写记录和签名校准材料，不直接公开私人正文
-    initial_state: 计时所公开索引；姓名栏为空，旧版签名仅在合适权限下可比对
-    possible_actions:
-    - 查询
-    - 比对
-  - id: cabinet-404
-    result: 只有实际收到原件才能确认暂存
-    initial_state: 可选的门牌实物暂存地点
-    possible_actions:
-    - 核对
-    - 收存
+  - name: low-deck.door-tag-317
+    context: 初始由resident-317试装；随后落在317空门框下，可暂借或原地扫描
+  - name: mara.sale-receipt-317
+    context: 旧物摊留存的门牌交易签；Ash拒绝或缺席时作为文书证言
+  - name: office.registry-317
+    context: 计时所公开索引；姓名为空，可凭404执行人凭证比较覆写版本
+  - name: office.memorial-preference-envelope-317
+    context: 与原住户签名哈希绑定的最小化偏好封套；校准前不显示正文
+  - name: reception.door-tag-claim
+    context: 展厅公开目录中的使用主张；不代表Celeste已经取得授权
+  - name: unit-404.cabinet.slot-01
+    context: 404继承柜第一格；接受证物版本，可成为门牌实物保管地
+  - name: office.public-evidence-locker
+    context: 可选的公共证物保管地；交付后生成机构回执
   stages:
-  - id: hear-metal
-    place: 404号舱门口
-    background: 玩家刚完成入住确认，听见门外短促的金属碰撞声。门外出现不在404清单内的物件。
-    reveal: 玩家只知道门外有异常物件，还不知道它是什么或属于谁。
-    goal: 出门查看响声来源。
-    title: 听见金属声
+  - id: s01-00-hear-metal
+    place: P_404 / unit-404.door
+    title: s01-00-hear-metal
+    background: 刚住进404，回收通知已经播放完。门外忽然传来一声短促的金属碰撞。
     script:
     - type: narration
-      text: 404号舱外传来一声短促的金属碰撞，像薄金属撞上墙面后滑落。
+      text: 门外传来一声轻响，像一块薄金属先撞上墙，又滑落到地面。
     - type: npc
-      speaker: N-07
-      text: 检测到门外有未登记物件。它不在404的清单里。
+      speaker: n07
+      text: 检测到门外有未登记物件。它不在404的租约清单里。
+    - type: npc
+      speaker: ash
+      text: 新来的，别急着把门外的东西都算进她的收藏。
     - type: player
       text: 打开门，去看看是什么掉在了外面。
     event:
-      intent: 用局部异常引出调查，不替玩家预先判断物件身份。
-      must_establish:
+      purpose: 用局部异常把玩家引出404，不提前解释物件身份
+      must:
       - 门外有未登记物件
-      must_not_establish:
-      - 提前透露317门牌或Eden身份
-      - 声称物件属于玩家
-      acceptable_actions:
-      - 玩家走出404并查看门外
-    outcome:
-      success: 玩家到达门外并发现异常来源。
-      next_stage: meet-resident
-      retained: []
-    interruptions:
-      leave: 已完成的观察、记录和来源保留；玩家回来后从当前阶段继续。
-      repeat: 可以再次查看或询问，但不重复生成同一事实或材料。
-  - id: meet-resident
-    place: 下层回廊，317空门框旁
-    background: 一位陌生住户正在尝试把旧金属牌装回门框；卡扣松动，门牌随后掉落。
-    reveal: 玩家看见试装经过，但不知道门牌原主和完整流转过程。
-    goal: 选择接触或绕开陌生住户，观察门牌落地。
-    title: 遇见陌生住户
+      - 物件不属于404租约清单
+      - 玩家需要亲自出门查看
+      avoid:
+      - 提前出现317
+      - 提前出现Eden
+      - 解释Mira与门牌的关系
+      - 声称玩家拥有门外物件
+      done: unit-404.threshold.crossed(first=true)
+      next: s01-01-meet-resident
+  - id: s01-01-meet-resident
+    place: P_CORRIDOR / low-deck.door-frame-317
+    title: s01-01-meet-resident
+    background: 404外第一处转角，一个陌生住户背对走廊，把一块旧金属牌往空门框上按。卡扣没有咬住。
     script:
     - type: narration
-      text: 一个陌生住户正在把旧金属牌往空门框上按，卡扣却始终没有咬住。
+      text: 那人扶着门框，反复调整一块没有挂稳的金属牌。他看见了你，却没有先开口。
     - type: player
-      text: 主动询问、等对方先说明，或从门框另一侧绕过去。
+      text: 主动走过去：需要帮忙吗？这块牌原来挂在这里？
+    - type: player
+      text: 留在原地，等他先说明自己在做什么。
+    - type: player
+      text: 不与他交谈，从门框另一侧绕过去。
+    - type: npc
+      speaker: resident-317
+      text: 卡扣早坏了。我只是想看看它还能不能装回去。
     - type: narration
       text: 金属牌从他手边滑落，翻过一面，停在空门框下。
     event:
-      intent: 让玩家的接触方式可被记录，但不因回避而失去调查入口。
-      must_establish:
-      - 住户在试装旧门牌
-      - 门牌掉到门框下
-      must_not_establish:
-      - 让住户说出原住户姓名
-      - 把回避视为任务失败
-      acceptable_actions:
-      - 玩家主动询问、等待对方开口，或绕过对方
-    outcome:
-      success: 门牌落地且玩家能继续调查。
-      next_stage: inspect-tag
-      retained: []
-    interruptions:
-      leave: 已完成的观察、记录和来源保留；玩家回来后从当前阶段继续。
-      repeat: 可以再次查看或询问，但不重复生成同一事实或材料。
-  - id: inspect-tag
-    place: 下层回廊，317门牌旁
-    background: 门牌正面的317仍可辨认，姓名区域被擦白，下沿底码和侧边缺口留有痕迹。
-    reveal: 这些痕迹证明门牌受过处理，不能单独证明谁动了手。
-    goal: 扫描痕迹，决定是否按权限暂借原件。
-    title: 查看门牌
+      purpose: 记录第一次陌生人接触方式，同时保证门牌出现
+      must:
+      - resident-317正在试装金属牌
+      - 三种接触方式不改变门牌落地
+      - 门牌出现与人格信号相互独立
+      avoid:
+      - 由陌生住户说出原住户姓名
+      - 把回避写成任务失败
+      - 让住户带走门牌
+      - 未确认选择时写入人格信号
+      done: low-deck.door-tag-317 spawned; seed_01_a resolved once
+      next: s01-02-inspect-tag
+  - id: s01-02-inspect-tag
+    place: P_CORRIDOR / low-deck.door-tag-317
+    title: s01-02-inspect-tag
+    background: 门牌落在空门框下。正面的317仍能辨认，姓名区域却像被反复擦洗过，只剩一片浅白。
     script:
     - type: narration
-      text: 门牌上的317仍然清楚，姓名区域被擦成发白的一片；底码、缺口和工具痕迹留在边缘。
+      text: 下沿残留一串模糊底码，右侧缺口旁有两道不平行的工具划痕。它只能证明受过外力，不能说明是谁动的手。
     - type: npc
-      speaker: N-07
-      text: 我可以保存物理痕迹。你可以只在现场扫描，也可以按权限暂借原件。
+      speaker: n07
+      text: 我可以保存物理痕迹。你可以按执行人权限暂借原件，也可以只在现场完成扫描。
     - type: player
-      text: 记录门牌痕迹，并决定现场保留还是暂借原件。
+      text: 按执行人权限暂借原件，并完成扫描。
+    - type: player
+      text: 不移动门牌，只在原地留下可校准扫描记录。
     event:
-      intent: 区分记录物理证据和取得实物保管权。
-      must_establish:
+      purpose: 取得第一项物理证据，并明确扫描不等于拥有
+      must:
       - 房号317
-      - 姓名被擦白
-      - 门牌留有底码与工具痕迹
-      must_not_establish:
-      - 用划痕直接指认Ash
-      - 把现场扫描当成取得原件
-      - 提前说出Eden
-      acceptable_actions:
-      - 玩家扫描门牌，可选择现场保留或暂借原件
-    outcome:
-      success: 痕迹已记录，原件位置明确。
-      next_stage: find-source
-      retained: []
-    interruptions:
-      leave: 已完成的观察、记录和来源保留；玩家回来后从当前阶段继续。
-      repeat: 可以再次查看或询问，但不重复生成同一事实或材料。
-  - id: find-source
-    place: 下层回廊，Ash的维修台或Mara的旧物摊
-    background: 门牌有拆取痕迹，但来源和后续流转仍不完整。Ash与Mara分别可能提供不同片段。
-    reveal: 任一来源只能证明自己知道的经手环节。
-    goal: 取得一份有明确来源的经手记录。
-    title: 核对门牌来源
+      - 姓名区域被消磁
+      - 下沿有底码
+      - 右侧有缺口与工具划痕
+      - 暂借和原地扫描产生同等物理痕迹
+      avoid:
+      - 工具痕迹证明Ash撬牌
+      - 门牌必然属于Mira
+      - 扫描后把原物传送到404
+      - 提前出现Eden
+      done: evidence.scan(low-deck.door-tag-317) completed
+      next: s01-03-find-source
+  - id: s01-03-find-source
+    place: P_CORRIDOR / ash.workbench OR mara.stall
+    title: s01-03-find-source
+    background: 门牌边缘有工具划痕。Ash就在404隔壁维修台；下层回廊的旧物摊也可能留有交易记录。任何一方只能证明自己知道的那一段。
     script:
     - type: player
-      text: 向Ash或Mara询问：你见过这块317门牌吗？
+      text: 把扫描痕迹给Ash看：你见过这块317门牌吗？
     - type: npc
-      speaker: Ash
-      text: 我从317的门框上拆过它。之后它怎么转手，我不能替别人作证。
+      speaker: ash
+      text: 见过。我从317的门框上拆过它，右侧那道缺口是工具滑开时留下的。之后它怎么转手，我不能替别人作证。
+    - type: player
+      text: 向Mara核对：你的摊位是否经手过这块门牌？
     - type: npc
-      speaker: Mara
-      text: 我这里留着一次转售签。它能证明我经手过一回，不能替前后的人补上故事。
-    event:
-      intent: 区分当前证词、摊位文书和未经证实的推测。
-      must_establish:
-      - Ash可说明拆取经过
-      - Mara或摊位签可说明一次交易
-      must_not_establish:
-      - 补全未经取证的完整流转链
-      - 将交易记录当成所有权证明
-      acceptable_actions:
-      - 询问Ash或Mara；当事人不可用时核对留存交易签
-    outcome:
-      success: 至少一份可核对的经手来源已保存。
-      next_stage: get-lookup
-      retained: []
-    interruptions:
-      leave: 已完成的观察、记录和来源保留；玩家回来后从当前阶段继续。
-      repeat: 可以再次查看或询问，但不重复生成同一事实或材料。
-  - id: get-lookup
-    place: 计时所公开队列
-    background: 物理痕迹和经手来源都不能单独确认原住户；计时所提供房号查询入口。
-    reveal: 玩家需要公开查询号才能进一步核对。
-    goal: 取得317公开查询入口。
-    title: 取得查询入口
-    script:
+      speaker: mara
+      text: 我这里留着一次转售签，底码和缺口都对得上。它能证明我经手过一回，不能替前后的人补上故事。
     - type: narration
-      text: 计时所的公开队列里有人认出404的执行人身份，但正式记录仍要从公开查询入口开始。
-    - type: player
-      text: 询问317的公开查询入口，或离开队列后向Adrian核对。
-    - type: npc
-      speaker: Adrian
-      text: 317使用同一个公开查询号。这里是入口，正式记录仍要由终端核验。
+      text: 如果当事人不愿开口，带时间戳的摊位签仍可作为文书来源，但不能被写成实时证词。
     event:
-      intent: 允许玩家回应、主动询问或避开陌生居民，三种路线都不阻断查询。
-      must_establish:
-      - 317有公开查询入口
-      must_not_establish:
-      - 因玩家回避交谈而提高查询代价
-      - 提前打开封存档
-      acceptable_actions:
-      - 玩家选择如何与队列中的人接触，必要时向Adrian询问
-    outcome:
-      success: 玩家获得可使用的317查询入口。
-      next_stage: compare-record
-      retained: []
-    interruptions:
-      leave: 已完成的观察、记录和来源保留；玩家回来后从当前阶段继续。
-      repeat: 可以再次查看或询问，但不重复生成同一事实或材料。
-  - id: compare-record
-    place: 计时所登记终端
-    background: 317公开索引仍在，但姓名栏为空；404临时联系人资格允许比对覆写前后的签名。
-    reveal: 比对不会直接解封私人正文。
-    goal: 核对房号记录的覆写痕迹。
-    title: 比对房号记录
+      purpose: 取得一份标明来源和证明范围的经手记录
+      must:
+      - Ash可证明自己拆过门牌
+      - Mara或摊位签可证明一次交易
+      - 任一路径只覆盖流转链一段
+      avoid:
+      - 补全Ash到Mara到买家到Mira的完整链
+      - 提前出现Eden
+      - 把销售记录写成官方所有权证明
+      - 把文书替代写成真人同意
+      done: handoff source stored with source_type and source_id
+      next: s01-04-get-lookup-id
+  - id: s01-04-get-lookup-id
+    place: P_OFFICE / office.public-queue
+    title: s01-04-get-lookup-id
+    background: 计时所的普通队列已经开放。队列里有人认出404的执行人身份，但那个人是否陌生，需要在事件开始时重新确认。
     script:
     - type: npc
-      speaker: Meridian
-      text: 当前记录中的姓名栏为空。可以按404临时联系人权限比较覆写前后的签名。
+      speaker: queue-resident
+      text: 404的人又来了。你也是为了那些没有名字的东西？
     - type: player
-      text: 比较当前记录与覆写前版本，只提取校准所需的信息。
+      text: 主动离开队列一步：你知道317的房号记录要从哪里查吗？
+    - type: player
+      text: 等对方问完再回应：我只需要317的公开查询入口。
+    - type: player
+      text: 不继续交谈，换到队列另一侧等候窗口。
     - type: npc
-      speaker: Meridian
-      text: 系统返回签名哈希和覆写信息，但不会打开未发送的私人记录。
+      speaker: adrian
+      text: 不论你从谁那里听说，317都使用同一个公开查询号。这里是入口，正式记录仍要由终端核验。
     event:
-      intent: 提供最小的来源校准材料，不代替身份结论。
-      must_establish:
-      - 317索引仍在
-      - 姓名字段曾被覆写
-      - 可以获得签名比对材料
-      must_not_establish:
+      purpose: 独立记录第二次陌生人接触方式，并保证所有路线获得同一查询号
+      must:
+      - seed_01_b与门牌材料相互独立
+      - 主动追问可由居民给入口
+      - 其它路线由Adrian给同一查询号
+      avoid:
+      - 因回避交谈而提高查询代价
+      - 让居民声称读过封存档
+      - 没扫描门牌时提前启动317查询
+      - 重复写入seed_01_b
+      done: registry_lookup_id_317 stored with source=resident|adrian
+      next: s01-05-compare-record
+  - id: s01-05-compare-record
+    place: P_OFFICE / office.registry-terminal
+    title: s01-05-compare-record
+    background: 公开终端显示317的房号索引仍然存在，姓名栏却为空。404临时执行人凭证允许比较一次覆写前后的签名，但不会直接打开私人记录。
+    script:
+    - type: npc
+      speaker: meridian
+      text: 当前记录：317，住户姓名为空。检测到404临时执行人凭证，可申请比较版本签名。
+    - type: player
+      text: 比较当前记录与覆写前版本，只提取校验所需的最小信息。
+    - type: npc
+      speaker: meridian
+      text: 姓名字段曾被覆写。系统返回原住户签名哈希、覆写时间，以及一份与该签名绑定的展示偏好封套；姓名和偏好正文仍保持封存。
+    - type: npc
+      speaker: adrian
+      text: 如果终端故障，我可以按同一权限打印带签名的最小化记录，内容不会更多。
+    event:
+      purpose: 取得第二项合成输入，证明房号姓名发生过制度性覆写
+      must:
+      - 317公开索引仍在
+      - 姓名字段被覆写
+      - 返回签名哈希与偏好封套
+      - 普通访客无权读取封存内容
+      avoid:
       - 终端直接说出Eden
-      - 打开未发送私人日志
-      - 将封套视为全面授权
-      acceptable_actions:
-      - 玩家按权限请求签名比对，终端故障时申请等价人工记录
-    outcome:
-      success: 有效的覆写比对材料已取得。
-      next_stage: calibrate
-      retained: []
-    interruptions:
-      leave: 已完成的观察、记录和来源保留；玩家回来后从当前阶段继续。
-      repeat: 可以再次查看或询问，但不重复生成同一事实或材料。
-  - id: calibrate
-    place: 404号舱，N-07附近
-    background: 门牌痕迹、经手来源与登记签名齐备；各来源只证明各自范围，须核对签名是否一致。
-    reveal: 身份结论尚未在校准前对玩家公开。
-    goal: 请N-07核对三类材料。
-    title: 校准身份
+      - 打开未发送日志
+      - 把偏好封套解释为全面授权或全面禁止
+      - 把空白姓名当成不存在住户
+      done: signed version comparison stored
+      next: s01-06-calibrate
+  - id: s01-06-calibrate
+    place: P_404 / unit-404.cabinet.slot-01
+    title: s01-06-calibrate
+    background: N-07把三项材料分开列出：门牌扫描证明物件痕迹，经手记录只证明流转中的一段，计时所缓存证明姓名字段被覆写。只有两个住户签名哈希一致，姓名才会解封。
     script:
     - type: npc
-      speaker: N-07
-      text: 三类来源已经齐备。我们可以核对签名是否一致，但校准本身不代表原物所有权。
+      speaker: n07
+      text: 三项来源齐备。门牌残留签名与计时所保存的原住户签名一致；经手记录的时间范围没有与它冲突。是否执行校准？
     - type: player
-      text: 提交来源并确认校准。
+      text: 核对来源列表，校准这件证物。
     - type: npc
-      speaker: N-07
-      text: 校准结果显示，门牌最早关联的住户是清洁工Eden。姓名曾从317索引中被覆写。
+      speaker: n07
+      text: 校准完成。门牌最早关联的住户是清洁工Eden。她的姓名后来从317索引中被覆写。
+    - type: npc
+      speaker: n07
+      text: 同一签名还确认了一项生前边界：不以她的姓名或形象制作公共纪念。这不否认她曾住在317，也不授权我们读取她未发送的私人日志。
     event:
-      intent: 在材料齐备且签名吻合时确认原住户与展示边界，不把校准当成产权证明。
-      must_establish:
-      - 校准成功后可确认原住户为清洁工Eden
-      - 她的姓名曾被覆写
-      - 她不愿以姓名或形象做公共纪念
-      must_not_establish:
-      - 补齐未经证明的流转链
-      - 公开未发送日志
+      purpose: 在证据门槛满足后首次揭露Eden身份和最小展示边界
+      must:
+      - 原住户是清洁工Eden
+      - 姓名被覆写
+      - public_memorial_display=false
+      - 重建不等于产权或公开许可
+      avoid:
+      - 把完整转手链写成定论
+      - 打开未发送日志正文
+      - 声称Eden反对任何形式的存在证明
       - 自动移动门牌原件
-      acceptable_actions:
-      - 玩家提交三类来源并确认校准
-    outcome:
-      success: 来源已校准且身份结论已确认。
-      next_stage: review-claim
-      retained: []
-    interruptions:
-      leave: 已完成的观察、记录和来源保留；玩家回来后从当前阶段继续。
-      repeat: 可以再次查看或询问，但不重复生成同一事实或材料。
-  - id: review-claim
-    place: 接待会前厅与公开目录
-    background: 玩家已确认门牌与Eden的关联；接待会有人主张使用覆写前后的身份数据。
-    reveal: 商业使用主张不是既得授权，门牌实物与身份数据不是同一项权利。
-    goal: 查清接待会提出了什么用途主张。
-    title: 查看使用主张
+      done: evidence calibration completed
+      next: s01-07-review-claim
+  - id: s01-07-review-claim
+    place: P_RECEPTION / reception.foyer + reception.public-catalog
+    title: s01-07-review-claim
+    background: Noel先在前厅完成自我介绍，确保玩家拥有一个真正认识的人作为中性接触路径。会场宾客讨论的重点不是门牌金属，而是覆写前后的身份差异能否用于展览和训练。
     script:
     - type: npc
-      speaker: Noel
-      text: 第一次来这种接待会，很容易把推销词听成权利证明。你想问什么，可以先找我。
+      speaker: noel
+      text: 我是Noel。第一次来这种接待会，很容易把推销词听成权利证明。你想问什么，可以先找我。
+    - type: npc
+      speaker: reception-guest
+      text: 旧门牌本身不值钱。被擦掉的名字、覆写前后的身份差异，才是可以训练和展示的部分。
     - type: player
-      text: 询问展览和训练用途具体想取得什么。
+      text: 追问：你们具体想取得实物、数据，还是讲述那个人的权利？
+    - type: player
+      text: 只向已经认识的Noel核对这些说法。
+    - type: player
+      text: 不加入交谈，独自查看展厅公开目录。
     - type: npc
-      speaker: Celeste
-      text: 我的条件涉及可被授权的展览和训练用途，不等于我已经拥有Eden，也不等于门牌自动附带她的同意。
+      speaker: celeste
+      text: 我的条件涉及可被授权的展览和训练用途，不等于我已经拥有Eden，也不等于这块门牌自动附带她的同意。
     event:
-      intent: 让玩家区分提出主张和真正获得授权；接触陌生宾客不是必经路径。
-      must_establish:
-      - 展览与训练用途被提出
+      purpose: 记录第三次陌生人接触方式，并让玩家看见商业使用主张与既有边界的冲突
+      must:
+      - Noel必须先成为已认识对象
+      - 三种接触方式都能取得同一公开主张
       - Celeste尚未取得Eden授权
-      must_not_establish:
-      - 把Celeste当作现有所有人
-      - 把玩家接触方式当成访问目录的资格
-      acceptable_actions:
-      - 经Noel引见、与宾客交谈，或独自阅读公开目录
-    outcome:
-      success: 玩家已获知可供比较的商业使用主张。
-      next_stage: draft-rights
-      retained: []
-    interruptions:
-      leave: 已完成的观察、记录和来源保留；玩家回来后从当前阶段继续。
-      repeat: 可以再次查看或询问，但不重复生成同一事实或材料。
-  - id: draft-rights
-    place: 404号舱，N-07附近
-    background: 玩家已了解Eden身份、她的展示边界及外部使用主张，须分别考虑实物、缓存与故事公开范围。
-    reveal: 保存草稿不会移动原件，也不会直接完成任务。
-    goal: 分别拟定三项权利安排。
-    title: 拟定权利安排
+      - 门牌实物与身份数据不是同一项权利
+      avoid:
+      - 未重建S01时点名Eden或门牌主张
+      - 把Celeste写成现有所有者
+      - 用行为信号决定能否读取目录
+      - 重复写入seed_01_c
+      done: s01_competing_claim_seen=true
+      next: s01-08-draft-rights
+  - id: s01-08-draft-rights
+    place: P_404 / unit-404.cabinet.slot-01
+    title: s01-08-draft-rights
+    background: N-07把门牌权利拆成三个互不替代的栏目。确认草稿不会移动实物，也不会立刻完成任务。
     script:
     - type: npc
-      speaker: N-07
+      speaker: n07
       text: 请分别决定三件事：谁保管门牌实物，谁能访问覆写缓存，以及外界可以如何讲述317住过的人。
     - type: player
-      text: 分别拟定实物保管、缓存访问和故事公开范围。
-    - type: npc
-      speaker: N-07
-      text: 草稿保存后，原件仍在当前位置；三项选择不会互相替代。
+      text: 实物保管：放入404继承柜暂存。
+    - type: player
+      text: 实物保管：交由Ash具名代管。
+    - type: player
+      text: 实物保管：交公共证物库保管。
+    - type: player
+      text: 缓存访问：仅用于后续权利核验。
+    - type: player
+      text: 缓存访问：开放不含姓名的匿名元数据。
+    - type: player
+      text: 缓存访问：给予Celeste限定用途、可撤销的访问。
+    - type: player
+      text: 缓存访问：给予Celeste独占访问。
+    - type: player
+      text: 故事公开：不对外公开。
+    - type: player
+      text: 故事公开：只匿名说明317曾有人居住。
+    - type: player
+      text: 故事公开：以Eden姓名做公开纪念。
+    - type: player
+      text: 核对三个栏目，保存权利草稿。
     event:
-      intent: 分开确认实物保管、缓存访问和故事公开；冲突选项可以被讨论，但不能伪装成已有授权。
-      must_establish:
-      - 实物保管不授予数据访问
-      - 数据访问不授予公开讲述
-      - 实名纪念与Eden留下的边界冲突
-      must_not_establish:
-      - 用单一决定覆盖三项权利
+      purpose: 将一件遗物的三种权利拆开确认，并明确冲突不等于隐形禁止
+      must:
+      - 实物保管不授予缓存访问
+      - 缓存访问不授予故事公开
+      - 实名纪念与Eden边界冲突
+      - 训练用途没有本人补签
+      avoid:
+      - 用一个交给某人按钮覆盖三权
       - 保存草稿时移动原件
-      - 将有争议选项隐藏或自动认可
-      acceptable_actions:
-      - 玩家分别选择实物保管地、缓存访问范围及故事公开范围
-    outcome:
-      success: 三项权利均已有明确草稿，不代表已交付实物。
-      next_stage: handover
-      retained: []
-    interruptions:
-      leave: 已完成的观察、记录和来源保留；玩家回来后从当前阶段继续。
-      repeat: 可以再次查看或询问，但不重复生成同一事实或材料。
-  - id: handover
-    place: 当前门牌位置及选定保管地点
-    background: 三权草稿已保存，但实物可能还留在317门框；只有原件实际交付并得到回执才算完成。
-    reveal: 回执证明保管交付，不证明原物所有权或完整流转链。
-    goal: 取得原件并交付给选定保管人。
-    title: 交付门牌原件
+      - 把冲突选项隐藏掉
+      - 把玩家选择写成人格分
+      - 两栏完成时提前完成任务
+      done: physical holder, cache access, and story publicity all confirmed
+      next: s01-09-handover
+  - id: s01-09-handover
+    place: low-deck.door-tag-317 → unit-404.cabinet.slot-01 OR ash.workbench OR office.public-evidence-locker
+    title: s01-09-handover
+    background: N-07显示门牌当前保管位置和草稿中的目标。若玩家此前只做现场扫描，必须先回317门框按执行人权限暂借原件。
     script:
     - type: npc
-      speaker: N-07
-      text: 权利草稿已经保存。现在请核对原件位置，并把它交给选定的实际保管人。
+      speaker: n07
+      text: 权利草稿已经保存。现在请核对原件位置，并把它交给你选定的实际保管人。
     - type: player
-      text: 取得原件，交给选定保管人，并确认对方签收。
+      text: 若原件仍在317门框，按执行人权限暂借并带去目标地点。
+    - type: player
+      text: 将门牌原件放入404继承柜第一格，确认暂存。
+    - type: player
+      text: 把门牌原件当面交给Ash，请他签收代管。
     - type: npc
-      speaker: N-07
-      text: 实物交付与草稿一致。登记完成，回执只证明保管交付。
+      speaker: ash
+      text: 我收下原件，只按这张回执代管。缓存和故事怎么使用，不由我替Eden决定。
+    - type: player
+      text: 将门牌原件放入公共证物柜，取得机构入库回执。
+    - type: npc
+      speaker: n07
+      text: 实物交付与权利草稿一致。S01登记完成，证物来源和仍待核的流转段落已经写入回顾。
     event:
-      intent: 核对原件位置与目标保管人，完成实物交接后再确认任务结果。
-      must_establish:
-      - 原件不会因草稿自动移动
-      - 交付必须由目标保管人实际接收
-      must_not_establish:
-      - 无原件时生成回执
-      - 门牌仍在走廊时宣称任务完成
-      - 将回执当成产权证明
-      acceptable_actions:
-      - 若原件仍在门框旁，玩家先按权限暂借
-      - 玩家将原件交给草稿指定的保管人并取得回执
-    outcome:
-      success: 原件已交付并取得相符回执。
-      next_stage: done
-      retained: []
-    interruptions:
-      leave: 已完成的观察、记录和来源保留；玩家回来后从当前阶段继续。
-      repeat: 可以再次查看或询问，但不重复生成同一事实或材料。
-  summary:
-    background: 玩家入住404后，门外一块姓名被擦除的317旧门牌引出调查。玩家需要核对门牌痕迹、经手来源与房号记录，才能确认原住户，并决定物件与相关信息如何保存和使用。
-    goal: 确认317门牌与原住户的关联，分别处理实物、相关记录和公开讲述边界。
-    boundary: 本任务不证明完整流转链、原物所有权，也不自动授予私人记录或训练使用许可。
-    scale: 10个事件阶段；三次人物接触、三类取证、一次校准和一次实物交付。
-  participants:
-  - id: n07
-    name: N-07
-    facts:
-    - 门牌需要来源校准，私人记录不能直接公开
-    context: 提示遗留物处理边界、核对材料、协助登记
-  - id: resident-317
-    name: 陌生住户
-    context: 在门框旁试装旧门牌；其接触方式由玩家选择
-  - id: ash
-    name: Ash
-    context: 可说明自己拆取门牌的经过；不能证明后续全部流转
-  - id: mara
-    name: Mara
-    context: 可提供摊位经手记录；记录只证明其中一次交易
-  - id: adrian
-    name: Adrian
-    context: 在计时所提供公开查询入口或人工记录
-  - id: meridian
-    name: Meridian
-    context: 提供317公开索引及权限范围内的版本比对
-  - id: noel
-    name: Noel
-    context: 在接待会为玩家提供中性引见
-  - id: celeste
-    name: Celeste
-    context: 提出展览与训练用途主张；并未自动取得授权
+      purpose: 让实物交付真正发生，并以回执作为任务完成门槛
+      must:
+      - 原件不会随权利选择自动移动
+      - 目标保管人必须实际接收
+      - 回执只证明保管交付
+      - 三权在回执后才正式登记
+      avoid:
+      - 没有原件时生成回执
+      - 门牌仍在走廊时显示任务完成
+      - 把保管回执写成所有权证明
+      - 补写未取得的流转证据
+      done: physical handover acknowledged
+      next: done
   result:
-    success: 玩家确认门牌与Eden的关联，分别登记实物保管、缓存访问与故事公开范围，实际交付原件并取得回执。
-    boundary: 本任务不证明完整流转链、原物所有权，也不自动授予私人记录或训练使用许可。
-    reward: 无额外物品奖励；保留调查结论与交接回执。
-    cancel: 保留已取得的来源、草稿和原件当前位置，返回后继续。
-    repeat: 不重复授予材料或生成回执；完成后可回顾来源。
+    success: S01完成；Eden与317门牌的关联已由三类来源校准，三项权利已登记，门牌原件已交付并取得回执。
+    reward: 无额外物品奖励。
+    unresolved:
+    - Ash到Mara到买家到Mira的未取证流转段落
+    - Ch5三权复核
+    - 其他30件遗物任务
+    - 运行时变量和效果语法
