@@ -26,7 +26,7 @@ export default defineConfig({
         { text: '任务卡总览', link: '/story-cards/' },
         { text: '标准格式', link: '/story-cards/standard' },
         { text: 'tavern · 旧版', link: '/story-cards/tavern' },
-        { text: 'remaining-time · 新版主线', link: '/story-cards/remaining-time' },
+        { text: 'remaining-time · S01', link: '/story-cards/remaining-time' },
       ] },
       { text: '房间布局', items: [
         { text: '原图、空背景与运行布局对照', link: '/rooms/' },
