@@ -116,6 +116,9 @@ def export(repo, ref):
                               active=active, background=background, layoutSource=layout_path,
                               mapSource=map_path, sceneSource=f'public/content/remaining-time/scenes/{ident}.json',
                               issues=issues, layers=layers, npcCount=npc_count,
+                              portals=[dict(id=e['id'], name=e['name'], destination=e['portal'],
+                                            tiles=e.get('portalTiles', [e['position']]))
+                                       for e in scene['entities'] if e.get('portal')],
                               objectCount=len(game_map['art']) - 1 + furniture_count))
         snapshot = dict(commit=commit, repository='NevaMind-AI/remaining-time',
                         contentVersion=manifest['content_version'], rooms=rooms, images=images)
