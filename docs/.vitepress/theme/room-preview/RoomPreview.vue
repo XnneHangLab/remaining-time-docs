@@ -23,6 +23,7 @@ const selected = ref(data.rooms[0].id);
 const room = computed(() => data.rooms.find((r) => r.id === selected.value)!);
 const showNpcs = ref(false);
 const showPortals = ref(true);
+const portalMode = ref<'tiles' | 'marker'>('marker');
 const zoom = ref(100);
 const canvas = ref<HTMLCanvasElement>();
 const status = ref('');
@@ -81,13 +82,33 @@ async function draw() {
         placement.y - placement.anchor.y * height, width, height);
     }
     if (showPortals.value) {
-      context.fillStyle = 'rgba(0, 255, 255, 0.3)';
-      context.strokeStyle = '#00ffff';
-      context.lineWidth = 2;
-      for (const portal of current.portals) {
-        for (const [x, y] of portal.tiles) {
-          context.fillRect(x * 32, y * 32, 32, 32);
-          context.strokeRect(x * 32 + 1, y * 32 + 1, 30, 30);
+      if (portalMode.value === 'tiles') {
+        context.fillStyle = 'rgba(0, 255, 255, 0.3)';
+        context.strokeStyle = '#00ffff';
+        context.lineWidth = 2;
+        for (const portal of current.portals) {
+          for (const [x, y] of portal.tiles) {
+            context.fillRect(x * 32, y * 32, 32, 32);
+            context.strokeRect(x * 32 + 1, y * 32 + 1, 30, 30);
+          }
+        }
+      } else {
+        context.fillStyle = '#211d24';
+        context.strokeStyle = '#c5a56d';
+        context.lineWidth = 3;
+        context.font = 'bold 24px sans-serif';
+        context.textAlign = 'center';
+        context.textBaseline = 'middle';
+        for (const portal of current.portals) {
+          const xs = portal.tiles.map(([x]) => x);
+          const ys = portal.tiles.map(([, y]) => y);
+          const x = (Math.min(...xs) + Math.max(...xs) + 1) * 16;
+          const y = (Math.min(...ys) + Math.max(...ys) + 1) * 32;
+          context.fillRect(x - 14, y - 42, 28, 42);
+          context.strokeRect(x - 14, y - 42, 28, 42);
+          context.fillStyle = '#f2d192';
+          context.fillText('↓', x, y - 21);
+          context.fillStyle = '#211d24';
         }
       }
     }
@@ -98,7 +119,7 @@ async function draw() {
     failure.value = error instanceof Error ? error.message : String(error);
   }
 }
-watch([selected, showNpcs, showPortals], () => {
+watch([selected, showNpcs, showPortals, portalMode], () => {
   if (typeof window !== 'undefined') {
     const url = new URL(window.location.href);
     url.searchParams.set('room', selected.value);
@@ -178,7 +199,9 @@ onUnmounted(() => { generation++; });
       <figure>
         <figcaption>当前拼装布局 <strong class="badge">浏览器实时绘制</strong></figcaption>
         <div class="controls">
-          <label><input v-model="showPortals" type="checkbox"> 显示青色传送触发格</label>
+          <label><input v-model="showPortals" type="checkbox"> 显示入口标识</label>
+          <label><input v-model="portalMode" type="radio" value="marker" :disabled="!showPortals"> 门＋箭头</label>
+          <label><input v-model="portalMode" type="radio" value="tiles" :disabled="!showPortals"> 青色触发格</label>
           <label><input v-model="showNpcs" type="checkbox"> 显示 NPC 初始站姿</label>
           <label>缩放 <select v-model.number="zoom">
             <option :value="100">适应宽度</option><option :value="150">150%</option><option :value="200">200%</option><option :value="300">300%</option>
@@ -191,7 +214,7 @@ onUnmounted(() => { generation++; });
         </div>
         <p role="status" class="metadata">{{ status }}</p>
         <p v-if="failure" role="alert" class="notice">{{ failure }}</p>
-        <p class="metadata">青色格为实际传送触发范围，每格 32 × 32 像素，默认显示且不受图片透明度影响。此处不判断剧情是否允许通行。</p>
+        <p class="metadata">入口标识与青色触发格互斥显示。门＋箭头用于查看入口位置，青色格用于核对实际传送范围；每格 32 × 32 像素。</p>
         <details>
           <summary>传送格坐标与目的地（{{ room.portals.length }} 个入口）</summary>
           <p class="metadata">坐标从左上角 (0, 0) 起，x 向右、y 向下；供人工核对与 AI 读取。</p>
