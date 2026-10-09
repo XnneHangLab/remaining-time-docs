@@ -12,6 +12,7 @@ type Room = {
   id: string; name: string; width: number; height: number;
   original: string | null; variants: { plain: string | null; box: string | null };
   active: string; background: string; layoutSource: string; mapSource: string; sceneSource: string;
+  portals: { id: string; name: string; destination: { scene: string; anchor: string }; tiles: number[][] }[];
   issues: string[]; layers: Layer[]; npcCount: number; objectCount: number;
 };
 const data = snapshot as {
@@ -21,6 +22,7 @@ const data = snapshot as {
 const selected = ref(data.rooms[0].id);
 const room = computed(() => data.rooms.find((r) => r.id === selected.value)!);
 const showNpcs = ref(false);
+const showPortals = ref(true);
 const zoom = ref(100);
 const canvas = ref<HTMLCanvasElement>();
 const status = ref('');
@@ -78,6 +80,17 @@ async function draw() {
         placement.x - placement.anchor.x * width,
         placement.y - placement.anchor.y * height, width, height);
     }
+    if (showPortals.value) {
+      context.fillStyle = 'rgba(0, 255, 255, 0.3)';
+      context.strokeStyle = '#00ffff';
+      context.lineWidth = 2;
+      for (const portal of current.portals) {
+        for (const [x, y] of portal.tiles) {
+          context.fillRect(x * 32, y * 32, 32, 32);
+          context.strokeRect(x * 32 + 1, y * 32 + 1, 30, 30);
+        }
+      }
+    }
     status.value = `已绘制 ${layers.length} 个图层（含背景与门），${current.width} × ${current.height} 像素。`;
   } catch (error) {
     if (ticket !== generation) return;
@@ -85,7 +98,7 @@ async function draw() {
     failure.value = error instanceof Error ? error.message : String(error);
   }
 }
-watch([selected, showNpcs], () => {
+watch([selected, showNpcs, showPortals], () => {
   if (typeof window !== 'undefined') {
     const url = new URL(window.location.href);
     url.searchParams.set('room', selected.value);
@@ -165,6 +178,7 @@ onUnmounted(() => { generation++; });
       <figure>
         <figcaption>当前拼装布局 <strong class="badge">浏览器实时绘制</strong></figcaption>
         <div class="controls">
+          <label><input v-model="showPortals" type="checkbox"> 显示青色传送触发格</label>
           <label><input v-model="showNpcs" type="checkbox"> 显示 NPC 初始站姿</label>
           <label>缩放 <select v-model.number="zoom">
             <option :value="100">适应宽度</option><option :value="150">150%</option><option :value="200">200%</option><option :value="300">300%</option>
@@ -177,7 +191,19 @@ onUnmounted(() => { generation++; });
         </div>
         <p role="status" class="metadata">{{ status }}</p>
         <p v-if="failure" role="alert" class="notice">{{ failure }}</p>
-        <p class="metadata">包含背景、独立物件、可交互家具与门。NPC 可选显示；不含玩家、存档变化、移动与高亮。</p>
+        <p class="metadata">青色格为实际传送触发范围，每格 32 × 32 像素，默认显示且不受图片透明度影响。此处不判断剧情是否允许通行。</p>
+        <details>
+          <summary>传送格坐标与目的地（{{ room.portals.length }} 个入口）</summary>
+          <p class="metadata">坐标从左上角 (0, 0) 起，x 向右、y 向下；供人工核对与 AI 读取。</p>
+          <ul>
+            <li v-for="portal in room.portals" :key="portal.id">
+              {{ portal.name }} · <code>{{ portal.id }}</code><br>
+              → <code>{{ portal.destination.scene }} / {{ portal.destination.anchor }}</code><br>
+              格子：<code>{{ portal.tiles.map(([x, y]) => `(${x}, ${y})`).join('、') }}</code>
+            </li>
+          </ul>
+        </details>
+        <p class="metadata">包含背景、独立物件、可交互家具与门。NPC 可选显示；不含玩家、存档变化、移动与交互高亮。</p>
       </figure>
     </div>
     <details>
