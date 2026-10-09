@@ -18,11 +18,12 @@ import RoomPreview from '../.vitepress/theme/room-preview/RoomPreview.vue';
 
 ## 本轮快照的实际情况
 
-本页固定为游戏合入提交 `3718577880b6178dba3806914862aafa6725dc5b`（封存区家具）。它是一个明确的版本基准，**不代表游戏工作分支或未合入 PR 的实时状态**。
+本页固定为导出时最新游戏 `dev` 提交 `164d566eed720b685dd8662a91f912e364cb213e`。它是一个明确的版本基准，**不代表游戏工作分支或未合入 PR 的实时状态**。
 
-- **21 间使用黑框版（约 81%）**：本轮快照包含已接入的合约咨询室 8 个独立物件、封存区 11 个独立物件、Noel 私人厅 9 个独立物件，以及花园维护层密室、余烬后台与账房等房间的家具。沙发在图层中独立，不等于已配置坐下或剧情交互。
-- **5 间使用普通版**：下层回廊、检修捷径、旧洗衣管道、高层天井和余烬休息间。是否启用黑框以运行地图为准，不以本地候选是否存在来判断。
-- 当前快照有 **12 间没有独立家具图层**：`low-service-duct`、`low-laundry-duct`、`transit-hall`、`civic-mediation`、`civic-zeroing-lounge`、`solarium`、`sky-lobby`、`celeste-gallery`、`celeste-archive`、`one-day-garden`、`embers-floor`、`embers-lounge`。
+- **22 间使用黑框版（约 85%）**：余烬休息间现已使用黑框背景；各房间的独立物件数量以自动导出的表格为准。独立物件不等于已配置坐下或剧情交互。
+- **4 间使用普通版**：下层回廊、检修捷径、旧洗衣管道、高层天井。是否启用黑框以运行地图为准，不以本地候选是否存在来判断。
+- 当前快照有 **9 间没有独立家具图层**：`low-service-duct`、`low-laundry-duct`、`transit-hall`、`civic-mediation`、`solarium`、`sky-lobby`、`celeste-gallery`、`one-day-garden`、`embers-floor`。
+- 余烬休息间的源配方仍选择普通布局，运行地图使用黑框背景；预览按运行地图绘制，并保留这项差异提示。
 - 每间房的原始完整 PNG 和普通空背景均已收录。具体房间名称、版本、独立物件数量与数据差异，以以上自动导出的表格为准。
 
 ## 一致性与使用边界
