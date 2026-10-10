@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "frameSize": [
+    64,
+    64
+  ],
+  "directions": [
+    "s",
+    "w",
+    "e",
+    "n"
+  ],
+  "characters": [
+    {
+      "id": "n07",
+      "name": "N-07"
+    },
+    {
+      "id": "ash",
+      "name": "Ash"
+    },
+    {
+      "id": "rhea",
+      "name": "Rhea"
+    },
+    {
+      "id": "milo",
+      "name": "Milo"
+    },
+    {
+      "id": "mara",
+      "name": "Mara"
+    },
+    {
+      "id": "rowan",
+      "name": "Rowan"
+    },
+    {
+      "id": "adrian",
+      "name": "Adrian"
+    },
+    {
+      "id": "silas",
+      "name": "Silas"
+    },
+    {
+      "id": "meridian",
+      "name": "Meridian"
+    },
+    {
+      "id": "celeste",
+      "name": "Celeste"
+    },
+    {
+      "id": "iris",
+      "name": "Iris"
+    },
+    {
+      "id": "noel",
+      "name": "Noel"
+    },
+    {
+      "id": "rook",
+      "name": "Rook"
+    },
+    {
+      "id": "lyra",
+      "name": "Lyra"
+    },
+    {
+      "id": "flint",
+      "name": "Flint"
+    },
+    {
+      "id": "resident",
+      "name": "居民"
+    },
+    {
+      "id": "elder",
+      "name": "陌生老人"
+    },
+    {
+      "id": "clerk",
+      "name": "实习柜员"
+    },
+    {
+      "id": "nurse",
+      "name": "值班护士"
+    },
+    {
+      "id": "receptionist",
+      "name": "接待员"
+    },
+    {
+      "id": "waiter",
+      "name": "侍者"
+    },
+    {
+      "id": "appraiser",
+      "name": "估值员"
+    },
+    {
+      "id": "collector",
+      "name": "陌生收藏者"
+    },
+    {
+      "id": "gambler",
+      "name": "赌客"
+    },
+    {
+      "id": "cashier",
+      "name": "兑时员"
+    },
+    {
+      "id": "guard",
+      "name": "安检保安"
+    },
+    {
+      "id": "volunteer",
+      "name": "陪伴志愿者"
+    },
+    {
+      "id": "digital-life",
+      "name": "数字生命"
+    },
+    {
+      "id": "bio-swift",
+      "name": "仿生雨燕"
+    }
+  ]
+}
