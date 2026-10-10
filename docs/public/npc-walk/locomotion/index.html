@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NPC 四方向移动动画</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#e7dfcf;color:#292c31;font:16px system-ui,sans-serif}header{padding:28px 32px;position:sticky;top:0;background:#e7dfcff2;z-index:1;border-bottom:1px solid #aaa398}h1{margin:0 0 12px;font-size:26px}p{margin:8px 0;color:#555}button{font:inherit;padding:8px 18px;border:1px solid #777;background:#faf5e9;border-radius:5px;cursor:pointer}button:focus-visible{outline:3px solid #1485ad}main{padding:24px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,540px),1fr));gap:20px}article{padding:16px;background:#f6f0e3;border:1px solid #c6bdae;border-radius:8px;overflow:auto}h2{font-size:18px;margin:0}canvas{display:block;width:512px;height:512px;image-rendering:pixelated;background:linear-gradient(90deg,transparent 49.8%,#c6bdae 50%,transparent 50.2%),linear-gradient(0deg,transparent 49.8%,#c6bdae 50%,transparent 50.2%)}.directions{display:grid;grid-template-columns:repeat(2,256px);width:512px;text-align:center;font-size:13px;color:#555}.directions span{width:256px}.directions span:nth-child(1){grid-column:1;grid-row:1}.directions span:nth-child(2){grid-column:2;grid-row:1}.directions span:nth-child(3){grid-column:1;grid-row:2}.directions span:nth-child(4){grid-column:2;grid-row:2}a{color:#216577}.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.error{color:#a22}
+</style>
+<header><p><a href="/">← 返回余时遗物文档站</a></p><h1>NPC 四方向移动动画</h1><p id="status" role="status">载入角色…</p><p>每人 4 方向 × 4 帧。角色沿对应方向移动，循环轨道用于观察实际位移。演示速度未与游戏世界校准。</p><p>固定快照：游戏 PR #147 · <code>bd9c0cb</code>，不随游戏更新自动同步。</p><div class="toolbar"><button id="pause">暂停</button><button id="step">下一帧</button><label>速度 <select id="speed"><option value="1">正常</option><option value="0.5">半速</option><option value="0.25">四分之一</option></select></label><span id="frame">帧 1 / 4</span></div></header>
+<main id="gallery"></main>
+<script type="module">
+const gallery=document.querySelector('#gallery'),status=document.querySelector('#status');
+const assets=[];let paused=matchMedia('(prefers-reduced-motion: reduce)').matches,time=0,last=null,manualFrame=null;
+const pause=document.querySelector('#pause');pause.textContent=paused?'播放':'暂停';
+pause.onclick=()=>{paused=!paused;manualFrame=null;pause.textContent=paused?'播放':'暂停'};
+document.querySelector('#step').onclick=()=>{paused=true;pause.textContent='播放';manualFrame=((manualFrame??Math.floor(time/140))+1)%4;draw()};
+function draw(){
+  for(const {image,metadata,ctx} of assets){
+    ctx.clearRect(0,0,512,512);ctx.imageSmoothingEnabled=false;
+    for(const [row,direction] of ['s','w','e','n'].entries()){
+      const animation=metadata.animations[`walk-${({s:'front',w:'left',e:'right',n:'back'})[direction]}`];
+      const frame=metadata.frames[animation.frames[manualFrame??Math.floor(time/animation.duration)%4]];
+      const travel=(time*0.12+192)%384-128;
+      const laneX=row%2*256,laneY=Math.floor(row/2)*256;
+      let x=laneX+64,y=laneY+64;
+      if(direction==='s') y=laneY+travel;
+      if(direction==='w') x=laneX+256-travel-128;
+      if(direction==='e') x=laneX+travel;
+      if(direction==='n') y=laneY+256-travel-128;
+      ctx.save();ctx.beginPath();ctx.rect(laneX,laneY,256,256);ctx.clip();
+      ctx.drawImage(image,frame.x,frame.y,frame.w,frame.h,
+        Math.round(x+(32-frame.anchor[0])*2),Math.round(y+(60-frame.anchor[1])*2),128,128);
+      ctx.restore();
+    }
+  }
+  document.querySelector('#frame').textContent=`帧 ${(manualFrame??Math.floor(time/140)%4)+1} / 4`;
+}
+try{
+ const response=await fetch('./manifest.json');if(!response.ok)throw Error('manifest');
+ const roster=await response.json();
+ for(const npc of roster.characters){
+   const article=document.createElement('article'),title=document.createElement('h2'),canvas=document.createElement('canvas'),labels=document.createElement('div'),link=document.createElement('a');
+   title.textContent=`${npc.name} · ${npc.id}`;canvas.width=512;canvas.height=512;canvas.setAttribute('aria-label',`${npc.name}四方向${npc.id==='bio-swift'?'飞行':'行走'}`);
+   labels.className='directions';for(const text of ['下 / S','左 / W','右 / E','上 / N']){const span=document.createElement('span');span.textContent=text;labels.append(span)}
+   link.href=`../${npc.id}.png`;link.textContent='透明图集';link.download=`${npc.id}.png`;
+   article.append(title,canvas,labels,link);gallery.append(article);
+   try{
+    const response=await fetch(`../${npc.id}.json`);if(!response.ok)throw Error(npc.id);
+    const metadata=await response.json(),image=new Image();image.src=`../${npc.id}.png`;await image.decode();assets.push({image,metadata,ctx:canvas.getContext('2d')});
+   }catch{article.classList.add('error');title.textContent+=' · 加载失败'}
+ }
+ status.textContent=`${assets.length} / ${roster.characters.length} 套已加载 · ${assets.length*4} 组移动循环 · ${assets.length*16} 帧`;
+}catch{status.textContent='资产清单加载失败，请刷新页面重试。'}
+function tick(now){if(last!==null&&!paused)time+=Math.min(now-last,100)*Number(document.querySelector('#speed').value);last=now;draw();requestAnimationFrame(tick)}
+requestAnimationFrame(tick);
+</script></html>
