@@ -1,9 +1,5 @@
 {
   "version": 1,
-  "frameSize": [
-    64,
-    64
-  ],
   "directions": [
     "s",
     "w",
@@ -11,6 +7,10 @@
     "n"
   ],
   "characters": [
+    {
+      "id": "player-preview",
+      "name": "主角 Player"
+    },
     {
       "id": "n07",
       "name": "N-07"

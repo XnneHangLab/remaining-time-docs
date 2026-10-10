@@ -13,7 +13,7 @@ export default defineConfig({
       { text: '世界背景', link: '/story/background' },
       { text: '剧本任务卡', link: '/story-cards/' },
       { text: '房间布局', link: '/rooms/' },
-      { text: 'NPC 行走', link: '/npc-walk/locomotion/index.html', target: '_blank', rel: 'noopener' },
+      { text: '角色行走', link: '/npc-walk/locomotion/index.html', target: '_blank', rel: 'noopener' },
       { text: '主要系统', link: '/systems/' },
       { text: '架构快照', link: '/architecture/world-model-2026-09-15' },
     ],
@@ -31,7 +31,7 @@ export default defineConfig({
       ] },
       { text: '房间布局', items: [
         { text: '原图、空背景与运行布局对照', link: '/rooms/' },
-        { text: 'NPC 行走预览', link: '/npc-walk/locomotion/index.html', target: '_blank', rel: 'noopener' },
+        { text: 'Player 与 NPC 行走预览', link: '/npc-walk/locomotion/index.html', target: '_blank', rel: 'noopener' },
       ] },
       { text: '架构快照', items: [
         { text: '世界架构 · 2026-09-15', link: '/architecture/world-model-2026-09-15' },
