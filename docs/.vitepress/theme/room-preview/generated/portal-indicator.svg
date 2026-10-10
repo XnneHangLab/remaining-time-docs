@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="104" height="152" viewBox="0 0 104 152" fill="none" role="img" aria-labelledby="title">
+  <title id="title">门与向上入口箭头</title>
+  <style>
+    .indicator { animation: portal-float 1.8s ease-in-out infinite; }
+    @keyframes portal-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(3px); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .indicator { animation: none; }
+    }
+  </style>
+  <g class="indicator">
+    <!-- Three separate strokes of 门, traced as filled shapes. -->
+    <g fill="#292927">
+      <path d="M6 6H34V27H6Z"/>
+      <path d="M6 34H34V80H27V89H6Z"/>
+      <path d="M41 6H99V89H77V80H71V34H49V27H41Z"/>
+    </g>
+    <g fill="#FFFFFF">
+      <path d="M13 13H27V20H13Z"/>
+      <path d="M13 41H27V76H20V83H13Z"/>
+      <path d="M48 13H92V83H85V76H78V27H56V20H48Z"/>
+    </g>
+    <!-- Stepped arrowhead with a broad, solid white shaft. -->
+    <path fill="#292927" d="M42 83H63V90H70V97H77V104H84V118H70V146H35V118H21V104H28V97H35V90H42Z"/>
+    <path fill="#FFFFFF" d="M49 90H56V97H63V104H70V111H77V112H63V139H42V112H28V111H35V104H42V97H49Z"/>
+  </g>
+</svg>
