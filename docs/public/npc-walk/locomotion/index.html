@@ -33,22 +33,40 @@ function draw(){
   }
   document.querySelector('#frame').textContent=`帧 ${(manualFrame??Math.floor(time/140)%4)+1} / 4`;
 }
+requestAnimationFrame(tick);
 try{
  const response=await fetch('./manifest.json');if(!response.ok)throw Error('manifest');
  const roster=await response.json();
+ const loaders=new WeakMap();
+ const observer=new IntersectionObserver(entries=>{
+   for(const entry of entries){
+     if(!entry.isIntersecting)continue;
+     observer.unobserve(entry.target);
+     loaders.get(entry.target)();
+   }
+ },{rootMargin:'200px 0px'});
+ const updateStatus=()=>{status.textContent=`${assets.length} / ${roster.characters.length} 套已加载 · 滚动页面按需加载`};
+ updateStatus();
  for(const npc of roster.characters){
    const article=document.createElement('article'),title=document.createElement('h2'),canvas=document.createElement('canvas'),labels=document.createElement('div'),link=document.createElement('a');
    title.textContent=`${npc.name} · ${npc.id}`;canvas.width=512;canvas.height=512;canvas.setAttribute('aria-label',`${npc.name}四方向${npc.id==='bio-swift'?'飞行':'行走'}`);
    labels.className='directions';for(const text of ['下 / S','左 / W','右 / E','上 / N']){const span=document.createElement('span');span.textContent=text;labels.append(span)}
    link.href=`../${npc.id}.png`;link.textContent='透明图集';link.download=`${npc.id}.png`;
-   article.append(title,canvas,labels,link);gallery.append(article);
-   try{
-    const response=await fetch(`../${npc.id}.json`);if(!response.ok)throw Error(npc.id);
-    const metadata=await response.json(),image=new Image();image.src=`../${npc.id}.png`;await image.decode();assets.push({image,metadata,ctx:canvas.getContext('2d')});
-   }catch{article.classList.add('error');title.textContent+=' · 加载失败'}
+   const loading=document.createElement('p'),retry=document.createElement('button');
+   loading.textContent='滚动到此处时加载';loading.setAttribute('role','status');
+   retry.textContent='重试加载';retry.hidden=true;
+   article.append(title,loading,retry,canvas,labels,link);gallery.append(article);
+   async function load(){
+     retry.hidden=true;article.classList.remove('error');loading.textContent='正在加载…';
+     try{
+       const response=await fetch(`../${npc.id}.json`);if(!response.ok)throw Error(npc.id);
+       const metadata=await response.json(),image=new Image();image.src=`../${npc.id}.png`;await image.decode();
+       assets.push({image,metadata,ctx:canvas.getContext('2d')});
+       loading.textContent='已加载';updateStatus();draw();
+     }catch{article.classList.add('error');loading.textContent='加载失败，请重试';retry.hidden=false}
+   }
+   retry.onclick=load;loaders.set(article,load);observer.observe(article);
  }
- status.textContent=`${assets.length} / ${roster.characters.length} 套已加载 · ${assets.length*4} 组移动循环 · ${assets.length*16} 帧`;
 }catch{status.textContent='资产清单加载失败，请刷新页面重试。'}
 function tick(now){if(last!==null&&!paused)time+=Math.min(now-last,100)*Number(document.querySelector('#speed').value);last=now;draw();requestAnimationFrame(tick)}
-requestAnimationFrame(tick);
 </script></html>
