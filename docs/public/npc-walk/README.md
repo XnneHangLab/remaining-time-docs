@@ -1,12 +1,14 @@
 # Player 与 NPC 行走预览快照
 
-站点入口：`/npc-walk/locomotion/index.html`，共 30 个角色，主角排在首位。
+站点入口：`/npc-walk/locomotion/index.html`，共 38 个角色，主角排在首位，随后为 8 位酒馆角色，再列出原有 29 位 NPC。
 
 ## 素材来源
 
 - NPC 与原预览页面：`NevaMind-AI/remaining-time` PR #147，固定提交 `bd9c0cb728eb26286cbf867700e5325458d16c8a`。来源为 `public/assets/room-npcs/locomotion/{index.html,manifest.json}` 及原清单中 29 个 NPC 的 `public/assets/room-npcs/{id}.{png,json}`。
 - 29 个 NPC 的上游动画素材来源：`MrMaii/project-myrmidon-map-prototype@6ac2b9a2735ca4fa142421593fe47765081ac4cd`。
 - Player：游戏 `dev` 固定提交 `c987409a79f17e1f359f91cb324b34444620884d`，将 `public/assets/room-player/player.png` 与 `data/spritesheets/room-player.json` 复制为本站 `player.png/json`，JSON 额外补充四个兼容旧预览页面的 walk 索引。已沿 `App → LocalGame → RoomPlayer` 核对：`remaining-time` 内容包使用这套运行时素材，版本为 `player-workwear-generated-v2.1`，帧尺寸 40×48，walk 每帧 90ms。不是 `room-npcs/player-preview` 的独立自制候选。
+
+- 酒馆角色：游戏 `dev` 固定提交 `c987409a79f17e1f359f91cb324b34444620884d` 的 `public/assets/room-npcs/{id}.{png,json}`，收录 Alice、Alex、Bob、Lucky、Pete、Kurt、莉奈与老板娘，对应 `alice/alex/bob/lucky/pete/kurt/rinai/hostess-preview`。PNG/JSON 原样复制，均为 80×128 帧；前七位 walk 每帧 160ms，老板娘 140ms。名单及素材来源依据游戏的 `public/assets/room-npcs/PLAZA-PREVIEW.md`，这里只展示已收录图集，不表示八位角色当前都在场景中。
 
 ## 网站适配
 

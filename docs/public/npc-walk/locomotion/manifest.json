@@ -12,6 +12,38 @@
       "name": "主角 Player（游戏当前使用）"
     },
     {
+      "id": "alice",
+      "name": "Alice（酒馆）"
+    },
+    {
+      "id": "alex",
+      "name": "Alex（酒馆）"
+    },
+    {
+      "id": "bob",
+      "name": "Bob（酒馆）"
+    },
+    {
+      "id": "lucky",
+      "name": "Lucky（酒馆）"
+    },
+    {
+      "id": "pete",
+      "name": "Pete（酒馆）"
+    },
+    {
+      "id": "kurt",
+      "name": "Kurt（酒馆）"
+    },
+    {
+      "id": "rinai",
+      "name": "莉奈（酒馆）"
+    },
+    {
+      "id": "hostess-preview",
+      "name": "老板娘（酒馆）"
+    },
+    {
       "id": "n07",
       "name": "N-07"
     },
