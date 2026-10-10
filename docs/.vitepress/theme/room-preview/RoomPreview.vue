@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue';
 import { withBase } from 'vitepress';
+import markerUrl from './generated/portal-indicator.svg';
+import marker from './generated/portal-indicator.json';
 import snapshot from './generated/rooms.json';
 import { visualPlacement, type Visual } from './generated/assets';
 
@@ -64,6 +66,12 @@ async function draw() {
       catch { throw new Error(`图片加载失败：${path}`); }
       return [path, image] as const;
     }));
+    const markerImage = new Image();
+    const drawMarker = showPortals.value && portalMode.value === 'marker' && marker.outdoorScenes.includes(current.id);
+    if (drawMarker) {
+      markerImage.src = markerUrl;
+      await markerImage.decode();
+    }
     if (ticket !== generation) return;
     const images = new Map(entries);
     const context = target.getContext('2d');
@@ -92,23 +100,15 @@ async function draw() {
             context.strokeRect(x * 32 + 1, y * 32 + 1, 30, 30);
           }
         }
-      } else {
-        context.fillStyle = '#211d24';
-        context.strokeStyle = '#c5a56d';
-        context.lineWidth = 3;
-        context.font = 'bold 24px sans-serif';
-        context.textAlign = 'center';
-        context.textBaseline = 'middle';
+      } else if (drawMarker) {
         for (const portal of current.portals) {
           const xs = portal.tiles.map(([x]) => x);
           const ys = portal.tiles.map(([, y]) => y);
           const x = (Math.min(...xs) + Math.max(...xs) + 1) * 16;
-          const y = (Math.min(...ys) + Math.max(...ys) + 1) * 32;
-          context.fillRect(x - 14, y - 42, 28, 42);
-          context.strokeRect(x - 14, y - 42, 28, 42);
-          context.fillStyle = '#f2d192';
-          context.fillText('↓', x, y - 21);
-          context.fillStyle = '#211d24';
+          const y = (Math.min(...ys) + Math.max(...ys) + 1) * 16;
+          // PortalIndicator.tsx: 42×61, anchor [0.5, 1], static bob=0 frame.
+          context.drawImage(markerImage, x - marker.width / 2, y - marker.height,
+            marker.width, marker.height);
         }
       }
     }
@@ -214,7 +214,8 @@ onUnmounted(() => { generation++; });
         </div>
         <p role="status" class="metadata">{{ status }}</p>
         <p v-if="failure" role="alert" class="notice">{{ failure }}</p>
-        <p class="metadata">入口标识与青色触发格互斥显示。门＋箭头用于查看入口位置，青色格用于核对实际传送范围；每格 32 × 32 像素。</p>
+        <p class="metadata">入口标识与青色触发格互斥显示。门＋箭头复用游戏 SVG，仅室外显示；青色格在所有房间用于核对实际传送范围，每格 32 × 32 像素。</p>
+        <p class="metadata">入口提示来源：游戏功能分支提交 <code>{{ marker.commit.slice(0, 12) }}</code>，尚非上方 dev 布局快照自带功能。尺寸、锚点与定位对应此提交；此处显示悬浮起点静态帧，不播放游戏动画。</p>
         <details>
           <summary>传送格坐标与目的地（{{ room.portals.length }} 个入口）</summary>
           <p class="metadata">坐标从左上角 (0, 0) 起，x 向右、y 向下；供人工核对与 AI 读取。</p>
