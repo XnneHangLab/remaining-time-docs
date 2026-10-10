@@ -14,7 +14,7 @@ type Room = {
   id: string; name: string; width: number; height: number;
   original: string | null; variants: { plain: string | null; box: string | null };
   active: string; background: string; layoutSource: string; mapSource: string; sceneSource: string;
-  portals: { id: string; name: string; destination: { scene: string; anchor: string }; tiles: number[][] }[];
+  portals: { id: string; name: string; destination: { scene: string; anchor: string }; hint?: number[] | null; tiles: number[][] }[];
   issues: string[]; layers: Layer[]; npcCount: number; objectCount: number;
 };
 const data = snapshot as {
@@ -25,7 +25,7 @@ const selected = ref(data.rooms[0].id);
 const room = computed(() => data.rooms.find((r) => r.id === selected.value)!);
 const showNpcs = ref(false);
 const showPortals = ref(true);
-const portalMode = ref<'tiles' | 'marker'>('marker');
+const portalMode = ref<'tiles' | 'marker' | 'both'>('both');
 const zoom = ref(100);
 const canvas = ref<HTMLCanvasElement>();
 const status = ref('');
@@ -67,7 +67,7 @@ async function draw() {
       return [path, image] as const;
     }));
     const markerImage = new Image();
-    const drawMarker = showPortals.value && portalMode.value === 'marker' && marker.outdoorScenes.includes(current.id);
+    const drawMarker = showPortals.value && portalMode.value !== 'tiles' && current.portals.some(p => p.hint);
     if (drawMarker) {
       markerImage.src = markerUrl;
       await markerImage.decode();
@@ -90,7 +90,7 @@ async function draw() {
         placement.y - placement.anchor.y * height, width, height);
     }
     if (showPortals.value) {
-      if (portalMode.value === 'tiles') {
+      if (portalMode.value !== 'marker') {
         context.fillStyle = 'rgba(0, 255, 255, 0.3)';
         context.strokeStyle = '#00ffff';
         context.lineWidth = 2;
@@ -100,12 +100,11 @@ async function draw() {
             context.strokeRect(x * 32 + 1, y * 32 + 1, 30, 30);
           }
         }
-      } else if (drawMarker) {
+      }
+      if (drawMarker) {
         for (const portal of current.portals) {
-          const xs = portal.tiles.map(([x]) => x);
-          const ys = portal.tiles.map(([, y]) => y);
-          const x = (Math.min(...xs) + Math.max(...xs) + 1) * 16;
-          const y = (Math.min(...ys) + Math.max(...ys) + 1) * 16;
+          if (!portal.hint) continue;
+          const [x, y] = portal.hint;
           // PortalIndicator.tsx: 42×61, anchor [0.5, 1], static bob=0 frame.
           context.drawImage(markerImage, x - marker.width / 2, y - marker.height,
             marker.width, marker.height);
@@ -200,6 +199,7 @@ onUnmounted(() => { generation++; });
         <figcaption>当前拼装布局 <strong class="badge">浏览器实时绘制</strong></figcaption>
         <div class="controls">
           <label><input v-model="showPortals" type="checkbox"> 显示入口标识</label>
+          <label><input v-model="portalMode" type="radio" value="both" :disabled="!showPortals"> 叠加校验</label>
           <label><input v-model="portalMode" type="radio" value="marker" :disabled="!showPortals"> 门＋箭头</label>
           <label><input v-model="portalMode" type="radio" value="tiles" :disabled="!showPortals"> 青色触发格</label>
           <label><input v-model="showNpcs" type="checkbox"> 显示 NPC 初始站姿</label>
@@ -214,8 +214,8 @@ onUnmounted(() => { generation++; });
         </div>
         <p role="status" class="metadata">{{ status }}</p>
         <p v-if="failure" role="alert" class="notice">{{ failure }}</p>
-        <p class="metadata">入口标识与青色触发格互斥显示。门＋箭头复用游戏 SVG，仅室外显示；青色格在所有房间用于核对实际传送范围，每格 32 × 32 像素。</p>
-        <p class="metadata">入口提示来源：游戏功能分支提交 <code>{{ marker.commit.slice(0, 12) }}</code>，尚非上方 dev 布局快照自带功能。尺寸、锚点与定位对应此提交；此处显示悬浮起点静态帧，不播放游戏动画。</p>
+        <p class="metadata">入口提示使用独立像素坐标，不随触发格增删移动。默认叠加显示，也可分别查看门＋箭头或青色触发格。门＋箭头复用游戏 SVG，仅室外显示；青色格在所有房间用于核对实际传送范围，每格 32 × 32 像素。</p>
+        <p class="metadata">入口提示来源：游戏功能分支提交 <code>{{ marker.commit.slice(0, 12) }}</code>，与本页布局快照来自同一提交。尺寸、锚点与独立提示坐标对应此提交；此处显示悬浮起点静态帧，不播放游戏动画。</p>
         <details>
           <summary>传送格坐标与目的地（{{ room.portals.length }} 个入口）</summary>
           <p class="metadata">坐标从左上角 (0, 0) 起，x 向右、y 向下；供人工核对与 AI 读取。</p>
@@ -223,6 +223,7 @@ onUnmounted(() => { generation++; });
             <li v-for="portal in room.portals" :key="portal.id">
               {{ portal.name }} · <code>{{ portal.id }}</code><br>
               → <code>{{ portal.destination.scene }} / {{ portal.destination.anchor }}</code><br>
+              提示像素坐标：<code>{{ portal.hint ?? '无提示（室内入口）' }}</code><br>
               格子：<code>{{ portal.tiles.map(([x, y]) => `(${x}, ${y})`).join('、') }}</code>
             </li>
           </ul>
