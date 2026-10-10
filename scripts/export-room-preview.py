@@ -100,6 +100,8 @@ def export(repo, ref):
             npc_count = 0
             furniture_count = 0
             for entity in scene['entities']:
+                if entity.get('portal'):
+                    continue
                 visual = entity.get('sprite')
                 if not visual:
                     raise ValueError(f'{ident}/{entity["id"]}: unsupported non-sprite entity')

@@ -414,91 +414,6 @@
         },
         {
           "visual": {
-            "image": "assets/unit-404/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            608,
-            992
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/unit-404/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/unit-404/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            544,
-            992
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/unit-404/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/unit-404/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            576,
-            992
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/unit-404/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/unit-404/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            640,
-            992
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/unit-404/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/unit-404/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            672,
-            992
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/unit-404/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
             "image": "assets/unit-404/cabinet.png",
             "size": [
               430,
@@ -703,346 +618,6 @@
           "depth": 958,
           "npc": false,
           "image": "public/assets/low-deck/market-stall.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            896,
-            224
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            864,
-            224
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            928,
-            224
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            224,
-            256
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1248,
-            256
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1216,
-            256
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            448,
-            256
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            640,
-            256
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            608,
-            256
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            160,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            128,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            192,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1344,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1376,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            512,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            544,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            512,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            544,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            480,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            480,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
           "crop": null
         },
         {
@@ -2101,108 +1676,6 @@
         },
         {
           "visual": {
-            "image": "assets/low-kitchen/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            672,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-kitchen/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-kitchen/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            704,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-kitchen/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-kitchen/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-kitchen/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-kitchen/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-kitchen/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-kitchen/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            800,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-kitchen/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-kitchen/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            832,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-kitchen/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
             "image": "assets/room-npcs/rowan-idle.png",
             "size": [
               160,
@@ -2912,108 +2385,6 @@
           "depth": 781,
           "npc": false,
           "image": "public/assets/low-clinic/southwest-planter.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-clinic/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            672,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-clinic/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-clinic/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            704,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-clinic/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-clinic/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-clinic/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-clinic/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-clinic/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-clinic/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            800,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-clinic/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-clinic/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            832,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-clinic/portal-box.png",
           "crop": null
         },
         {
@@ -4575,108 +3946,6 @@
         },
         {
           "visual": {
-            "image": "assets/rhea-den/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            672,
-            960
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/rhea-den/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/rhea-den/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            704,
-            960
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/rhea-den/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/rhea-den/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            960
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/rhea-den/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/rhea-den/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            960
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/rhea-den/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/rhea-den/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            800,
-            960
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/rhea-den/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/rhea-den/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            832,
-            960
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/rhea-den/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
             "image": "assets/room-npcs/rhea-idle.png",
             "size": [
               160,
@@ -4779,74 +4048,6 @@
           "npc": false,
           "image": "public/assets/low-service-duct/background.png",
           "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1376,
-            352
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1344,
-            352
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            896,
-            320
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            864,
-            320
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
         }
       ],
       "npcCount": 0,
@@ -4923,74 +4124,6 @@
           "depth": -1,
           "npc": false,
           "image": "public/assets/low-laundry-duct/background.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            128,
-            352
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            160,
-            352
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1344,
-            352
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1376,
-            352
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
           "crop": null
         }
       ],
@@ -5465,57 +4598,6 @@
           "npc": false,
           "image": "public/assets/low-cooling-room/bench-note.png",
           "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-cooling-room/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            704,
-            864
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-cooling-room/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-cooling-room/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            864
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-cooling-room/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/low-cooling-room/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            864
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/low-cooling-room/portal-box.png",
-          "crop": null
         }
       ],
       "npcCount": 0,
@@ -5578,142 +4660,6 @@
           "depth": -1,
           "npc": false,
           "image": "public/assets/transit-hall/background-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/transit-hall/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            224
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/transit-hall/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/transit-hall/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            224
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/transit-hall/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/transit-hall/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/transit-hall/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/transit-hall/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/transit-hall/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/transit-hall/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            64,
-            512
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/transit-hall/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/transit-hall/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            64,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/transit-hall/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/transit-hall/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1440,
-            512
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/transit-hall/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/transit-hall/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1440,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/transit-hall/portal-box.png",
           "crop": null
         },
         {
@@ -6895,176 +5841,6 @@
         },
         {
           "visual": {
-            "image": "assets/civic-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1472,
-            704
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-office/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1472,
-            672
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-office/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1312,
-            224
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-office/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1280,
-            224
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-office/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            32,
-            480
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-office/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            32,
-            448
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-office/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            32,
-            672
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-office/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            32,
-            704
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-office/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1472,
-            480
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-office/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1472,
-            448
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-office/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
             "image": "assets/room-npcs/adrian-idle.png",
             "size": [
               160,
@@ -7398,40 +6174,6 @@
           "npc": false,
           "image": "public/assets/civic-mediation/background-box.png",
           "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-mediation/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1472,
-            512
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-mediation/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-mediation/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1472,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-mediation/portal-box.png",
-          "crop": null
         }
       ],
       "npcCount": 0,
@@ -7667,23 +6409,6 @@
           "npc": false,
           "image": "public/assets/civic-consult/floor-planter.png",
           "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-consult/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            224,
-            512
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-consult/portal-box.png",
-          "crop": null
         }
       ],
       "npcCount": 0,
@@ -7914,40 +6639,6 @@
           "depth": 799,
           "npc": false,
           "image": "public/assets/civic-zeroing-lounge/waiting-chair.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-zeroing-lounge/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1408,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-zeroing-lounge/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-zeroing-lounge/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1408,
-            512
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-zeroing-lounge/portal-box.png",
           "crop": null
         },
         {
@@ -8310,74 +7001,6 @@
           "npc": false,
           "image": "public/assets/civic-consult/visitor-chair-right.png",
           "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-archive/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            704,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-archive/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-archive/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-archive/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-archive/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-archive/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/civic-archive/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            800,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/civic-archive/portal-box.png",
-          "crop": null
         }
       ],
       "npcCount": 0,
@@ -8444,227 +7067,6 @@
           "depth": -1,
           "npc": false,
           "image": "public/assets/solarium/background.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            800
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            800,
-            800
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            192,
-            288
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            224,
-            288
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            576,
-            288
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            192,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1248,
-            256
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1280,
-            256
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            896,
-            160
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            864,
-            160
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            928,
-            160
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1344,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1312,
-            544
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
           "crop": null
         }
       ],
@@ -8832,108 +7234,6 @@
         },
         {
           "visual": {
-            "image": "assets/sky-lobby/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            704,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/sky-lobby/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/sky-lobby/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/sky-lobby/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/sky-lobby/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/sky-lobby/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/sky-lobby/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            800,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/sky-lobby/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            256
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            256
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
             "image": "assets/room-npcs/receptionist-idle.png",
             "size": [
               160,
@@ -9045,91 +7345,6 @@
           "depth": -1,
           "npc": false,
           "image": "public/assets/celeste-reception/background-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-reception/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            672,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-reception/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-reception/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            704,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-reception/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-reception/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-reception/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-reception/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-reception/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-reception/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            800,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-reception/portal-box.png",
           "crop": null
         },
         {
@@ -9350,91 +7565,6 @@
         },
         {
           "visual": {
-            "image": "assets/celeste-gallery/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            672,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-gallery/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-gallery/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            704,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-gallery/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-gallery/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-gallery/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-gallery/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-gallery/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-gallery/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            800,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-gallery/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
             "image": "assets/room-npcs/appraiser-idle.png",
             "size": [
               160,
@@ -9598,91 +7728,6 @@
           "depth": 225,
           "npc": false,
           "image": "public/assets/celeste-archive/display-case-right.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-archive/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            672,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-archive/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-archive/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            704,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-archive/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-archive/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-archive/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-archive/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-archive/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/celeste-archive/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            800,
-            928
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/celeste-archive/portal-box.png",
           "crop": null
         }
       ],
@@ -9953,91 +7998,6 @@
           "npc": false,
           "image": "public/assets/noel-suite/floor-planter.png",
           "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/noel-suite/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            672,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/noel-suite/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/noel-suite/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            704,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/noel-suite/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/noel-suite/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/noel-suite/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/noel-suite/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/noel-suite/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/noel-suite/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            800,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/noel-suite/portal-box.png",
-          "crop": null
         }
       ],
       "npcCount": 0,
@@ -10108,91 +8068,6 @@
           "depth": -1,
           "npc": false,
           "image": "public/assets/one-day-garden/background-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/one-day-garden/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            224,
-            800
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/one-day-garden/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/one-day-garden/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            256,
-            800
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/one-day-garden/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/one-day-garden/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1248,
-            864
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/one-day-garden/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/one-day-garden/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            192
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/one-day-garden/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/one-day-garden/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            192
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/one-day-garden/portal-box.png",
           "crop": null
         },
         {
@@ -10425,40 +8300,6 @@
           "npc": false,
           "image": "public/assets/garden-vault/crystal-display.png",
           "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/garden-vault/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            864
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/garden-vault/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/garden-vault/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            864
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/garden-vault/portal-box.png",
-          "crop": null
         }
       ],
       "npcCount": 0,
@@ -10517,142 +8358,6 @@
           "depth": -1,
           "npc": false,
           "image": "public/assets/embers-floor/background-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-floor/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            32,
-            704
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-floor/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-floor/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            32,
-            672
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-floor/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-floor/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1088,
-            160
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-floor/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-floor/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1056,
-            160
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-floor/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-floor/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1472,
-            384
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-floor/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-floor/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1472,
-            352
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-floor/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-floor/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            32,
-            384
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-floor/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-floor/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            32,
-            352
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-floor/portal-box.png",
           "crop": null
         },
         {
@@ -11190,40 +8895,6 @@
           "depth": 352,
           "npc": false,
           "image": "public/assets/embers-lounge/chair-north-foreground.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1344,
-            512
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/remaining-time/portal-shadow.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            1344,
-            480
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/remaining-time/portal-shadow.png",
           "crop": null
         },
         {
@@ -12107,91 +9778,6 @@
           "npc": false,
           "image": "public/assets/embers-backstage/side-table.png",
           "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-backstage/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            672,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-backstage/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-backstage/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            704,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-backstage/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-backstage/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            736,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-backstage/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-backstage/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            768,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-backstage/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-backstage/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            800,
-            896
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-backstage/portal-box.png",
-          "crop": null
         }
       ],
       "npcCount": 0,
@@ -12483,40 +10069,6 @@
           "npc": false,
           "image": "public/assets/embers-back-office/chair-right.png",
           "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-back-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            32,
-            480
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-back-office/portal-box.png",
-          "crop": null
-        },
-        {
-          "visual": {
-            "image": "assets/embers-back-office/portal-box.png",
-            "size": [
-              32,
-              32
-            ]
-          },
-          "position": [
-            32,
-            512
-          ],
-          "depth": 1,
-          "npc": false,
-          "image": "public/assets/embers-back-office/portal-box.png",
-          "crop": null
         }
       ],
       "npcCount": 0,
@@ -12664,12 +10216,6 @@
       "height": 175,
       "sha256": "2148bdbf252682b6daf1f883ef9734c7dcd8ebf0eba3909e14f374c571415587"
     },
-    "public/assets/unit-404/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/unit-404/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "public/assets/unit-404/cabinet.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/unit-404/cabinet.png",
       "width": 430,
@@ -12723,12 +10269,6 @@
       "width": 1282,
       "height": 1227,
       "sha256": "025e671630297e3d66542a900fac916c64368b4ce98ded69b86245bfe6bc3726"
-    },
-    "public/assets/remaining-time/portal-shadow.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/remaining-time/portal-shadow.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "1971e5eedb7a106035c57c0f6f8add502e85a5ac1c7d082eeba4bb778239130b"
     },
     "public/assets/low-deck/door-tag-317.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/low-deck/door-tag-317.png",
@@ -13000,12 +10540,6 @@
       "height": 36,
       "sha256": "f7df928f9751100d419275cc9231bd17f291348e67f35d96ac3861602cad2516"
     },
-    "public/assets/low-kitchen/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/low-kitchen/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "public/assets/room-npcs/rowan-idle.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/room-npcs/rowan-idle.png",
       "width": 64,
@@ -13179,12 +10713,6 @@
       "width": 93,
       "height": 153,
       "sha256": "8e2123717b1df89f58905a089fdc87cd343a96893f2d404594fe569aacf06591"
-    },
-    "public/assets/low-clinic/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/low-clinic/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/nurse-idle.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/room-npcs/nurse-idle.png",
@@ -13612,12 +11140,6 @@
       "height": 117,
       "sha256": "6df88814779f1aa6bad58f9623438a43b01510ec5baa29df70661a07e99c9547"
     },
-    "public/assets/rhea-den/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/rhea-den/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "public/assets/room-npcs/rhea-idle.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/room-npcs/rhea-idle.png",
       "width": 64,
@@ -13780,12 +11302,6 @@
       "height": 36,
       "sha256": "a28b400d2b5d6286aa09127a1817aeadcf5a5ee088a5647bad88d14f0ca4e9e2"
     },
-    "public/assets/low-cooling-room/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/low-cooling-room/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "art/props/transit-hall/room-layout.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/art/props/transit-hall/room-layout.png",
       "width": 1536,
@@ -13803,12 +11319,6 @@
       "width": 1536,
       "height": 1024,
       "sha256": "b9a2c7bc5b79d14b02c90c356ff26276b4d73ed856fda78286c4fcc4e0ea3762"
-    },
-    "public/assets/transit-hall/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/transit-hall/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/silas-idle.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/room-npcs/silas-idle.png",
@@ -13954,12 +11464,6 @@
       "height": 164,
       "sha256": "56576e8b71b2a8449d1482400e13cfa7c1c319fce2ca523ef065ca0056167ac3"
     },
-    "public/assets/civic-office/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/civic-office/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "public/assets/room-npcs/adrian-idle.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/room-npcs/adrian-idle.png",
       "width": 64,
@@ -14044,12 +11548,6 @@
       "height": 1024,
       "sha256": "2a7fa1c19a8f8868fa7a68ef57a029b5f2141060cb796867cb6a9df1aab776b6"
     },
-    "public/assets/civic-mediation/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/civic-mediation/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "art/props/civic-consult/room-layout.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/art/props/civic-consult/room-layout.png",
       "width": 1536,
@@ -14104,12 +11602,6 @@
       "height": 121,
       "sha256": "c19ada5389aa3c49c639b681b46211f45abf209fdb6643bdbe5f042f7f399a62"
     },
-    "public/assets/civic-consult/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/civic-consult/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "art/props/civic-zeroing-lounge/room-layout.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/art/props/civic-zeroing-lounge/room-layout.png",
       "width": 1536,
@@ -14157,12 +11649,6 @@
       "width": 576,
       "height": 795,
       "sha256": "2623e263b15168c459d2d4c758c8eac271f48f188e877b7a061b81fefe5195a9"
-    },
-    "public/assets/civic-zeroing-lounge/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/civic-zeroing-lounge/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/volunteer-idle.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/room-npcs/volunteer-idle.png",
@@ -14242,12 +11728,6 @@
       "height": 388,
       "sha256": "225d08b7c2f8a516571585d785b98ae8a208f281787fb0c244c0d2402e292e18"
     },
-    "public/assets/civic-archive/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/civic-archive/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "art/props/solarium/room-layout.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/art/props/solarium/room-layout.png",
       "width": 1536,
@@ -14278,12 +11758,6 @@
       "height": 992,
       "sha256": "d1d9cfdb881ebc0a0783924f6d29161ecb562d97317ec27665483ceb84c979a9"
     },
-    "public/assets/sky-lobby/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/sky-lobby/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "public/assets/room-npcs/receptionist-idle.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/room-npcs/receptionist-idle.png",
       "width": 64,
@@ -14313,12 +11787,6 @@
       "width": 1536,
       "height": 992,
       "sha256": "2b766a5ccd2c89abe5fa0b9db3ea1dd495810468f978af33353962025fb90380"
-    },
-    "public/assets/celeste-reception/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/celeste-reception/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/celeste-idle.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/room-npcs/celeste-idle.png",
@@ -14386,12 +11854,6 @@
       "height": 992,
       "sha256": "40257fbd24e75e380fc7536c32dcbec188f6a91ad4ec6e089276f5fdc67ffcf9"
     },
-    "public/assets/celeste-gallery/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/celeste-gallery/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "public/assets/room-npcs/appraiser-idle.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/room-npcs/appraiser-idle.png",
       "width": 64,
@@ -14439,12 +11901,6 @@
       "width": 609,
       "height": 913,
       "sha256": "36e665058482cc98315e597c47c67bcf9206cce373acd0e7269b8ff0eadc13de"
-    },
-    "public/assets/celeste-archive/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/celeste-archive/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "art/props/noel-suite/room-layout.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/art/props/noel-suite/room-layout.png",
@@ -14518,12 +11974,6 @@
       "height": 158,
       "sha256": "6543f2f75f9592767714c86bca52f2e8567ada21aa3b20537ae19709d3d5389a"
     },
-    "public/assets/noel-suite/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/noel-suite/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "art/props/one-day-garden/room-layout.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/art/props/one-day-garden/room-layout.png",
       "width": 1536,
@@ -14541,12 +11991,6 @@
       "width": 1536,
       "height": 1024,
       "sha256": "97a6ba66e98be3645eaab3aeaa5fd13b39fd4d8b453fe64d2f25b3b714e418c5"
-    },
-    "public/assets/one-day-garden/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/one-day-garden/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/iris-idle.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/room-npcs/iris-idle.png",
@@ -14602,12 +12046,6 @@
       "height": 245,
       "sha256": "019f4a048d690792bf150183b55e9e332f0a790b26235fda014c451b5793bd11"
     },
-    "public/assets/garden-vault/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/garden-vault/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "art/props/embers-floor/room-layout.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/art/props/embers-floor/room-layout.png",
       "width": 1536,
@@ -14625,12 +12063,6 @@
       "width": 1536,
       "height": 1024,
       "sha256": "9259c64c4a81f6e4cee76e136ac472bba3dae98e4820feb29862abd14f38d647"
-    },
-    "public/assets/embers-floor/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/embers-floor/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     },
     "public/assets/room-npcs/rook-idle.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/room-npcs/rook-idle.png",
@@ -14920,12 +12352,6 @@
       "height": 144,
       "sha256": "32872f06d719bc51cf1226aa3a1bfa98aa0a7380a32c718012c6b53aa2d87953"
     },
-    "public/assets/embers-backstage/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/embers-backstage/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
-    },
     "art/props/embers-back-office/room-layout.png": {
       "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/art/props/embers-back-office/room-layout.png",
       "width": 1536,
@@ -14997,12 +12423,6 @@
       "width": 102,
       "height": 166,
       "sha256": "a0c9324669135737bb097e1b60b7183cb858b4df59ae035ea76bc29324256ae5"
-    },
-    "public/assets/embers-back-office/portal-box.png": {
-      "url": "/room-preview/da320e43aa6af1a611fd9e46e860470cae3c49df/public/assets/embers-back-office/portal-box.png",
-      "width": 32,
-      "height": 32,
-      "sha256": "b0775cba09eadf2fde241b35daa28cdcd03af6d23e99e0decd32b42f13f6d220"
     }
   }
 }
