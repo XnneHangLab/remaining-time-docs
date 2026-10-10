@@ -35,6 +35,7 @@ export default defineConfig({
       ] },
       { text: '架构快照', items: [
         { text: '世界架构 · 2026-09-15', link: '/architecture/world-model-2026-09-15' },
+        { text: '插件包与 SDK 边界 · 2026-10-10', link: '/architecture/plugin-packages-2026-10-10' },
         { text: '前后端分工与多人云存档 · 2026-09-18', link: '/architecture/client-server-2026-09-18' },
       ] },
       { text: '主要系统', items: [
