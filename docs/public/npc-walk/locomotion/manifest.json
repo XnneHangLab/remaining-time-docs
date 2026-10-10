@@ -8,8 +8,8 @@
   ],
   "characters": [
     {
-      "id": "player-preview",
-      "name": "主角 Player"
+      "id": "player",
+      "name": "主角 Player（游戏当前使用）"
     },
     {
       "id": "n07",
