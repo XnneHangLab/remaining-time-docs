@@ -208,6 +208,26 @@
     }
   },
   "animations": {
+    "walk-front": {
+      "frames": ["s-walk-0", "s-walk-1", "s-walk-2", "s-walk-3"],
+      "duration": 90,
+      "loop": true
+    },
+    "walk-left": {
+      "frames": ["w-walk-0", "w-walk-1", "w-walk-2", "w-walk-3"],
+      "duration": 90,
+      "loop": true
+    },
+    "walk-right": {
+      "frames": ["e-walk-0", "e-walk-1", "e-walk-2", "e-walk-3"],
+      "duration": 90,
+      "loop": true
+    },
+    "walk-back": {
+      "frames": ["n-walk-0", "n-walk-1", "n-walk-2", "n-walk-3"],
+      "duration": 90,
+      "loop": true
+    },
     "s": {
       "idle": {
         "frames": ["s-idle"],
