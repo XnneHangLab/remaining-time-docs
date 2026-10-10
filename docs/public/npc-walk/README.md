@@ -1,6 +1,6 @@
 # Player 与 NPC 行走预览快照
 
-站点入口：`/npc-walk/locomotion/index.html`，共 38 个角色，主角排在首位，随后为 8 位酒馆角色，再列出原有 29 位 NPC。
+站点入口：`/npc-walk/locomotion/index.html`，共 38 个角色，依次为主角 Player、29 位原版 NPC、8 位酒馆角色。
 
 ## 素材来源
 
