@@ -100,6 +100,8 @@ def export(repo, ref):
             npc_count = 0
             furniture_count = 0
             for entity in scene['entities']:
+                if entity.get('portal'):
+                    continue
                 visual = entity.get('sprite')
                 if not visual:
                     raise ValueError(f'{ident}/{entity["id"]}: unsupported non-sprite entity')
@@ -116,7 +118,7 @@ def export(repo, ref):
                               active=active, background=background, layoutSource=layout_path,
                               mapSource=map_path, sceneSource=f'public/content/remaining-time/scenes/{ident}.json',
                               issues=issues, layers=layers, npcCount=npc_count,
-                              portals=[dict(id=e['id'], name=e['name'], destination=e['portal'],
+                              portals=[dict(id=e['id'], name=e['name'], destination=e['portal'], hint=e.get('portalHint'),
                                             tiles=e.get('portalTiles', [e['position']]))
                                        for e in scene['entities'] if e.get('portal')],
                               objectCount=len(game_map['art']) - 1 + furniture_count))
